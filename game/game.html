@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brahmi Typing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap">
+</head>
+
+<body>
+    <div id="game-container">
+        <h1>Brahmi</h1>
+        <div id="score-display">Score: 0</div>
+
+        <div style="display: flex; align-items: center; width: 920px;">
+            <!-- Left Text Area -->
+            <textarea
+                style="
+                    width: 450px;
+                    height: 200px;
+                    border-radius: 20px 0 0 20px;
+                    resize: none;
+                "
+                placeholder="𑀰𑁆𑀭𑀻 𑀆𑀤𑀺𑀦𑀸𑀣 𑀦𑀫ः𑁇𑁇 𑀦𑀫𑁄 𑀩𑀁𑀪𑀇𑀬𑁂 𑀮𑀺𑀯𑀺𑀬𑀸𑁇 𑀬𑀳 𑀮𑀺𑀧𑀺 𑀆𑀤𑀺𑀦𑀸𑀣 𑀪𑀕𑀯𑀦 𑀚𑀻 𑀦𑁂 𑀅𑀧𑀦𑀻 𑀧𑀼𑀢𑁆𑀭𑀻 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀓𑁄 𑀲𑀺𑀔𑀸𑀈 𑀣𑀻 , 𑀉𑀲𑀻 𑀓 𑀦𑀸𑀫 𑀲𑀸𑀈 𑀬𑁂 𑀮𑀺𑀧𑀺 𑀳𑁃𑁇"
+            ></textarea>
+        
+            <!-- Divider -->
+            <div
+                style="
+                    width: 2px;
+                    height: 200px;
+                    background-color: #ccc;
+                "
+            ></div>
+        
+            <!-- Right Text Area -->
+            <textarea
+                style="
+                    width: 450px;
+                    height: 200px;
+                    border-radius: 0 20px 20px 0;
+                    resize: none;
+                "
+                placeholder="श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।"
+            ></textarea>
+        </div>
+        <div id="game-area">
+            <!-- Background video for the game area -->
+            <video autoplay loop muted playsinline id="background-video">
+                <source src="media\background\area video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Game elements overlaying the video -->
+        </div>
+
+        <div id="input-container">
+            <input type="text" hidden id="user-input" placeholder="Start typing Brahmi words..." autofocus />
+        </div>
+        <div>
+            <div class="keyboard" id="keyboard">
+                <!-- Row 1 -->
+                <button data-char="𑁒">𑁒</button>
+                <button data-char="𑁓">𑁓</button>
+                <button data-char="𑁔">𑁔</button>
+                <button data-char="𑁕">𑁕</button>
+                <button data-char="𑁖">𑁖</button>
+                <button data-char="𑁗">𑁗</button>
+                <button data-char="𑁘">𑁘</button>
+                <button data-char="𑁙">𑁙</button>
+                <button data-char="𑁚">𑁚</button>
+                <button data-char="o">o</button>
+        
+        
+        
+        
+                <button data-char="𑀅">𑀅</button>
+                <button data-char="𑀆">𑀆</button>
+                <button data-char="𑀇">𑀇</button>
+                <button data-char="𑀈">𑀈</button>
+                <button data-char="𑀉">𑀉</button>
+                <button data-char="𑀊">𑀊</button>
+                <button data-char="𑀏">𑀏</button>
+                <button data-char="𑀐">𑀐</button>
+                <button data-char="𑀑">𑀑</button>
+                <button data-char="𑀒">𑀒</button>
+              
+                <!-- Row 2 -->
+               
+                <button data-char="𑀓">𑀓</button>
+                <button data-char="𑀔">𑀔</button>
+                <button data-char="𑀕">𑀕</button>
+                <button data-char="𑀖">𑀖</button>
+                <button data-char="𑀗">𑀗</button>
+                <button data-char="𑀘">𑀘</button>
+                <button data-char="𑀙">𑀙</button>
+                <button data-char="𑀚">𑀚</button>
+                <button data-char="𑀛">𑀛</button>
+                <button data-char="𑀜">𑀜</button>
+                <!-- Row 3 -->
+               
+                <button data-char="𑀝">𑀝</button>
+                <button data-char="𑀞">𑀞</button>
+                <button data-char="𑀟">𑀟</button>
+                <button data-char="𑀠">𑀠</button>
+                <button data-char="𑀡">𑀡</button>
+                <button data-char="𑀢">𑀢</button>
+                <button data-char="𑀣">𑀣</button>
+                <button data-char="𑀤">𑀤</button>
+                <button data-char="𑀥">𑀥</button>
+                <button data-char="𑀦">𑀦</button>
+                <!-- Row 4 -->
+              
+                <button data-char="𑀧">𑀧</button>
+                <button data-char="𑀨">𑀨</button>
+                <button data-char="𑀩">𑀩</button>
+                <button data-char="𑀪">𑀪</button>
+                <button data-char="𑀫">𑀫</button>
+                <button data-char="𑀬">𑀬</button>
+                <button data-char="𑀭">𑀭</button>
+                <button data-char="𑀮">𑀮</button>
+                <button data-char="𑀯">𑀯</button>
+                <button data-char="𑀰">𑀰</button>
+                <!-- Row 5 -->
+              
+                <button data-char="𑀱">𑀱</button>
+                <button data-char="𑀲">𑀲</button>
+                <button data-char="𑀳">𑀳</button>
+                <button data-char="𑀴">𑀴</button>
+                <button data-char="𑀵">𑀵</button>
+                <button data-char="𑀶">𑀶</button>
+              
+                <!-- Row 6 -->
+               
+                <button data-char=" " class=".">.</button>
+                <button data-char=" " class="">.</button>
+                <button data-char="←" class="backspace">Back</button>
+        
+                <button data-char="?123">?123</button>
+                <button data-char=",">,</button>
+                <button data-char="🌐">🌐</button>
+                <button data-char=" " style="width: 250px;" class="space">ब्राह्मी लिपि</button>
+                <button data-char="|">|</button>
+                <button data-char="↵">↵</button>
+              </div>   
+        </div>
+        <div id="progress-bar">
+            <div id="bar-inner"></div>
+        </div>
+    </div>
+
+
+    <audio id="shoot-sound" src="media/sounds/plasma.ogg"></audio>
+    <audio id="explosion-sound" src="media/sounds/explosion.ogg"></audio>
+    <script src="script.js"></script>
+</body>
+
+</html>

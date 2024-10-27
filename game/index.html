@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brahmi Typing Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap">
+</head>
+<style>
+    body{
+        height: 100vh;
+        overflow: hidden !important;
+    }
+</style>
+<body>
+    <div id="fullscreen-image">
+        <button id="start-button"  onclick="startGame()">Start Game</button>
+    </div>
+    <audio id="shoot-sound" src="media/sounds/plasma.ogg"></audio>
+    <audio id="explosion-sound" src="media/sounds/explosion.ogg"></audio>
+<script>
+
+function startGame() {
+    window.location.href = 'game.html';
+}
+</script>
+</body>
+
+</html>
