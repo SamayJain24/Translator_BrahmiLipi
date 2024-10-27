@@ -199,72 +199,77 @@ h1 {
 .keyboard {
     display: flex;
     flex-wrap: wrap;
-    max-width: 750px;
-    margin: 20px auto; /* Centering and adding space around */
-    gap: 5px;
+    max-width: 100%; /* Allow it to take full width */
+    margin: 0 auto; /* Center horizontally */
+    gap: 3px;
     justify-content: center;
-    padding: 10px; /* Adding padding for spacing inside the border */
-    border: 2px solid black; /* Black border around the keyboard */
-    border-radius: 10px; /* Optional: Rounded corners */
-    background-color: #99C0FB; /* Optional: Light background for contrast */
-  }
-  
-  .keyboard button {
-    width: 70px;
-    height: 70px;
-    font-size: 1.5rem;
+    padding: 8px; /* Smaller padding for mobile */
+    border: 2px solid black; 
+    border-radius: 10px; 
+    background-color: #99C0FB;
+    position: fixed;
+    bottom: 0; /* Position at the bottom of the screen */
+    left: 0;
+    right: 0;
+    z-index: 10; /* Keep it above other elements */
+}
+
+.keyboard button {
+    width: 45px; /* Smaller width for buttons */
+    height: 45px; /* Smaller height for buttons */
+    font-size: 1rem; /* Adjust font size for mobile */
     text-align: center;
     cursor: pointer;
     background-color: #e0e0e0;
     border: none;
     background: rgb(185,152,76);
-  background: linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%);
+    background: linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%);
     clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
     transition: background-color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .keyboard button:hover {
-    background-color: #d1d1d1;
-  }
-  
-  .keyboard button.space {
-    width: 140px;
+}
+
+.keyboard button.space {
+    width: 100px; /* Adjusted width for mobile */
     clip-path: none;
     border-radius: 8px;
-  }
-  
-  .keyboard button.backspace {
-    width: 100px;
+}
+
+.keyboard button.backspace {
+    width: 70px; /* Adjusted width for mobile */
     clip-path: none;
     border-radius: 8px;
-  }
-   /* Add your custom styles here */
-   #fullscreen-image {
+}
+
+/* Custom styles for full screen image background */
+#fullscreen-image {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfOGhKxjHR_oPvCMEcd9T2ciXH4AJKtTD1Y5fu9VVqbtGVRRuBIW_kZDTLanT9o_N78nMDRs-N1NsktZl1wz0q5-RPC8pIQ9OlCsioNYIJEik01_9IxG0rOrtq1rRYq-tVqt1SpDEhaWyjoK04hWE87i0Ld3yWkhynzdQla4g98KEVhGnmAwilakD4Hsc/s320-rw/IMG-20241014-WA0051.jpg'); /* Replace with your image path */
+    background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfOGhKxjHR_oPvCMEcd9T2ciXH4AJKtTD1Y5fu9VVqbtGVRRuBIW_kZDTLanT9o_N78nMDRs-N1NsktZl1wz0q5-RPC8pIQ9OlCsioNYIJEik01_9IxG0rOrtq1rRYq-tVqt1SpDEhaWyjoK04hWE87i0Ld3yWkhynzdQla4g98KEVhGnmAwilakD4Hsc/s320-rw/IMG-20241014-WA0051.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Make sure it's on top */
+    z-index: 9999;
 }
+
 #start-button {
-    padding: 20px 40px;
-    font-size: 24px;
+    padding: 15px 30px; /* Adjust padding for smaller screens */
+    font-size: 18px; /* Smaller font size */
     background-color: #fff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 #start-button:hover {
     background-color: #f0f0f0;
 }
+
