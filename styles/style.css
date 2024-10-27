@@ -1,0 +1,715 @@
+:root {
+  --primary-color: #7c5b29; /* Dark brown */
+  --bg-color: #f5f1e6; /* Light beige */
+  --light-bg-color: #ffffff; /* White for card backgrounds */
+  --text-color: #3e2a1d; /* Dark text color */
+  --light-text-color: #d1c6b1; /* Light text color for secondary elements */
+  --primary-text-color: #fff; /* White for buttons */
+}
+
+/* Apply a paper-like background */
+body {
+  background-size: cover; /* Make the background cover the entire area */
+  background-repeat: no-repeat;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+.card {
+  border: 1px solid #d1c6b1; /* Light border to mimic paper edges */
+  background-color: rgba(255, 255, 255, 0.9); /* Card background */
+}
+
+.container textarea {
+  border: 1px solid #b4a57a; /* Light border to match theme */
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+  color: var(--text-color);
+}
+
+.dropdown-container .dropdown-toggle {
+  background-color: rgba(255, 255, 255, 0.9); /* White background for dropdown */
+}
+
+.dropdown-container .dropdown-menu {
+  background-color: var(--bg-color); /* Keep dropdown background */
+}
+
+/* Adjust button styles for the theme */
+.card-bottom button {
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+}
+
+/* Fonts */
+body {
+  font-family: 'Georgia', 'Times New Roman', serif; /* Change to serif fonts for an ancient feel */
+}
+
+/* Scrollbar for vintage theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color); /* Scrollbar color */
+  border-radius: 10px; /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d1c6b1; /* Hover color */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif; */
+}
+body {
+  font-family: 'Cinzel', serif;
+}
+
+.trans {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.container {
+  position: relative;
+  width: 1200px;
+  padding: 0 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.container .card {
+  flex: 1;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: var(--light-bg-color);
+}
+
+.container .card .from,
+.container .card .to {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.container .card .from {
+  margin-right: 20px;
+}
+
+.container .card .to {
+  margin-left: 20px;
+}
+
+.container .card .heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--light-text-color);
+  white-space: nowrap;
+}
+
+.dropdown-container {
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.dropdown-container .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 30px;
+  background-color: var(--bg-color);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dropdown-container .dropdown-toggle span {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.dropdown-container .dropdown-toggle ion-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-container.active .dropdown-toggle {
+  border-radius: 20px 20px 0 0;
+}
+
+.dropdown-container.active .dropdown-toggle ion-icon:last-child {
+  transform: rotate(180deg);
+}
+
+.dropdown-container .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+  display: none;
+  padding: 20px;
+  z-index: 1;
+  list-style: none;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  transition: all 1s;
+  border-radius: 0 0 20px 20px;
+}
+
+.dropdown-container .dropdown-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdown-container.active .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-container .dropdown-menu li {
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--light-bg-color);
+  transition: all 0.3s ease;
+}
+
+.dropdown-container .dropdown-menu li:hover {
+  background-color: var(--light-bg-color);
+}
+.dropdown-container .dropdown-menu li.active {
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+}
+
+.container .text-area {
+  position: relative;
+}
+
+.container textarea {
+  width: 100%;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 20px;
+}
+
+.container .text-area .chars {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 0.8rem;
+  color: var(--light-text-color);
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 2px solid var(--bg-color);
+}
+
+.card-bottom p {
+  margin-bottom: 20px;
+}
+
+.card-bottom label {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  cursor: pointer;
+  border-radius: 32px;
+  background-color: var(--bg-color);
+}
+
+.card-bottom label:hover {
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+}
+
+.card-bottom span {
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.card-bottom ion-icon {
+  font-size: 22px;
+}
+
+.card-bottom button {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  cursor: pointer;
+  background-color: var(--bg-color);
+}
+
+.card-bottom button:hover {
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+}
+
+.container .center {
+  position: relative;
+}
+
+.swap-position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 5px solid var(--bg-color);
+  transition: all 0.3s;
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+}
+
+.swap-position ion-icon {
+  font-size: 25px;
+}
+
+.swap-position:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+.mode {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1;
+}
+
+.toggle {
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 30px;
+  height: 50px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 3px 0;
+  justify-content: space-between;
+  border: 1px solid var(--light-text-color);
+  background-color: var(--light-bg-color);
+  transition: all 0.3s ease;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 25px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transition: all 0.5s;
+}
+
+.toggle input:checked ~ .toggle-thumb {
+  transform: translateY(25px);
+}
+
+.toggle img {
+  width: 20px;
+  height: 20px;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+.slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+img {
+  height: 100%;
+}
+
+#output-text{
+  width: 100%;
+  overflow: scroll;
+  height: 295px;
+}
+
+#copy-message {
+  display: none;
+  position: fixed; /* Change to fixed to center it on the screen */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Centering */
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: opacity 0.5s; /* Optional for fade-out effect */
+}
+
+/* Media Querries */
+
+@media (max-width: 800px) {
+  
+  .PinturaNavSet {
+    display: none;
+  }
+  
+  .card-bottom{
+    flex-direction: column;
+  }
+
+  .image-editor .image-container .wrapper{
+    flex-direction: column;
+  }
+
+  textarea{
+    max-height: 10vh;
+  }
+  
+  #output-text{
+    height: 10vh;
+  }
+  
+  .container {
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .container .card {
+    width: 100%;
+  }
+
+  .container.card .from {
+    margin-right: 0;
+  }
+
+  .container.card .to {
+    margin-left: 0;
+  }
+
+  .container .card .from,
+  .container .card .to {
+    flex-direction: column;
+  }
+
+  .swap-position {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .swap-position:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .swap-position ion-icon {
+    transform: rotate(90deg);
+  }
+}
+
+.font-size-container {
+  margin: 10px 0;
+}
+
+.font-size-container select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.container {
+  position: relative;
+  width: 1200px; /* Adjust as necessary */
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  background-color: #fdf6e3; /* Light beige for paper color */
+  border: 2px solid #c0b99a; /* Light brown border */
+  border-radius: 10px; /* Slightly rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background-size: cover; /* Cover the whole area */
+  background-repeat: no-repeat; /* No repeat */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9); /* Card background */
+  padding: 20px; /* Inner padding */
+  border-radius: 8px; /* Slight rounding for inner cards */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif !important;
+  background: #f5f5f5; /* Light background for contrast */
+}
+
+.paper-container {
+  background: url('https://www.textures.com/system/categories/12113/39287/texture-17128215.jpg') no-repeat center center; /* Paper texture */
+  background-size: cover;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  margin: 50px auto;
+  color: #333;
+}
+
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* img {
+  max-width: 100%;
+} */
+
+/* bright / dark mode */
+.pintura-editor {
+  --color-background: 255, 255, 255;
+  --color-foreground: 10, 10, 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+      color: #fff;
+  }
+
+  .pintura-editor {
+      --color-background: 10, 10, 10;
+      --color-foreground: 255, 255, 255;
+  }
+}
+.PinturaNavGroupFloat{
+  margin: 0 !important;
+}
+
+.PinturaRoot{
+  border-radius: 25px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);;
+  padding: 10px 20px;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.nav-links li {
+  margin: 0 10px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+.nav-links input {
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 2px;
+  border-radius: 2px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(55deg) translate(10px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-55deg) translate(4px, -1px);
+}
+
+@media (max-width: 768px) {
+  /* .navbar {
+      justify-content: flex-start;
+  } */
+
+  .nav-links {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0;
+      background-color: var(--primary-color);
+      max-height: 0;
+      overflow: hidden;
+  }
+
+  .nav-links.open {
+      max-height: 300px; /* Adjust based on the number of items */
+  }
+
+  .nav-links li {
+      text-align: center;
+      margin: 10px 0;
+  }
+
+  .hamburger {
+      display: flex;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(to right, #333, #555);
+  color: #fff;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.example.com/background.jpg') no-repeat center center/cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+.footer .content, .footer .social-icons {
+  position: relative;
+  z-index: 1;
+}
+.footer .content {
+  flex: 1;
+}
+.footer .social-icons {
+  display: flex;
+  gap: 15px;
+}
+.footer .social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  transition: color 0.3s;
+}
+.footer .social-icons a:hover {
+  color: #ddd;
+}
+.footer p{
+  font-size: 1.1rem;
+}
+.button-link {
+  display: inline-block; /* Make it inline */
+  padding: 10px 20px;   /* Add some padding */
+  background-color: #007BFF; /* Button color */
+  color: white;         /* Text color */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px;   /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth hover transition */
+}
+
+.button-link:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
