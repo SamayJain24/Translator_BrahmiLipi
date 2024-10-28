@@ -703,11 +703,13 @@ h1 {
 .button-link {
   display: inline-block; /* Make it inline */
   padding: 10px 20px;   /* Add some padding */
-  background-color: #007BFF; /* Button color */
+  background-color: #8B2323; /* Button color */
   color: white;         /* Text color */
   text-decoration: none; /* Remove underline */
   border-radius: 5px;   /* Rounded corners */
-  transition: background-color 0.3s; /* Smooth hover transition */
+  transition: background-color 0.3s;
+  text-align: center;
+  width: 2rem;/* Smooth hover transition */
 }
 
 .button-link:hover {
