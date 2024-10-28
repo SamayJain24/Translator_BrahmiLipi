@@ -1,4 +1,4 @@
-let words = ['𑀦',"𑀦𑀫𑀲𑁆𑀢𑁂", "type", "𑀚𑁃𑀦", "𑀔𑀼𑀰", "𑀚𑁃𑀦𑀥𑀭𑁆𑀫", "speed", "𑀫𑀳𑀸𑀯𑀻𑀭", "skill", "accuracy", "focus"];
+let words = ['𑀦', "𑀢𑁂", "𑁒", "𑀚𑁃", "𑀦", "𑀔𑀼", "𑀰", "𑀚𑁃", "𑀦", "𑀥", "𑀭𑁆𑀫", "𑀫", "𑀳𑀸", "𑀯𑀻", "𑀭"];
 const gameArea = document.getElementById('game-area');
 const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
@@ -6,7 +6,9 @@ const shootSound = document.getElementById('shoot-sound');
 const explosionSound = document.getElementById('explosion-sound');
 let activeWords = [];
 let score = 0;
+let gameOverOccurred = false;
 
+// Function to create a new word
 function createWord() {
     const word = document.createElement('div');
     word.classList.add('word');
@@ -17,28 +19,33 @@ function createWord() {
     activeWords.push(word);
 }
 
+// Function to move words downward and handle when they reach the bottom
 function moveWords() {
-    activeWords.forEach(word => {
+    activeWords.forEach((word, index) => {
         let currentTop = parseInt(word.style.top);
         word.style.top = `${currentTop + 1}px`;
 
-        if (currentTop > gameArea.offsetHeight - 30) {
-            gameOver();
+        // Remove word and trigger game over if it reaches the bottom of the game area
+        if (currentTop >= gameArea.offsetHeight - 30) {
+            gameArea.removeChild(word);
+            activeWords.splice(index, 1);
+            triggerGameOver();
         }
     });
 }
 
-
+// Function to check input against active words
 function checkInput() {
-    const inputText = userInput.value.trim().toLowerCase();
+    const inputText = userInput.value.trim();
     for (let i = 0; i < activeWords.length; i++) {
-        if (inputText === activeWords[i].textContent.toLowerCase()) {
+        if (inputText === activeWords[i].textContent) {
             launchRocket(activeWords[i]);
             return;
         }
     }
 }
 
+// Function to launch a rocket towards a target word
 function launchRocket(targetWord) {
     const rocket = document.createElement('div');
     rocket.classList.add('rocket');
@@ -46,21 +53,20 @@ function launchRocket(targetWord) {
     rocket.style.top = '90%';
     gameArea.appendChild(rocket);
 
-    shootSound.play();  // Play rocket launch sound
+    shootSound.play(); // Play rocket launch sound
+    userInput.value = ''; // Clear input after launching the rocket
 
-    userInput.value = '';  // Clear input immediately after launching the rocket
-
+    // After a delay, handle the explosion and scoring
     setTimeout(() => {
         createExplosion(targetWord);
         gameArea.removeChild(targetWord);
         activeWords = activeWords.filter(w => w !== targetWord);
         gameArea.removeChild(rocket);
-        score++;
-        scoreDisplay.textContent = `Score: ${score}`;
+        updateScore();
     }, 1000);
 }
 
-
+// Function to create an explosion effect
 function createExplosion(targetWord) {
     const explosion = document.createElement('div');
     explosion.classList.add('explosion');
@@ -68,59 +74,61 @@ function createExplosion(targetWord) {
     explosion.style.top = `${targetWord.offsetTop}px`;
     gameArea.appendChild(explosion);
     
-    explosionSound.play();  // Play explosion sound
+    explosionSound.play(); // Play explosion sound
 
+    // Remove explosion element after animation
     setTimeout(() => {
         gameArea.removeChild(explosion);
     }, 500);
 }
 
-let gameOverOccurred = false; // Flag to check if game over has occurred
+// Update score and display
+function updateScore() {
+    score++;
+    scoreDisplay.textContent = `Score: ${score}`;
+}
 
-function gameOver() {
-    if (gameOverOccurred) return; // If game over has already happened, do nothing
-    
-    gameOverOccurred = true; // Set flag to true when game over occurs
-    alert("Game Over! Your score is: " + score);
-    
-    activeWords.forEach(word => {
-        gameArea.removeChild(word);
-    });
+// Handle game over logic
+function triggerGameOver() {
+    if (gameOverOccurred) return; // Prevent multiple game over triggers
+    gameOverOccurred = true; // Set flag to indicate game over
+    alert(`Game Over! Your final score is: ${score}`);
+
+    // Reset the game state
+    activeWords.forEach(word => gameArea.removeChild(word));
     activeWords = [];
     score = 0;
     userInput.value = '';
     scoreDisplay.textContent = `Score: ${score}`;
 }
 
-// Reset the gameOverOccurred flag if needed to restart the game
+// Reset game for replay
 function resetGame() {
     gameOverOccurred = false; // Allow game over to occur again
-    // Additional reset logic if necessary
 }
 
+// Event listener to check input change
+userInput.addEventListener('input', checkInput);
 
-userInput.addEventListener('change', checkInput);
-
+// Create words and move them down the screen periodically
 setInterval(createWord, 2000);  // Generate a new word every 2 seconds
-setInterval(moveWords, 200);     // Move words down the screen every 50ms
+setInterval(moveWords, 50);     // Move words down every 50ms
 
+// Keyboard interaction for custom keyboard on screen
 document.addEventListener("DOMContentLoaded", function() {
-    const textInput = document.getElementById("user-input");
     const keys = document.querySelectorAll(".keyboard button");
-  
     keys.forEach(key => {
-      key.addEventListener("click", () => {
-        const char = key.getAttribute("data-char");
-  
-        if (char === "←") {
-          // Backspace functionality
-          textInput.value = textInput.value.slice(0, -1);
-          checkInput();
-        } else {
-          // Insert character
-          textInput.value += char;
-          checkInput();
-        }
-      });
+        key.addEventListener("click", () => {
+            const char = key.getAttribute("data-char");
+            if (char === "←") {
+                // Backspace functionality
+                userInput.value = userInput.value.slice(0, -1);
+                checkInput();
+            } else {
+                // Insert character and check input
+                userInput.value += char;
+                checkInput();
+            }
+        });
     });
-  });
+});
