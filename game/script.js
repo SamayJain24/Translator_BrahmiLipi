@@ -28,6 +28,7 @@ function moveWords() {
     });
 }
 
+
 function checkInput() {
     const inputText = userInput.value.trim().toLowerCase();
     for (let i = 0; i < activeWords.length; i++) {
@@ -74,8 +75,14 @@ function createExplosion(targetWord) {
     }, 500);
 }
 
+let gameOverOccurred = false; // Flag to check if game over has occurred
+
 function gameOver() {
+    if (gameOverOccurred) return; // If game over has already happened, do nothing
+    
+    gameOverOccurred = true; // Set flag to true when game over occurs
     alert("Game Over! Your score is: " + score);
+    
     activeWords.forEach(word => {
         gameArea.removeChild(word);
     });
@@ -84,6 +91,13 @@ function gameOver() {
     userInput.value = '';
     scoreDisplay.textContent = `Score: ${score}`;
 }
+
+// Reset the gameOverOccurred flag if needed to restart the game
+function resetGame() {
+    gameOverOccurred = false; // Allow game over to occur again
+    // Additional reset logic if necessary
+}
+
 
 userInput.addEventListener('change', checkInput);
 
