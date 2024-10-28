@@ -59,7 +59,9 @@ h2 {
     overflow: hidden;
     border-radius: 15px;
     background-color: transparent; 
-}
+} 
+
+
 
     
 
@@ -217,7 +219,8 @@ h2 {
     padding: 5px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #99C0FB;
+    background-color: #8B2323;
+    ;
 }
 
   
