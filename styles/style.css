@@ -708,10 +708,10 @@ h1 {
   text-decoration: none; /* Remove underline */
   border-radius: 5px;   /* Rounded corners */
   transition: background-color 0.3s;
-  text-align: center;
-  width: 2rem;/* Smooth hover transition */
+  align-item: center;
+  width: 5rem;/* Smooth hover transition */
 }
 
 .button-link:hover {
-  background-color: #0056b3; /* Darker color on hover */
+  background-color: #8B2323; /* Darker color on hover */
 }
