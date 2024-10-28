@@ -8,42 +8,60 @@
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #101820FF; /* Fallback color in case the image doesn't load */
-    background-image: url('media/background/background_image.jpg'); /* Replace with your image path */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Keeps the image centered */
-    background-attachment: fixed; /* Keeps the background in place when scrolling */
+    background-image: url('media/background/Image_Background.jpg'); /* Replace with your image path */
+    background-size:cover; /* Ensures the image covers the entire background */
+    background-position:center; /* Keeps the image centered */
+    background-attachment:fixed; /* Keeps the background in place when scrolling */
     color: #FEE715FF;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 #game-container {
     text-align: center;
 }
 
+
 h1 {
     font-size: 2.5rem;
-    margin-top: 100px;
+    margin-top: 10px;
     margin-bottom: 20px;
-    color: #ca5e1a;
-    text-align: left;  /* Aligns text to the left */
-    padding-left: 5px;
+    color: black;
+    text-align: center;
+    text-shadow: 
+        -1px -1px 0 #ffffff, 
+        1px -1px 0 #ffffff,  
+        -1px 1px 0 #ffffff,  
+        1px 1px 0 #ffffff;
+    padding: 0 10px; /* Adds padding to prevent text cutoff on smaller screens */
+    white-space: nowrap; /* Prevents text from wrapping to a new line */
+    overflow-wrap: break-word;
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Adjust font size for mobile */
+    }
 }
 
 #game-area {
     position: relative;
-    width: 90vw;  /* Responsive width for mobile */
-    max-width: 600px;  /* Restrict max width */
-    height: 30vh;  /* Reduced height for compact look */
-    border: 2px solid #000;
+    width: 80vw;
+    height: 60vh;
+    border: 3px solid #000000;
     margin: 20px auto;
-    border-radius: 10px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: transparent; 
 }
+
+    
 
 #background-video {
     position: absolute;
@@ -58,16 +76,10 @@ h1 {
 
 /* Media query for mobile devices */
 @media (max-width: 768px) {
-      #game-area {
-        width: 90vw;  /* Takes up most of the screen width */
-        height: 25vh;  /* Further reduced height on smaller screens */
-    }
-    textarea {
-        width: 45%;  /* Reduced width for smaller screens */
-        height: 100px;  /* Smaller height */
-    }
-    #score-display {
-        font-size: 1rem;  /* Smaller font for score display */
+    #game-area {
+        width: 95vw;  /* Adjust the width for smaller screens */
+        height: 50vh; /* Adjust the height for smaller screens */
+        border-radius: 10px; /* Smaller border radius for better appearance on mobile */
     }
 
     #background-video {
@@ -76,11 +88,10 @@ h1 {
 }
 
 #score-display {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
-    color: #FEE715FF;
-    text-align: center;
-    font-weight: bold;
+    margin-top:20px;
+    color: #ca5e1a;
 }
 
 /* Additional game elements */
@@ -155,7 +166,6 @@ h1 {
     color: #FAEBD7;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-
 }
 
 #user-input:focus {
@@ -163,8 +173,6 @@ h1 {
     outline: none;
     box-shadow: 0 2px 8px rgba(139, 35, 35, 0.3);
 }
-
-
 
 #progress-bar {
     width: 80%;
@@ -195,7 +203,6 @@ h1 {
     }
 }
 
-
 .keyboard {
     display: flex;
     flex-wrap: wrap;
@@ -207,9 +214,9 @@ h1 {
     border: 2px solid black; /* Black border around the keyboard */
     border-radius: 10px; /* Optional: Rounded corners */
     background-color: #99C0FB; /* Optional: Light background for contrast */
-  }
+}
   
-  .keyboard button {
+.keyboard button {
     width: 70px;
     height: 70px;
     font-size: 1.5rem;
@@ -218,31 +225,31 @@ h1 {
     background-color: #e0e0e0;
     border: none;
     background: rgb(185,152,76);
-  background: linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%);
+    background: linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%);
     clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
     transition: background-color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .keyboard button:hover {
+.keyboard button:hover {
     background-color: #d1d1d1;
-  }
+}
   
-  .keyboard button.space {
+.keyboard button.space {
     width: 140px;
     clip-path: none;
     border-radius: 8px;
-  }
+}
   
-  .keyboard button.backspace {
+.keyboard button.backspace {
     width: 100px;
     clip-path: none;
     border-radius: 8px;
-  }
-   /* Add your custom styles here */
-   #fullscreen-image {
+}
+
+#fullscreen-image {
     position: fixed;
     top: 0;
     left: 0;
@@ -256,6 +263,7 @@ h1 {
     align-items: center;
     z-index: 9999; /* Make sure it's on top */
 }
+
 #start-button {
     padding: 20px 40px;
     font-size: 24px;
@@ -265,6 +273,7 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 #start-button:hover {
     background-color: #f0f0f0;
 }
