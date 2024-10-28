@@ -718,5 +718,5 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Vertically centers the button on full screen */
+  height: 10vh; /* Vertically centers the button on full screen */
 }
