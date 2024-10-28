@@ -195,7 +195,7 @@ h1 {
 @media screen and (max-width: 768px) {
     #game-area {
         width: 100%;
-        height: 60vh;
+        height: 35vh;
     }
 
     .falling-word {
