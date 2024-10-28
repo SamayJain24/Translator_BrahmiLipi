@@ -701,17 +701,22 @@ h1 {
   font-size: 1.1rem;
 }
 .button-link {
-  display: inline-block; /* Make it inline */
-  padding: 10px 20px;   /* Add some padding */
-  background-color: #8B2323; /* Button color */
-  color: white;         /* Text color */
-  text-decoration: none; /* Remove underline */
-  border-radius: 5px;   /* Rounded corners */
-  transition: background-color 0.3s;
-  align-item: center;
-  width: 5rem;/* Smooth hover transition */
+  display: inline-block;       /* Inline block display */
+  padding: 10px 20px;          /* Padding for size */
+  background-color: #8B2323;   /* Button color */
+  color: white;                /* Text color */
+  text-decoration: none;       /* Remove underline */
+  border-radius: 5px;          /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth hover transition */
 }
 
 .button-link:hover {
-  background-color: #8B2323; /* Darker color on hover */
+  background-color: #661B1B;   /* Darker color on hover */
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Vertically centers the button on full screen */
 }
