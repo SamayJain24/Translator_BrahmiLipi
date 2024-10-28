@@ -55,7 +55,7 @@ h2 {
     width: 80vw;
     height: 60vh;
     border: 3px solid #000000;
-    margin: 0px auto;
+    margin: 3px auto;
     overflow: hidden;
     border-radius: 15px;
     background-color: transparent; 
@@ -201,25 +201,30 @@ h2 {
     .falling-word {
         font-size: 6vw;
     }
+    .keyboard{
+        width: 100%;
+        height: 40vh;
+    }
 }
 
 .keyboard {
     display: flex;
     flex-wrap: wrap;
     max-width: 750px;
-    margin: 20px auto; /* Centering and adding space around */
-    gap: 5px;
+    margin: 2px auto;
+    gap: 0.5px 0.5px; /* Set 2px horizontal and 1px vertical gap */
     justify-content: center;
-    padding: 10px; /* Adding padding for spacing inside the border */
-    border: 2px solid black; /* Black border around the keyboard */
-    border-radius: 10px; /* Optional: Rounded corners */
-    background-color: #99C0FB; /* Optional: Light background for contrast */
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #99C0FB;
 }
+
   
 .keyboard button {
-    width: 70px;
-    height: 70px;
-    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
     text-align: center;
     cursor: pointer;
     background-color: #e0e0e0;
@@ -238,15 +243,15 @@ h2 {
 }
   
 .keyboard button.space {
-    width: 140px;
+    width: 50px;
     clip-path: none;
-    border-radius: 8px;
+    border-radius: 3px;
 }
   
 .keyboard button.backspace {
-    width: 100px;
+    width: 80px;
     clip-path: none;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 #fullscreen-image {
