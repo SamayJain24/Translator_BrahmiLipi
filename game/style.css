@@ -27,9 +27,9 @@ body {
 }
 
 
-h1 {
-    font-size: 2rem;
-    margin-top: 10px;
+h2 {
+    font-size: 1.3rem;
+    margin-top: 3px;
     margin-bottom: 0px;
     color: black;
     text-align: center;
@@ -55,7 +55,7 @@ h1 {
     width: 80vw;
     height: 60vh;
     border: 3px solid #000000;
-    margin: 20px auto;
+    margin: 0px auto;
     overflow: hidden;
     border-radius: 15px;
     background-color: transparent; 
@@ -194,7 +194,7 @@ h1 {
 /* Additional adjustments for mobile */
 @media screen and (max-width: 768px) {
     #game-area {
-        width: 100%;
+        width: 95%;
         height: 35vh;
     }
 
