@@ -62,9 +62,6 @@ h2 {
 } 
 
 
-
-    
-
 #background-video {
     position: absolute;
     top: 0;
@@ -121,7 +118,20 @@ h2 {
     background-image: url('media/sprites/missle.png');
     background-size: contain;
     background-repeat: no-repeat;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    z-index: 100;
     animation: rocketMove 1s linear forwards;
+}
+
+.rocket::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: orange;
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
 }
 
 @keyframes rocketMove {
