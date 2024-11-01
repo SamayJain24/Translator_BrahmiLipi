@@ -29,7 +29,7 @@ function highlightButton(char) {
         button.classList.add('highlight-ready');
         
         const blinkInterval = setInterval(() => {
-            if (blinkCount < 5) {
+            if (blinkCount < 3) {
                 // Toggle highlight class
                 button.classList.add('highlight-active');
                 
