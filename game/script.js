@@ -170,7 +170,7 @@ function resetGame() {
 userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
-setInterval(createWord, 4000);  // Generate a new word every 2 seconds
+setInterval(createWord, 2500);  // Generate a new word every 2 seconds
 setInterval(moveWords, 300);     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
