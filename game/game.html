@@ -15,19 +15,26 @@
         <div id="score-display">Score: 0</div>
 
         <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
-            <!-- Left Text Area -->
-            <textarea
+            <!-- Left Text Area (Converted to a div) -->
+            <div
+                contenteditable="true"
+                id="left-text-area"
                 style="
                     width: 180px;
                     height: 80px;
                     border-radius: 20px 0 0 20px;
+                    font-size: 12px;
+                    padding: 8px;
+                    line-height: 1.2;
+                    border: 1px solid #ccc;
+                    background-color: white;
+                    overflow: auto;
                     resize: none;
-                    font-size: 12px; /* Reduced font size */
-                    padding: 8px; /* Adds padding for better readability */
-                    line-height: 1.2; /* Adjusts line height for tighter fit */
                 "
-                placeholder="𑀰𑁆𑀭𑀻 𑀆𑀤𑀺𑀦𑀸𑀣 𑀦𑀫ः𑁇𑁇 𑀦𑀫𑁄 𑀩𑀁𑀪𑀇𑀬𑁂 𑀮𑀺𑀯𑀺𑀬𑀸𑁇 𑀬𑀳 𑀮𑀺𑀧𑀺 𑀆𑀤𑀺𑀦𑀸𑀣 𑀪𑀕𑀯𑀦 𑀚𑀻 𑀦𑁂 𑀅𑀧𑀦𑀻 𑀧𑀼𑀢𑁆𑀭𑀻 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀓𑁄 𑀲𑀺𑀔𑀸𑀈 𑀣𑀻 , 𑀉𑀲𑀻 𑀓 𑀦𑀸𑀫 𑀲𑀸𑀈 𑀬𑁂 𑀮𑀺𑀧𑀺 𑀳𑁃𑁇"
-            ></textarea>
+                placeholder="𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓"
+                onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';"
+                onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');"
+            >𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓</div>
         
             <!-- Divider -->
             <div
@@ -38,23 +45,29 @@
                 "
             ></div>
         
-            <!-- Right Text Area -->
-            <textarea
+            <!-- Right Text Area (Converted to a div) -->
+            <div
+
+                contenteditable="true"
+                id="right-text-area"
                 style="
                     width: 180px;
                     height: 80px;
                     border-radius: 0 20px 20px 0;
+                    font-size: 12px;
+                    padding: 8px;
+                    line-height: 1.2;
+                    border: 1px solid #ccc;
+                    background-color: white;
+                    overflow: auto;
                     resize: none;
-                    font-size: 12px; /* Reduced font size */
-                    padding: 8px; /* Adds padding for better readability */
-                    line-height: 1.2; /* Adjusts line height for tighter fit */
                 "
                 placeholder="श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।"
-            ></textarea>
+                onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';"
+                onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');"
+            >श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।</div>
         </div>
         
-        
-
         
         <div id="game-area">
             <!-- Background video for the game area -->
@@ -71,6 +84,7 @@
         <div>
             <div class="keyboard" id="keyboard">
                 <!-- Row 1 -->
+                
                 <button data-char="𑁒">𑁒</button>
                 <button data-char="𑁓">𑁓</button>
                 <button data-char="𑁔">𑁔</button>
@@ -158,12 +172,12 @@
                 <button data-char=" " class="">.</button>
                 <button data-char="←" class="backspace">Back</button>
         
-                <!-- <button data-char="?123">?123</button>
+                <button data-char="?123">?123</button>
                 <button data-char=",">,</button>
                 <button data-char="🌐">🌐</button>
                 <button data-char=" " style="width: 100px;" class="space">ब्राह्मी लिपि</button>
                 <button data-char="|">|</button>
-                <button data-char="↵">↵</button> -->
+                <button data-char="↵">↵</button>
               </div>   
         </div>
         <div hidden id ="progress-bar">
