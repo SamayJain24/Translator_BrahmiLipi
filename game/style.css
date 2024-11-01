@@ -46,8 +46,7 @@ h2 {
 /* Responsive adjustments for mobile screens */
 @media (max-width: 600px) {
     h1 {
-        font-size: 1.8rem; /* Adjust font size for mobile */
-    }
+        font-size: 1.8rem; 
 }
 
 #game-area {
