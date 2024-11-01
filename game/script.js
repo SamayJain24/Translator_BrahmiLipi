@@ -6,6 +6,7 @@ let words = [
     '𑀧', '𑀨', '𑀩', '𑀪', '𑀫', '𑀬', '𑀭', '𑀮', '𑀯', '𑀰',
     '𑀱', '𑀲', '𑀳', '𑀴', '𑀵', '𑀶'
 ];
+
 const gameArea = document.getElementById('game-area');
 const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
@@ -15,15 +16,47 @@ let activeWords = [];
 let score = 0;
 let gameOverOccurred = false;
 
+
+// Function to highlight a button by character
+function highlightButton(char) {
+    const button = document.querySelector(`#keyboard button[data-char="${char}"]`);
+    if (button) {
+        
+        button.style.backgroundColor = "#FFB300"; // Temporary highlight background color
+        button.style.clipPath = "none"; // Optional: Disable clip-path during highlight if desired
+
+        // Reset style after a brief delay (e.g., 500 ms)
+        setTimeout(() => {
+            button.style.border = "none"; // Reset border
+            button.style.background = "linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%)"; // Reset gradient background
+            button.style.clipPath = "polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%)"; // Reset clip-path
+        }, 500); // Adjust delay as needed
+    }
+}
+
+// Function to remove highlight from all buttons
+function resetButtonHighlights() {
+    const buttons = document.querySelectorAll('#keyboard button');
+    buttons.forEach(button => {
+        button.style.border = "none";
+        button.style.backgroundColor = ""; // reset background color
+    });
+}
+
 // Function to create a new word
 function createWord() {
     const word = document.createElement('div');
     word.classList.add('word');
-    word.textContent = words[Math.floor(Math.random() * words.length)];
+    const randomChar = words[Math.floor(Math.random() * words.length)];
+    word.textContent = randomChar;
     word.style.left = `${Math.random() * (gameArea.offsetWidth - 100)}px`;
     word.style.top = '0px';
     gameArea.appendChild(word);
     activeWords.push(word);
+
+    // Highlight corresponding button
+    resetButtonHighlights(); // Clear previous highlights
+    highlightButton(randomChar);
 }
 
 // Function to move words downward and handle when they reach the bottom
@@ -37,6 +70,9 @@ function moveWords() {
             gameArea.removeChild(word);
             activeWords.splice(index, 1);
             triggerGameOver();
+
+            // Reset button highlight if game over occurs
+            resetButtonHighlights();
         }
     });
 }
@@ -47,6 +83,7 @@ function checkInput() {
     for (let i = 0; i < activeWords.length; i++) {
         if (inputText === activeWords[i].textContent) {
             launchRocket(activeWords[i]);
+            resetButtonHighlights(); // Clear highlight after successful input
             return;
         }
     }
@@ -70,7 +107,7 @@ function launchRocket(targetWord) {
         activeWords = activeWords.filter(w => w !== targetWord);
         gameArea.removeChild(rocket);
         updateScore();
-    }, 1000);
+    }, 500);
 }
 
 // Function to create an explosion effect
@@ -86,7 +123,7 @@ function createExplosion(targetWord) {
     // Remove explosion element after animation
     setTimeout(() => {
         gameArea.removeChild(explosion);
-    }, 500);
+    }, 100);
 }
 
 // Update score and display
@@ -119,7 +156,7 @@ userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
 setInterval(createWord, 2000);  // Generate a new word every 2 seconds
-setInterval(moveWords, 50);     // Move words down every 50ms
+setInterval(moveWords, 100);     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
 document.addEventListener("DOMContentLoaded", function() {
@@ -139,3 +176,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
