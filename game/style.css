@@ -289,3 +289,37 @@ h2 {
     background-color: #f0f0f0;
 }
 
+/* Add these styles to your existing CSS */
+.keyboard button.highlight-ready {
+    position: relative;
+}
+
+.keyboard button.highlight-ready::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: #FFB300; /* Highlight color */
+    z-index: -1;
+    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.keyboard button.highlight-active::before {
+    opacity: 1;
+}
+
+/* Optional: you can add a subtle scale effect */
+.keyboard button.highlight-active {
+    transform: scale(1.05);
+    transition: transform 0.15s ease-in-out;
+}
+
+/* Reset transform when not active */
+.keyboard button:not(.highlight-active) {
+    transform: scale(1);
+    transition: transform 0.15s ease-in-out;
+}
