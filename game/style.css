@@ -205,7 +205,7 @@ h2 {
     }
     .keyboard{
         width: 100%;
-        height: 40vh;
+        height: 45vh;
     }
 }
 
@@ -223,11 +223,12 @@ h2 {
     ;
 }
 
-  
-.keyboard button {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+
+
+.keyboard button { 
+    width: 33px;
+    height: 33px;
+    font-size: 1.1rem;
     text-align: center;
     cursor: pointer;
     background-color: #e0e0e0;
@@ -240,11 +241,13 @@ h2 {
     align-items: center;
     justify-content: center;
 }
-  
 .keyboard button:hover {
     background-color: #d1d1d1;
 }
-  
+.keyboard button.highlight {
+    background-color: #ffcc00;  /* Color for highlighting */
+}
+
 .keyboard button.space {
     width: 50px;
     clip-path: none;
@@ -285,3 +288,4 @@ h2 {
 #start-button:hover {
     background-color: #f0f0f0;
 }
+
