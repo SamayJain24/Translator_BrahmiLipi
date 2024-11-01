@@ -12,7 +12,7 @@ body {
     background-size:cover; /* Ensures the image covers the entire background */
     background-position:center; /* Keeps the image centered */
     background-attachment:fixed; /* Keeps the background in place when scrolling */
-    color: #FEE715FF;
+    color:  #ccc ;  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +46,8 @@ h2 {
 /* Responsive adjustments for mobile screens */
 @media (max-width: 600px) {
     h1 {
-        font-size: 1.8rem; 
+        font-size: 1.8rem; /* Adjust font size for mobile */
+    }
 }
 
 #game-area {
@@ -331,4 +332,47 @@ h2 {
 .keyboard button:not(.highlight-active) {
     transform: scale(1);
     transition: transform 0.15s ease-in-out;
+}
+
+/* Add these styles to your CSS */
+#left-text-area, #right-text-area {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.text-area-glow {
+    box-shadow: 0 0 10px #FFD700;
+}
+
+.soul {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.6); /* Light color with some transparency */
+    font-size: 20px;
+    transition: all 0.8s ease-out; /* Smooth transition */
+    opacity: 1; /* Start fully opaque */
+}
+
+@keyframes soulFloat {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.5) rotate(360deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes soulGlow {
+    from {
+        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+    }
+    to {
+        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+    }
+}
+
+.highlight-text {
+    color: #ff5555 !important; /* Force color change */
+    font-weight: bold;
 }
