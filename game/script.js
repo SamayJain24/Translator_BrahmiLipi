@@ -29,7 +29,7 @@ function highlightButton(char) {
         button.classList.add('highlight-ready');
         
         const blinkInterval = setInterval(() => {
-            if (blinkCount < 3) {
+            if (blinkCount < 5) {
                 // Toggle highlight class
                 button.classList.add('highlight-active');
                 
@@ -58,72 +58,120 @@ function resetButtonHighlights() {
     });
 }
 
-// Function to create a new word
-function createWord() {
-    const word = document.createElement('div');
-    word.classList.add('word');
-    const randomChar = words[Math.floor(Math.random() * words.length)];
-    word.textContent = randomChar;
-    word.style.left = `${Math.random() * (gameArea.offsetWidth - 100)}px`;
-    word.style.top = '0px';
-    gameArea.appendChild(word);
-    activeWords.push(word);
 
-    // Highlight corresponding button
-    resetButtonHighlights(); // Clear previous highlights
-    highlightButton(randomChar);
-}
 
-// Function to move words downward and handle when they reach the
-function moveWords() {
-    activeWords.forEach((word, index) => {
-        let currentTop = parseInt(word.style.top);
-        word.style.top = `${currentTop + 1}px`;
-
-        // Remove word and trigger game over if it reaches the bottom of the game area
-        if (currentTop >= gameArea.offsetHeight - 30) {
-            gameArea.removeChild(word);
-            activeWords.splice(index, 1);
-            triggerGameOver();
-
-            // Reset button highlight if game over occurs
-            resetButtonHighlights();
-        }
-    });
-}
-
-// Function to check input against active words
-function checkInput() {
-    const inputText = userInput.value.trim();
-    for (let i = 0; i < activeWords.length; i++) {
-        if (inputText === activeWords[i].textContent) {
-            launchRocket(activeWords[i]);
-            resetButtonHighlights(); // Clear highlight after successful input
-            return;
-        }
-    }
-}
+// Global flag to track if a word is currently active
+let isWordActive = false;
 
 // Function to launch a rocket towards a target word
 function launchRocket(targetWord) {
     const rocket = document.createElement('div');
     rocket.classList.add('rocket');
-    rocket.style.left = `${targetWord.offsetLeft + targetWord.offsetWidth / 2 - 5}px`;
-    rocket.style.top = '90%';
+    
+    // Position rocket at bottom center of game area
+    const gameAreaRect = gameArea.getBoundingClientRect();
+    const wordRect = targetWord.getBoundingClientRect();
+    
+    // Calculate relative position to game area
+    const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
+    const startY = gameAreaRect.height - 30; // Start from bottom
+    
+    rocket.style.left = `${targetX}px`;
+    rocket.style.bottom = '10px'; // Start from bottom
     gameArea.appendChild(rocket);
-
-    shootSound.play(); // Play rocket launch sound
-    userInput.value = ''; // Clear input after launching the rocket
-
-    // After a delay, handle the explosion and scoring
+    
+    // Play sound
+    shootSound.play();
+    
+    // Clear input
+    userInput.value = '';
+    
+    // Animate rocket to target
+    const targetY = wordRect.top - gameAreaRect.top;
+    rocket.style.transition = 'top 0.5s linear';
+    
+    // Force a reflow to ensure the transition works
+    rocket.offsetHeight;
+    
+    // Set final position
+    rocket.style.top = `${targetY}px`;
+    
+    // Handle explosion and cleanup
     setTimeout(() => {
         createExplosion(targetWord);
-        gameArea.removeChild(targetWord);
+        if (targetWord.parentNode) {
+            gameArea.removeChild(targetWord);
+        }
         activeWords = activeWords.filter(w => w !== targetWord);
-        gameArea.removeChild(rocket);
-        updateScore();
+        if (rocket.parentNode) {
+            gameArea.removeChild(rocket);
+        }
+        updateScore(1);
     }, 500);
 }
+
+// Function to create a new word
+function createWord() {
+    if (!isWordActive) {
+        const word = document.createElement('div');
+        word.classList.add('word');
+        const randomChar = words[Math.floor(Math.random() * words.length)];
+        word.textContent = randomChar;
+        word.style.left = `${Math.random() * (gameArea.offsetWidth - 100)}px`;
+        word.style.top = '0px';
+        word.dataset.passedMiddle = 'false';
+        gameArea.appendChild(word);
+        activeWords.push(word);
+        isWordActive = true;
+
+        resetButtonHighlights();
+        highlightButton(randomChar);
+    }
+}
+
+// Function to move words downward
+function moveWords() {
+    const middleY = gameArea.offsetHeight / 2;
+    
+    for (let i = activeWords.length - 1; i >= 0; i--) {
+        const word = activeWords[i];
+        let currentTop = parseInt(word.style.top);
+        word.style.top = `${currentTop + 1}px`;
+
+        if (currentTop >= middleY && word.dataset.passedMiddle === 'false') {
+            word.dataset.passedMiddle = 'true';
+            isWordActive = false;
+            createWord();
+        }
+
+        if (currentTop >= gameArea.offsetHeight - 30) {
+            if (word.parentNode) {
+                gameArea.removeChild(word);
+            }
+            activeWords.splice(i, 1);
+            isWordActive = false;
+            createWord();
+            updateScore(-1);
+        }
+    }
+}
+
+// Function to check input against active words
+function checkInput() {
+    const inputText = userInput.value.trim();
+    
+    for (let i = activeWords.length - 1; i >= 0; i--) {
+        const word = activeWords[i];
+        if (inputText === word.textContent) {
+            launchRocket(word);
+            isWordActive = false;
+            createWord();
+            resetButtonHighlights();
+            return;
+        }
+    }
+}
+
 
 // Function to create an explosion effect
 function createExplosion(targetWord) {
@@ -170,7 +218,7 @@ function resetGame() {
 userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
-setInterval(createWord, 2500);  // Generate a new word every 2 seconds
+setInterval(createWord, 4000);  // Generate a new word every 2 seconds
 setInterval(moveWords, 300);     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
