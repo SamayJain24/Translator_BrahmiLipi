@@ -341,17 +341,20 @@ h2 {
 }
 
 .text-area-glow {
-    box-shadow: 0 0 10px #FFD700;
+    box-shadow: 0 0 10px rgb(20, 20, 20);
 }
 
-.soul {
+/* Soul Element Styling with Darker Color */
+/* .soul {
     position: absolute;
-    color: rgba(255, 255, 255, 0.6); /* Light color with some transparency */
     font-size: 20px;
-    transition: all 0.8s ease-out; /* Smooth transition */
-    opacity: 1; /* Start fully opaque */
-}
+    transition: all 10s ease-out;
+    color: #8B0000; 
+    animation: soulFloat 1s ease-out;
+    opacity: 1;
+} */
 
+/* Floating Effect */
 @keyframes soulFloat {
     0% {
         transform: scale(1) rotate(0deg);
@@ -363,16 +366,16 @@ h2 {
     }
 }
 
+/* Glow Effect */
 @keyframes soulGlow {
     from {
-        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+        text-shadow: 0 0 60px #8B0000, 0 0 10px #8B0000, 0 0 15px #8B0000;
     }
     to {
-        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+        text-shadow: 0 0 60px #8B0000, 0 0 20px #8B0000, 0 0 30px #8B0000;
     }
 }
-
 .highlight-text {
-    color: #ff5555 !important; /* Force color change */
+    color: #000000 !important; /* Force color change */
     font-weight: bold;
 }
