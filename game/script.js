@@ -18,7 +18,7 @@ let score = 0;
 let gameOverOccurred = false;
 let currentTargetChar = null;
 let isWordActive = false;
-let wordIndex = 0; // Track current index in `sentence`
+let wordIndex = 0; // Track current index in `sentece`
 
 // Function to create a new word in sequence
 function createWord() {
