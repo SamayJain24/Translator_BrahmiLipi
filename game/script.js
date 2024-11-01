@@ -74,7 +74,7 @@ function createWord() {
     highlightButton(randomChar);
 }
 
-// Function to move words downward and handle when they reach the bottom
+// Function to move words downward and handle when they reach the
 function moveWords() {
     activeWords.forEach((word, index) => {
         let currentTop = parseInt(word.style.top);
