@@ -17,22 +17,37 @@ let score = 0;
 let gameOverOccurred = false;
 
 
-// Function to highlight a button by character
+
+
+// Function to highlight a button by character with a blinking outline effect
 function highlightButton(char) {
     const button = document.querySelector(`#keyboard button[data-char="${char}"]`);
     if (button) {
+        let blinkCount = 0;
         
-        button.style.backgroundColor = "#FFB300"; // Temporary highlight background color
-        button.style.clipPath = "none"; // Optional: Disable clip-path during highlight if desired
-
-        // Reset style after a brief delay (e.g., 500 ms)
-        setTimeout(() => {
-            button.style.border = "none"; // Reset border
-            button.style.background = "linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%)"; // Reset gradient background
-            button.style.clipPath = "polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%)"; // Reset clip-path
-        }, 500); // Adjust delay as needed
+        // Add a class for the highlight animation
+        button.classList.add('highlight-ready');
+        
+        const blinkInterval = setInterval(() => {
+            if (blinkCount < 3) {
+                // Toggle highlight class
+                button.classList.add('highlight-active');
+                
+                // Remove highlight after a short delay
+                setTimeout(() => {
+                    button.classList.remove('highlight-active');
+                }, 250);
+                
+                blinkCount++;
+            } else {
+                // Stop the blinking effect and cleanup
+                clearInterval(blinkInterval);
+                button.classList.remove('highlight-ready');
+            }
+        }, 500);
     }
 }
+
 
 // Function to remove highlight from all buttons
 function resetButtonHighlights() {
@@ -155,8 +170,8 @@ function resetGame() {
 userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
-setInterval(createWord, 2000);  // Generate a new word every 2 seconds
-setInterval(moveWords, 100);     // Move words down every 50ms
+setInterval(createWord, 4000);  // Generate a new word every 2 seconds
+setInterval(moveWords, 300);     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
 document.addEventListener("DOMContentLoaded", function() {
