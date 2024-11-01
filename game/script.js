@@ -18,7 +18,7 @@ let score = 0;
 let gameOverOccurred = false;
 let currentTargetChar = null;
 let isWordActive = false;
-let wordIndex = 0; // Track current index in `sentece`
+let wordIndex = 0; // Track current index in `sentence`
 
 // Function to create a new word in sequence
 function createWord() {
@@ -345,12 +345,15 @@ function createSoulAnimation(character) {
     const rightTargetRect = rightTextArea.getBoundingClientRect();
     
     soulLeft.style.left = `${leftTargetRect.left + 10}px`;
+    soulLeft.style.color = 'black';
     soulLeft.style.top = `${leftTargetRect.top + 10}px`;
-    soulLeft.style.opacity = '0'; // Fade out effect
+    soulLeft.style.opacity = '0.8'; // Fade out effect
     
     soulRight.style.left = `${rightTargetRect.left + 10}px`;
+    soulRight.style.color = 'black';
+
     soulRight.style.top = `${rightTargetRect.top + 10}px`;
-    soulRight.style.opacity = '0'; // Fade out effect
+    soulRight.style.opacity = '0.8'; // Fade out effect
     
     // Highlight corresponding text in both areas
     highlightTextInArea(left-text-Area, character);
