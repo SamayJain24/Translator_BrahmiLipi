@@ -155,10 +155,13 @@ function moveWords() {
     }
 }
 
+
+
 // Function to check input against active words
 function checkInput() {
     const inputText = userInput.value.trim();
-    
+    let foundMatch = false; // Flag to track if a match was found
+
     for (let i = activeWords.length - 1; i >= 0; i--) {
         const word = activeWords[i];
         if (inputText === word.textContent) {
@@ -167,11 +170,16 @@ function checkInput() {
             createWord();
             resetButtonHighlights();
             createWord();
-            return;
+            foundMatch = true; // Set flag to true if a match is found
+            break; // Exit loop once a match is found
         }
     }
-}
 
+    // If no match is found, clear the input box
+    if (!foundMatch) {
+        userInput.value = '';
+    }
+}
 
 
 
