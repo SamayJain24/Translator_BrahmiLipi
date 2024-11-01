@@ -15,8 +15,7 @@ const explosionSound = document.getElementById('explosion-sound');
 let activeWords = [];
 let score = 0;
 let gameOverOccurred = false;
-
-
+let currentTargetChar = null;
 
 
 // Function to highlight a button by character with a blinking outline effect
@@ -167,10 +166,13 @@ function checkInput() {
             isWordActive = false;
             createWord();
             resetButtonHighlights();
+            createWord();
             return;
         }
     }
 }
+
+
 
 
 // Function to create an explosion effect
