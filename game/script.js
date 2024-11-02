@@ -95,54 +95,6 @@ function checkInput() {
     }
 }
 
-// // Function to launch a rocket towards a target word
-// function launchRocket(targetWord) {
-//     const rocket = document.createElement('div');
-//     rocket.classList.add('rocket');
-    
-//     // Position rocket at bottom center of game area
-//     const gameAreaRect = gameArea.getBoundingClientRect();
-//     const wordRect = targetWord.getBoundingClientRect();
-    
-//     // Calculate relative position to game area
-//     const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
-//     const startY = gameAreaRect.height - 30; // Start from bottom
-    
-//     rocket.style.left = `${targetX}px`;
-//     rocket.style.bottom = '10px'; // Start from bottom
-//     gameArea.appendChild(rocket);
-    
-//     // Play sound
-//     shootSound.play();
-    
-//     // Clear input
-//     userInput.value = '';
-    
-//     // Animate rocket to target
-//     const targetY = wordRect.top - gameAreaRect.top;
-//     rocket.style.transition = 'top 0.5s linear';
-    
-//     // Force a reflow to ensure the transition works
-//     rocket.offsetHeight;
-    
-//     // Set final position
-//     rocket.style.top = `${targetY}px`;
-    
-//     // Handle explosion and cleanup
-//     setTimeout(() => {
-//         createExplosion(targetWord);
-//         if (targetWord.parentNode) {
-//             gameArea.removeChild(targetWord);
-//         }
-//         activeWords = activeWords.filter(w => w !== targetWord);
-//         if (rocket.parentNode) {
-//             gameArea.removeChild(rocket);
-//         }
-//         updateScore(1);
-//     }, 500);
-// }
-
-
 
 
 // Function to create an explosion effect
@@ -336,55 +288,143 @@ function createSoulAnimation(character) {
     soulRight.style.left = `${startX}px`;
     soulRight.style.top = `${startY}px`;
     
+    // Remove yellow shadow or glow
+    soulLeft.style.textShadow = 'none';
+    soulRight.style.textShadow = 'none';
+
     // Force reflow
     soulLeft.offsetHeight;
     soulRight.offsetHeight;
     
-    // Animate to respective text areas and set opacity transition for fade-out
+    // Animate to respective text areas
     const leftTargetRect = leftTextArea.getBoundingClientRect();
     const rightTargetRect = rightTextArea.getBoundingClientRect();
     
-    soulLeft.style.left = `${leftTargetRect.left + 10}px`;
+    soulLeft.style.left = `${leftTargetRect.left + 70}px`;
     soulLeft.style.color = 'black';
-    soulLeft.style.top = `${leftTargetRect.top + 10}px`;
-    soulLeft.style.opacity = '0.8'; // Fade out effect
+    soulLeft.style.top = `${leftTargetRect.top + 35}px`;
     
-    soulRight.style.left = `${rightTargetRect.left + 10}px`;
+    soulRight.style.left = `${rightTargetRect.left + 70}px`;
     soulRight.style.color = 'black';
+    soulRight.style.top = `${rightTargetRect.top + 35}px`;
+    
+    // Add a transition end event listener for the left soul
+    soulLeft.addEventListener('transitionend', () => {
+        if (document.body.contains(soulLeft)) {
+            document.body.removeChild(soulLeft);
+        }// Remove soulLeft once it reaches the target
+        verifyleftTextAreas(); // Highlight text after soul removal
+    });
 
-    soulRight.style.top = `${rightTargetRect.top + 10}px`;
-    soulRight.style.opacity = '0.8'; // Fade out effect
-    
-    // Highlight corresponding text in both areas
-    highlightTextInArea(left-text-Area, character);
-    highlightTextInArea(right-textArea, character);
-    
-    // Remove souls after animation
-    setTimeout(() => {
-        document.body.removeChild(soulLeft);
-        document.body.removeChild(soulRight);
-    }, 800);
+    // Add a transition end event listener for the right soul
+    soulRight.addEventListener('transitionend', () => {
+        if (document.body.contains(soulRight)) {
+            document.body.removeChild(soulRight);
+        }; // Remove soulRight once it reaches the target
+        updateTextArea(); // Highlight text after soul removal  character
+    });
 }
 
-function highlightTextInArea(textAreaId, character) {
-    console.log("highlightTextInArea called with:", character); // Debugging statement
-    const textArea = document.getElementById(textAreaId);
-    const text = textArea.textContent; // Use textContent for editable divs
-    const index = text.indexOf(character);
-    
-    if (index !== -1) {
-        // Create a new range and highlight the character by changing its color
-        const range = document.createRange();
-        range.setStart(textArea.firstChild, index);
-        range.setEnd(textArea.firstChild, index + 1);
-        
-        // Create a span element to highlight
-        const span = document.createElement('span');
-        span.className = 'highlighted'; // Apply the darker color
-        span.textContent = character; // Set the character
+// Store state globally
+let spans = null;
+let currentIndex = 0;
+let isProcessing = false; // Add a processing flag
 
-        // Replace the character with the highlighted span
-        range.deleteContents();
-        range.insertNode(span);
+function updateTextArea() {
+    // If already processing, exit immediately
+    if (isProcessing) {
+        console.log("Already processing, skipping call");
+        return;
+    }
+    
+    isProcessing = true; // Set processing flag
+    console.log("------- Function Start -------");
+    const rightTextArea = document.getElementById("righttextarea");
+    
+    // Initialize spans only if they don't exist
+    if (!spans) {
+        console.log("Creating new spans");
+        const text = rightTextArea.textContent;
+        const characters = [...text];
+        
+        const processedHTML = characters.map(char => {
+            if (char === ' ') {
+                return ' ';
+            }
+            return `<span data-revealed="false" style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
+        }).join('');
+        
+        rightTextArea.innerHTML = processedHTML;
+        spans = Array.from(rightTextArea.getElementsByTagName('span'));
+        console.log(`Created ${spans.length} character spans`);
+    }
+
+    // Log current state
+    console.log("Current spans state:");
+    spans.forEach((span, index) => {
+        console.log(`Span ${index}: "${span.textContent}" - Revealed: ${span.dataset.revealed}`);
+    });
+
+    // Only reveal one character and exit
+    if (currentIndex < spans.length) {
+        const currentSpan = spans[currentIndex];
+        
+        if (currentSpan.dataset.revealed === "false") {
+            console.log(`Revealing: "${currentSpan.textContent}"`);
+            currentSpan.style.color = 'black';
+            currentSpan.dataset.revealed = "true";
+            currentIndex++;
+            
+            // Log final state
+            console.log("Final spans state:");
+            spans.forEach((span, index) => {
+                console.log(`Span ${index}: "${span.textContent}" - Revealed: ${span.dataset.revealed}`);
+            });
+        }
+    }
+
+    // Reset processing flag after a small delay
+    setTimeout(() => {
+        isProcessing = false;
+    }, 100); // 100ms delay before allowing next call
+}
+
+function resetTextArea() {
+    console.log("Resetting text area");
+    if (spans) {
+        spans.forEach(span => {
+            span.style.color = 'transparent';
+            span.dataset.revealed = "false";
+        });
+        currentIndex = 0;
+        isProcessing = false;
     }
 }
+
+function isComplete() {
+    return spans && currentIndex >= spans.length;
+}
+
+
+function verifyleftTextAreas() {
+    const leftTextArea = document.getElementById("lefttextarea");
+    
+
+    if (!leftTextArea .innerHTML.includes("span")) {
+        leftTextArea .innerHTML = leftTextArea .textContent.split('').map(char => {
+            return `<span style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
+        }).join('');
+    }
+    
+    // Get all span elements (characters) in the text area
+    const characterSpans = leftTextArea .querySelectorAll('span');
+
+    // Change the first non-black character to black
+    for (let span of characterSpans) {
+        if (span.style.color === 'transparent') {
+            span.style.color = 'black';
+            break;
+        }
+    }
+}
+
