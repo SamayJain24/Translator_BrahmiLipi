@@ -5,7 +5,8 @@
 //     '𑁖', '𑁗', '𑁘', '𑁙', '𑁚', 'o',
 
 let words = [
-  '𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀁','𑀓','𑀭',' 𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃','𑀁', '𑁇'
+    
+    '𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃','𑁇'
 ];
 
 const gameArea = document.getElementById('game-area');
@@ -37,7 +38,7 @@ function createWord() {
 
         // Advance to the next character
         wordIndex++;
-        if (wordIndex >= words.length) {
+        if (wordIndex >= words.length+1) {
             // Prompt "Round 1 is cleared" and stop the sequence
             alert("Round 1 is cleared");
             wordIndex = 0; // Optional: Reset if needed for the next round
@@ -146,7 +147,7 @@ function resetGame() {
 userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
-setInterval(createWord, 4000);  // Generate a new word every 2 seconds
+setInterval(createWord, 1000);  // Generate a new word every 2 seconds
 setInterval(moveWords, 300);     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
@@ -228,6 +229,7 @@ document.head.appendChild(style);
 
 // Modify the launchRocket function to include the soul animation
 function launchRocket(targetWord) {
+    shootSound.play();
     const rocket = document.createElement('div');
     rocket.classList.add('rocket');
     
