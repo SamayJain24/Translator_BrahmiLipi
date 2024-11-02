@@ -25,11 +25,16 @@
         }
 
         /* Title Styling */
+        h1, h2 {
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+        }
+
+        /* Title Styling */
         h1 {
-            margin-top: 40px;
+            margin-top: 30px;
             font-size: 3em;
             color: #ca5e1a;
-            text-shadow: 2px 2px 5px #8B2323;
+            text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
         }
 
         h2 {
@@ -52,10 +57,18 @@
             border-radius: 8px;
             color: #FFF;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            text-transform: uppercase;
-            width: 200px;
+            margin-top: 10px;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+        }
+
+        .fade-out {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+
+        .fade-out-buttons {
+            transform: translateY(100px);
+            opacity: 0;
         }
 
         button:hover {
@@ -84,7 +97,7 @@
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
-                margin-top: 20px;
+                margin-top: 10px;
             }
 
             h2 {
@@ -101,18 +114,19 @@
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2em;
-                margin-top: 15px;
+                font-size: 3em;
+                margin-top: 10px;
             }
 
             h2 {
-                font-size: 1rem;
+                font-size: 1.3rem;
             }
 
             button {
                 font-size: 0.9em;
                 padding: 10px 20px;
                 width: 50%;
+
             }
         }
     </style>
@@ -157,8 +171,21 @@
 
 <script>
     function startGame() {
-        window.location.href = 'game.html';
-    }
+            // Get elements
+            const heading1 = document.querySelector('h1');
+            const heading2 = document.querySelector('h2');
+            const buttons = document.querySelectorAll('button');
+
+            // Add classes for animation
+            heading1.classList.add('fade-out');
+            heading2.classList.add('fade-out');
+            buttons.forEach(button => button.classList.add('fade-out-buttons'));
+
+            // Redirect after animation
+            setTimeout(() => {
+                window.location.href = 'game.html';
+            }, 1000); // Wait for 1 second for the animation to complete
+        }
 
     function showStats() {
         alert("Statistics will be available soon!");
