@@ -15,26 +15,22 @@
         <div id="score-display">Score: 0</div>
 
         <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
-            <!-- Left Text Area (Converted a div) -->
-            <div
-                contenteditable="true"
-                id="left-text-area"
+            <!-- Left Text Area (Converted to a div) -->
+            <div contenteditable="true" id="lefttextarea"
                 style="
                     width: 180px;
                     height: 80px;
                     border-radius: 20px 0 0 20px;
-                    font-size: 12px;
+                    font-size: 15px;
                     padding: 8px;
-                    line-height: 1.2;
+                    line-height: 1.8;
                     border: 1px solid #ccc;
                     background-color: white;
                     overflow: auto;
                     resize: none;
-                "
-                placeholder="𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓"
-                onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';"
-                onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');"
-            >𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓</div>
+                    color:transparent;
+                    -webkit-text-stroke: 0.3px black;"
+                placeholder="𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓" onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';" onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');">𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓</div>
         
             <!-- Divider -->
             <div
@@ -49,23 +45,26 @@
             <div
 
                 contenteditable="true"
-                id="right-text-area"
+                id="righttextarea"
                 style="
                     width: 180px;
                     height: 80px;
                     border-radius: 0 20px 20px 0;
-                    font-size: 12px;
+                    font-size: 15px;
                     padding: 8px;
-                    line-height: 1.2;
+                    line-height: 1.8;
                     border: 1px solid #ccc;
                     background-color: white;
                     overflow: auto;
                     resize: none;
+                    color:transparent;
+                    -webkit-text-stroke: 0.3px black;
+                    
                 "
                 placeholder="श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।"
                 onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';"
                 onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');"
-            >श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।</div>
+            >अ आ इ ई उ ऊ ए ऐ ओ औ क </div>
         </div>
         
         
