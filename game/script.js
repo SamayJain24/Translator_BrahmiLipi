@@ -5,9 +5,8 @@
 //     '𑁖', '𑁗', '𑁘', '𑁙', '𑁚', 'o',
 
 let words = [
-    
-    '𑀅', '𑀆', '𑀇', '𑀈', '𑀉', '𑀊', '𑀏', '𑀐', '𑀑', '𑀒',
-    '𑀓', '𑀔', '𑀕', '𑀖', '𑀗'];
+    '𑀚', '𑁃', '𑀦', ' ', '𑀥', '𑀭', '𑁆', '𑀫', '𑀓', '𑁂', '𑀧', '𑀳', '𑀢', '𑀻', '𑀁', '𑀣', '𑀆', '𑀤', '𑀺', '𑀪', '𑀕', '𑀯', '𑀸', '𑀁', '𑁇'];
+
 const gameArea = document.getElementById('game-area');
 const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
@@ -19,6 +18,7 @@ let gameOverOccurred = false;
 let currentTargetChar = null;
 let isWordActive = false;
 let wordIndex = 0; // Track current index in `sentence`
+
 
 // Function to create a new word in sequence
 function createWord() {
@@ -37,7 +37,10 @@ function createWord() {
         // Advance to the next character
         wordIndex++;
         if (wordIndex >= words.length) {
-            wordIndex = 0; // Reset to the beginning if you want a continuous loop
+            // Prompt "Round 1 is cleared" and stop the sequence
+            alert("Round 1 is cleared");
+            wordIndex = 0; // Optional: Reset if needed for the next round
+            return; // Exit the function to prevent continuous looping
         }
 
         resetButtonHighlights();
@@ -428,6 +431,7 @@ function verifyleftTextAreas() {
     }
 }
 
+
 window.onpopstate = function(event) {
         // Redirect to your desired page when the back button is pressed
         window.location.href = 'index.html'; // Replace with the correct filename or URL
@@ -437,4 +441,6 @@ window.onpopstate = function(event) {
     window.onload = function() {
         history.pushState({}, '', window.location.href);
     };
+
+
 
