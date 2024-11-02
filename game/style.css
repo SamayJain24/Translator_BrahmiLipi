@@ -369,10 +369,10 @@ h2 {
 /* Glow Effect */
 @keyframes soulGlow {
     from {
-        text-shadow: 0 0 60px #8B0000, 0 0 10px #8B0000, 0 0 15px #8B0000;
+        text-shadow: 0 0 60px #000000, 0 0 10px #000000, 0 0 15px #000000;
     }
     to {
-        text-shadow: 0 0 60px #8B0000, 0 0 20px #8B0000, 0 0 30px #8B0000;
+        text-shadow: 0 0 60px #000000, 0 0 20px #000000, 0 0 30px #000000;
     }
 }
 .highlight-text {
