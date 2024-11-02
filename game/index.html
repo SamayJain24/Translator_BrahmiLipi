@@ -28,6 +28,10 @@
         h1, h2 {
             transition: transform 1s ease-in-out, opacity 1s ease-in-out;
         }
+        .reset-animation {
+            transform: none;
+            opacity: 1;
+        }
 
         /* Title Styling */
         h1 {
@@ -170,6 +174,13 @@
     </div>
 
 <script>
+    // Ensure elements are visible when navigating back to this page
+
+    window.onload = function() {
+            document.getElementById('title').classList.add('reset-animation');
+            document.getElementById('subtitle').classList.add('reset-animation');
+            history.pushState({}, '', window.location.href);
+        };
     function startGame() {
             // Get elements
             const heading1 = document.querySelector('h1');
@@ -186,6 +197,11 @@
                 window.location.href = 'game.html';
             }, 500); // Wait for 1 second for the animation to complete
         }
+    // Handle back navigation to ensure proper state reset
+    window.onpopstate = function(event) {
+            document.getElementById('title').classList.add('reset-animation');
+            document.getElementById('subtitle').classList.add('reset-animation');
+    };
 
     function showStats() {
         alert("Statistics will be available soon!");
