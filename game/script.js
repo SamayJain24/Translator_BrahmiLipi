@@ -428,3 +428,13 @@ function verifyleftTextAreas() {
     }
 }
 
+window.onpopstate = function(event) {
+        // Redirect to your desired page when the back button is pressed
+        window.location.href = 'index.html'; // Replace with the correct filename or URL
+    };
+
+    // Add a new history state when the page loads
+    window.onload = function() {
+        history.pushState({}, '', window.location.href);
+    };
+
