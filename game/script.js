@@ -1,4 +1,22 @@
+// Initialize the current round
 let currentRound = 0;
+
+// Function to load the selected level if available
+function loadSelectedLevel() {
+  const savedLevel = localStorage.getItem('selectedLevel');
+  if (savedLevel !== null) {
+    currentRound = parseInt(savedLevel, 10);
+    localStorage.removeItem('selectedLevel'); // Clear after reading
+  }
+  console.log("Starting at Level:", currentRound);
+  return
+}
+
+// Call this function early in the script
+loadSelectedLevel();
+console.log("Selected Level:", currentRound);
+
+
 
 let rounds = [
     // Round 1 words
@@ -15,7 +33,9 @@ let rounds = [
     ['𑀪', '𑀸', '𑀱', '𑀸', '𑀩', '𑁄', '𑀮,', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻', '𑀳,' ,' 𑁃', '𑀮', '𑀺', '𑀧', '𑀺', '𑀮', '𑀺', '𑀔', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻,' ,'𑀳', '𑁃', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀏', '𑀧', '𑀓', '𑀻', '𑀫', '𑀤', '𑀤,', '𑀲', '𑁂', '𑀆', '𑀧', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀮', '𑀺', '𑀧', '𑀺', '𑀓', '𑁄', '𑀓','𑀺', '𑀲', '𑀻', '𑀪', '𑀻', '𑀪', '𑀸', '𑀱', '𑀸', '𑀫', '𑁂', '𑀁', '𑀮', '𑀺', '𑀔', '𑀦', '𑀸', '𑀲', '𑀻', '𑀔', '𑀲', '𑀓', '𑀢', '𑁂', '𑀳', '𑁃', '𑀁',],
 
 ];
-let words = rounds[currentRound];
+console.log("Words for this level:", rounds[currentRound]);
+let words = rounds[currentRound-1];
+console.log("Words for Current Round:", words);
 console.log(words)
 const gameArea = document.getElementById('game-area');
 const userInput = document.getElementById('user-input');
@@ -521,7 +541,7 @@ function updateRound(roundNumber) {
         initializeRound(roundNumber);
     }
 
-    initializeRound(1);
+initializeRound(currentRound);
 
 function verifyleftTextAreas(char) {
         console.log("verifyleftTextAreas called properly ")
