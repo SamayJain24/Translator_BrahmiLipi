@@ -13,10 +13,9 @@
     <div id="game-container">
         <h2>खेल-खेल में सीखें ब्राह्मी लिपि</h2>
         <div id="score-display">Score: 0</div>
-
         <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
-            <!-- Left Text Area (Converted to a div) -->
-            <div contenteditable="False" id="lefttextarea"
+            <!-- Left Text Area -->
+            <div contenteditable="False" id="leftTextArea"
                 style="
                     width: 180px;
                     height: 80px;
@@ -28,10 +27,8 @@
                     background-color: white;
                     overflow: auto;
                     resize: none;
-                    color:transparent;
-                    -webkit-text-stroke: 0.3px black;"
-                placeholder="𑀅 𑀆 𑀇 𑀈 𑀉 𑀊 𑀏 𑀐 𑀑 𑀒 𑀓" onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';" onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');">
-                𑀚𑁃𑀦 𑀥𑀭𑁆𑀫 𑀓𑁂 𑀧𑁆𑀭𑀣𑀫 𑀢𑀻𑀭𑁆𑀣𑀁𑀓𑀭 𑀆𑀤𑀺𑀦𑀸𑀣 𑀪𑀕𑀯𑀸𑀦 𑀚𑀻 𑀳𑁃𑀁 𑁇
+                    color: transparent;
+                    -webkit-text-stroke: 0.3px black;">
             </div>
         
             <!-- Divider -->
@@ -40,14 +37,12 @@
                     width: 2px;
                     height: 80px;
                     background-color: #ccc;
-                "
-            ></div>
+                    border: 1px solid #ccc;
+                ">
+            </div>
         
-            <!-- Right TextArea (Converted to a div) -->
-            <div
-
-                contenteditable="False"
-                id="righttextarea"
+            <!-- Right Text Area -->
+            <div contenteditable="False" id="rightTextArea"
                 style="
                     width: 180px;
                     height: 80px;
@@ -59,16 +54,12 @@
                     background-color: white;
                     overflow: auto;
                     resize: none;
-                    color:transparent;
-                    -webkit-text-stroke: 0.3px black;
-                    
-                "
-                placeholder="श्री आदिनाथ नमः।।  नमो बंभइये लिविया।  यह लिपि आदिनाथ भगवन जी ने अपनी पुत्री ब्राह्मी को सिखाई थी , उसी क नाम साई ये लिपि है।"
-                onfocus="if (this.textContent == this.getAttribute('placeholder')) this.textContent = '';"
-                onblur="if (this.textContent == '') this.textContent = this.getAttribute('placeholder');"
-            >जैन धर्म के प्रथम तीर्थंकर आदिनाथ भगवान जी हैं।
+                    color: transparent;
+                    -webkit-text-stroke: 0.3px black;">
+            </div>
         </div>
-        </div>
+
+        
         
         
         <div id="game-area">
@@ -190,7 +181,7 @@
 
     <audio  id="shoot-sound" src="media/sounds/plasma.ogg"></audio>
     <audio id="explosion-sound" src="media/sounds/explosion.ogg"></audio>
-    <script src="script.js"></script>
+    <script src="script1.js"></script>
 </body>
 
 </html>
