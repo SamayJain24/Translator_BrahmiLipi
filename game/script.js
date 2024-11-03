@@ -4,9 +4,16 @@ let rounds = [
     // Round 1 words
     ['𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃'],
     // Round 2 words
-    ['𑀧', '𑀭', '𑀣', '𑀫'],
+    ['𑀋', '𑀱','𑀪', '𑀤 ', '𑁂', '𑀯', '𑀚', '𑀻','𑀯','𑀾', '𑀱', '𑀪', '𑀦', '𑀸', '𑀣', '𑀚', '𑀻', '𑀅', '𑁅', '𑀭', '𑀅', '𑀸', '𑀺', '𑀤', '𑀦', '𑀸', '𑀣','𑀚', '𑀻', '𑀬', '𑁂', '𑀢', '𑀻', '𑀦', '𑁄', '𑀦', '𑀸', ' 𑀫', '𑀧𑁆', '𑀭', '𑀣', '𑀫', ' 𑀢', '𑀻', ' 𑀭𑁆', '𑀣', '𑀁', ' 𑀓', '𑀭', '𑀓', '𑁂', '𑀳', '𑀻', '𑀳', '𑁃','𑀁'],
     // Round 3 words 
-    ['𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃','𑁇'], 
+    ['𑀫', '𑀳', '𑀸', '𑀭', '𑀸', '𑀚', '𑀸', '𑀋', '𑀱', '𑀪', '𑀤', '𑁂', '𑀯', '𑀚', '𑀻', '𑀦', '𑁂', '𑀅', '𑀧', '𑀦', '𑀻', '𑀩', '𑀟', '𑀻', '𑀧', '𑀼', '𑀢𑁆', '𑀭', '𑀻', '𑀩𑁆', '𑀭', '𑀸', '𑀳𑁆', '𑀫', '𑀻', '𑀓', '𑁄', '𑀅', '𑀓𑁆', '𑀱', '𑀭', '𑀮', '𑁂', '𑀔', '𑀦', '𑀓', '𑀻', '𑀓', '𑀮', '𑀸','𑀺', '𑀲', '𑀔', '𑀸', '𑀈'],
+    // Round 4 words 
+    ['𑀩𑁆', '𑀭', '𑀸','𑀳', '𑀫', '𑀻', '𑀦', '𑁂', '𑀧', '𑀺', '𑀢', '𑀸', '𑀓', '𑁂', '𑀤𑁆', '𑀯', '𑀸', '𑀭', '𑀸', '𑀤', '𑀻', '𑀕', '𑀈', '𑀮', '𑀺', '𑀧', '𑀺', '𑀯', '𑀺', ' 𑀤𑁆', '𑀬', '𑀸', '𑀚', '𑀦', '-,', '𑀚', '𑀦', '𑀓', '𑁄', '𑀲', '𑀺', '𑀔', '𑀸', '𑀈'],
+    // Round 5 words 
+    ['𑀲', '𑀩', '𑀦', '𑁂', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀲', '𑁂', '𑀲', '𑀻', '𑀔', '𑀻', '𑀕', '𑀈', '𑀺', '𑀮', '𑀺', '𑀧', '𑀺', '𑀺', '𑀯', '𑀖', '𑀸', '𑀓', '𑁄', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀺', '𑀮', '𑀺', '𑀧', '𑀦', '𑀸', '𑀫', '𑀺', '𑀤', '𑀬', '𑀸'],
+    // Round 6 words 
+    ['𑀪', '𑀸', '𑀱', '𑀸', '𑀩', '𑁄', '𑀮,', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻', '𑀳,' ,' 𑁃', '𑀮', '𑀺', '𑀧', '𑀺', '𑀮', '𑀺', '𑀔', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻,' ,'𑀳', '𑁃', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀏', '𑀧', '𑀓', '𑀻', '𑀫', '𑀤', '𑀤,', '𑀲', '𑁂', '𑀆', '𑀧', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀮', '𑀺', '𑀧', '𑀺', '𑀓', '𑁄', '𑀓','𑀺', '𑀲', '𑀻', '𑀪', '𑀻', '𑀪', '𑀸', '𑀱', '𑀸', '𑀫', '𑁂', '𑀁', '𑀮', '𑀺', '𑀔', '𑀦', '𑀸', '𑀲', '𑀻', '𑀔', '𑀲', '𑀓', '𑀢', '𑁂', '𑀳', '𑁃', '𑀁',],
+
 ];
 let words = rounds[currentRound];
 console.log(words)
@@ -23,16 +30,14 @@ let isWordActive = false;
 let wordIndex = 0; // Track current index in `sentence`
 
 
+
 function createWord() {
-    // Check if this is the last word in the array and if there are no active words on screen
     if (wordIndex === words.length && activeWords.length === 0) {
-        // Don't show alert immediately - wait for animations to complete
-        console.log("All words processed and activeWords is empty. Preparing to display round completion.");
-        return; // Exit here - the level completion will be handled by soul animation completion
+        console.log("All words processed and activeWords is empty.");
+        return;
     }
     
     if (!isWordActive && wordIndex < words.length) {
-        // Rest of your createWord logic remains the same
         const word = document.createElement('div');
         word.classList.add('word');
         const nextChar = words[wordIndex];
@@ -40,7 +45,14 @@ function createWord() {
         word.style.left = `${Math.random() * (gameArea.offsetWidth - 100)}px`;
         word.style.top = '0px';
         word.dataset.passedMiddle = 'false';
+        word.dataset.isRemoving = 'false';
         gameArea.appendChild(word);
+        
+        // Start falling animation
+        requestAnimationFrame(() => {
+            word.classList.add('falling');
+        });
+
         activeWords.push(word);
         isWordActive = true;
         wordIndex++;
@@ -49,74 +61,111 @@ function createWord() {
     }
 }
 
-// Function to handle when a word leaves the game area or is processed
-function removeWord(wordElement) {
-    console.log("removeWord called. Word to remove:", wordElement.textContent);
-    
-    // Remove word from the DOM and activeWords array
-    const index = activeWords.indexOf(wordElement);
-    if (index > -1) {
-        activeWords.splice(index, 1);
-        wordElement.remove();
-        console.log(`Word removed from activeWords. Remaining activeWords.length: ${activeWords.length}`);
-    } else {
-        console.log("Error: Word to remove was not found in activeWords.");
-    }
-
-    // Check if all words have been cleared
-    console.log("Checking if all words are cleared after removeWord.");
-    console.log("Current state: wordIndex:", wordIndex, "words.length:", words.length, "activeWords.length:", activeWords.length);
-    if (wordIndex >= words.length && activeWords.length === 0) {
-        console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
-        setTimeout(() => {
-            console.log(`Round ${currentRound + 1} is cleared!`);
-            alert(`Round ${currentRound + 1} is cleared!`);
-
-            // Move to the next round if available
-            currentRound++;
-            if (currentRound < rounds.length) {
-                words = rounds[currentRound];
-                wordIndex = 0;
-                console.log("Moving to next round. currentRound:", currentRound);
-                updateRound(currentRound + 1);
-            } else {
-                console.log("Game Completed!");
-                alert("Game Completed!");
-            }
-        }, 500);
-    }
-}
-
-
-
-
-// Function to move words downward
 function moveWords() {
-    const middleY = gameArea.offsetHeight / 2;
+    const gameAreaHeight = gameArea.offsetHeight;
+    const seventyPercentHeight = Math.floor(gameAreaHeight * 0.7);
     
     for (let i = activeWords.length - 1; i >= 0; i--) {
         const word = activeWords[i];
-        let currentTop = parseInt(word.style.top);
-        word.style.top = `${currentTop + 1}px`;
+        if (word.dataset.isRemoving === 'true') continue;
 
-        if (currentTop >= middleY && word.dataset.passedMiddle === 'false') {
+        const rect = word.getBoundingClientRect();
+        const currentTop = rect.top - gameArea.getBoundingClientRect().top;
+
+        // Create new word when current word passes 70% of height
+        if (currentTop >= seventyPercentHeight && word.dataset.passedMiddle === 'false') {
+            console.log("Word passed 70% height, creating new word");
             word.dataset.passedMiddle = 'true';
             isWordActive = false;
-            createWord();
+            setTimeout(() => createWord(), 0);
         }
 
-        if (currentTop >= gameArea.offsetHeight - 30) {
-            if (word.parentNode) {
-                gameArea.removeChild(word);
-            }
-            activeWords.splice(i, 1);
-            isWordActive = false;
-            createWord();
-            updateScore(-1);
+        // Handle word reaching bottom
+        if (currentTop >= gameAreaHeight * 0.9) { // 90% of height
+            word.dataset.isRemoving = 'true';
+            
+            setTimeout(() => {
+                if (word.parentNode) {
+                    word.remove();
+                }
+                const index = activeWords.indexOf(word);
+                if (index > -1) {
+                    activeWords.splice(index, 1);
+                }
+                isWordActive = false;
+                updateScore(-1);
+                setTimeout(() => createWord(), 0);
+            }, 500);
         }
     }
 }
+function removeWord(wordElement) {
+    console.log("removeWord called. Word to remove:", wordElement.textContent);
+    
+    if (wordElement.dataset.isRemoving === 'true') {
+        return; // Prevent double removal
+    }
+    
+    wordElement.dataset.isRemoving = 'true';
+    wordElement.style.opacity = '0';
+    wordElement.style.pointerEvents = 'none';
+    
+    setTimeout(() => {
+        const index = activeWords.indexOf(wordElement);
+        if (index > -1) {
+            activeWords.splice(index, 1);
+            wordElement.remove();
+            console.log(`Word removed from activeWords. Remaining activeWords.length: ${activeWords.length}`);
+        }
 
+        // Check if all words have been cleared
+        console.log("Checking if all words are cleared after removeWord.");
+        console.log("Current state: wordIndex:", wordIndex, "words.length:", words.length, "activeWords.length:", activeWords.length);
+        
+        if (wordIndex >= words.length && activeWords.length === 0) {
+            console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
+            setTimeout(() => {
+                console.log(`Round ${currentRound + 1} is cleared!`);
+                alert(`Round ${currentRound + 1} is cleared!`);
+
+                // Move to the next round if available
+                currentRound++;
+                if (currentRound < rounds.length) {
+                    words = rounds[currentRound];
+                    wordIndex = 0;
+                    console.log("Moving to next round. currentRound:", currentRound);
+                    updateRound(currentRound + 1);
+                } else {
+                    console.log("Game Completed!");
+                    alert("Game Completed!");
+                }
+            }, 500);
+        }
+
+        // Allow new word creation after removal
+        isWordActive = false;
+        setTimeout(() => createWord(), 0);
+    }, 500);
+}
+
+// Add this CSS to your stylesheet
+const styles = `
+.word {
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    z-index: 1;
+}
+
+.word[data-is-removing="true"] {
+    pointer-events: none;
+}
+`;
+
+// Create and append style element
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
 // Function to check input against active words
 function checkInput() {
     const inputText = userInput.value.trim();
@@ -517,61 +566,107 @@ if (conditionMet) {
     }
 ;
 
-const hindiMapping = {
-    '𑀚': 'ज',
-    '𑁃': 'ै',
-    '𑀦': 'न',
-    '𑀥': 'ध',
-    '𑀭': 'र',
-    '𑀫': 'म',
-    '𑀓': 'क',
-    '𑁂': '्',
-    '𑀧': 'प',
-    '𑀣': 'थ',
-    '𑀅': 'अ',
-    '𑀆': 'आ',
-    '𑀇': 'इ',
-    '𑀈': 'ई',
-    '𑀉': 'उ',
-    '𑀊': 'ऊ',
-    '𑀏': 'ए',
-    '𑀐': 'ऐ',
-    '𑀑': 'ओ',
-    '𑀒': 'औ',
-    '𑀸': 'ा',
-    '𑀺': 'ि',
-    '𑀻': 'ी',
-    '𑀼': 'ु',
-    '𑀽': 'ू',
-    '𑀔': 'ख',
-    '𑀕': 'ग',
-    '𑀖': 'घ',
-    '𑀗': 'ङ',
-    '𑀘': 'च',
-    '𑀙': 'छ',
-    '𑀛': 'ट',
-    '𑀜': 'ठ',
-    '𑀝': 'ड',
-    '𑀞': 'ढ',
-    '𑀟': 'ण',
-    '𑀡': 'द',
-    '𑀢': 'ध',
-    '𑀤': 'न',
-    '𑀪': 'ब',
-    '𑀫': 'म',
-    '𑀬': 'य',
-    '𑀭': 'र',
-    '𑀮': 'ल',
-    '𑀯': 'व',
-    '𑀰': 'श',
-    '𑀱': 'ष',
-    '𑀲': 'स',
-    '𑀳': 'ह',
-    '𑀴': 'ळ',
-    '𑀵': 'क्ष',
-    '𑀶': 'ज्ञ'
-};
 
+const hindiMapping = {
+    "𑀅": "अ",
+    "𑀆": "आ",
+    "𑀇": "इ",
+    "𑀈": "ई",
+    "𑀉": "उ",
+    "𑀊": "ऊ",
+    "𑀏": "ए",
+    "𑀐": "ऐ",
+    "𑀑": "ओ",
+    "𑀒": "औ",
+    "𑀅𑀁" : "अं",
+    "𑀅ः" : "अः",
+
+
+    "𑀓":"क",
+    "𑀔": "ख",
+    "𑀕": "ग",
+    "𑀖": "घ",
+    "𑀗": "ङ",
+    "𑀘": "च",
+    "𑀙": "छ",
+    "𑀚" : "ज",
+    "𑀛" :"झ",
+    "𑀜" :"ञ",
+    "𑀝": "ट",
+    "𑀞": "ठ",
+    "𑀟": "ड",
+    "𑀠": "ढ",
+    "𑀡": "ण",
+    "𑀢"  :"त",
+    "𑀣" :"थ",
+    "𑀤": "द",
+    "𑀥": "ध",
+    "𑀦": "न",
+    "𑀧": "प",
+    "𑀨" :"फ",
+    "𑀩": "ब",
+    "𑀪":"भ",
+    "𑀫": "म",
+    "𑀬": "य",
+    "𑀭": "र",
+    "𑀮": "ल",
+    "𑀯": "व",
+    "𑀰": "श",
+    "𑀱": "ष",
+    "𑀲": "स",
+    "𑀳": "ह",
+    "𑀚𑁆𑀜": "ज्ञ",
+    "𑀓𑁆𑀱": "क्ष",
+    "𑀰𑁆𑀭":"श्र", 
+    "𑀧𑁆𑀭": "प्र",
+    "𑀋":"ऋ",
+    '𑀸':'ा',
+'𑀺':'ि',
+'𑀻':'ी',
+'𑀼':'ु',
+'𑀽':'ू',
+'𑁂':'े',
+'𑁃':'ै',
+'𑁄':'ो',
+'𑁅':'ौ',
+'𑀁':'ं',
+'‌‌ः':'ः',
+'𑁆':'्',
+'़':'़',
+"𑀾": "ृ",
+'ऽ':'ऽ',
+'ॐ':'ॐ',
+'𑁈':'॥',
+';':';',
+'-':'-',
+'?':'?',
+'!':'!',
+'.':'.',
+'/':'/',
+')':')',
+'(':'(',
+'𑁧':'१',
+'𑁨':'२',
+'𑁩':'३',
+'𑁪':'४',
+'𑁫':'५',
+'𑁬':'६',
+'𑁭':'७',
+'𑁮':'८',
+'𑁯':'९',
+'𑁦':'०',
+'𑁧':'1',
+'𑁨':'2',
+'𑁩':'3',
+'𑁪':'4',
+'𑁫':'5',
+'𑁬':'6',
+'𑁭':'7',
+'𑁮':'8',
+'𑁯':'9',
+'𑁦':'0',
+
+    }
 function updateTextArea(inputChar) {
     if (isProcessing) {
         console.log("Already processing, skipping call");
