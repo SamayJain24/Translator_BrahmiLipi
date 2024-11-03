@@ -517,58 +517,6 @@ if (conditionMet) {
     }
 ;
 
-// function updateTextArea() {
-//     if (isProcessing) {
-//         console.log("Already processing, skipping call");
-//         return;
-//     }
-
-//     isProcessing = true;
-//     console.log("------- Function Start -------");
-
-//     const rightTextArea = document.getElementById("rightTextArea");
-//     if (!rightTextArea) {
-//         console.warn("rightTextArea element not found");
-//         isProcessing = false;
-//         return;
-//     }
-
-//     if (!currentRoundSpans[currentRound]) {
-//         console.log(`Creating new spans for round ${currentRound}`);
-//         const roundText = roundTexts[currentRound + 1]?.right || '';
-//         const characters = [...roundText];
-        
-//         const processedHTML = characters.map(char => {
-//             if (char === ' ') {
-//                 return ' ';
-//             }
-//             return `<span data-revealed="false" style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
-//         }).join('');
-        
-//         rightTextArea.innerHTML = processedHTML;
-//         currentRoundSpans[currentRound] = Array.from(rightTextArea.getElementsByTagName('span'));
-//         spans = currentRoundSpans[currentRound];
-//         currentIndex = 0;
-//     } else {
-//         spans = currentRoundSpans[currentRound];
-//     }
-
-//     if (currentIndex < spans.length) {
-//         const currentSpan = spans[currentIndex];
-        
-//         if (currentSpan.dataset.revealed === "false") {
-//             console.log(`Revealing: "${currentSpan.textContent}"`);
-//             currentSpan.style.color = 'black';
-//             currentSpan.dataset.revealed = "true";
-//             currentIndex++;
-//         }
-//     }
-
-//     setTimeout(() => {
-//         isProcessing = false;
-//     }, 100);
-// }
-
 const hindiMapping = {
     '𑀚': 'ज',
     '𑁃': 'ै',
