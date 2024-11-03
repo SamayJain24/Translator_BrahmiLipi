@@ -256,7 +256,7 @@ h2 {
 }
 
 
-
+/* 
 .keyboard button { 
     width: 33px;
     height: 33px;
@@ -272,9 +272,28 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+
+
+.keyboard button { 
+    width: 33px;
+    height: 33px;
+    font-size: 1.1rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url('media/background/level background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .keyboard button:hover {
-    background-color: #d1d1d1;
+    background-color: transparent;
 }
 .keyboard button.highlight {
     background-color: #ffcc00;  /* Color for highlighting */
