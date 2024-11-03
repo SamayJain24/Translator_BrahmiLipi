@@ -69,7 +69,7 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures the video fills the area while maintaining aspect ratio */
-    z-index: -1; /* Sends the video to the background */
+    z-index: 1; /* Sends the video to the background */
     pointer-events: none; /* Disables interaction with the video */
 }
 
@@ -99,18 +99,40 @@ h2 {
     position: absolute;
     font-size: 1.5rem;
     color: #000000;
-    animation: wordMove 7s linear forwards;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    pointer-events: auto;
+}
+
+.word[data-is-removing="true"] {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
 }
 
 @keyframes wordMove {
-    from {
+    0% {
         top: 0;
+        opacity: 1;
     }
-    to {
+    70% {  /* At 70% of animation, start preparing for pass-through */
+        top: 70%;
+        opacity: 1;
+    }
+    90% {  /* Start fading out */
+        top: 85%;
+        opacity: 0.7;
+    }
+    100% {
         top: 90%;
+        opacity: 0;
     }
 }
 
+.word.falling {
+    animation: wordMove 7s linear forwards;
+}
 .rocket {
     width: 10px;
     height: 20px;
