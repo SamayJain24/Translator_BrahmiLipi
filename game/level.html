@@ -33,20 +33,27 @@
         .level-container {
             display: grid;
             grid-template-columns: repeat(3, 100px);
-            grid-gap: 20px;
+            grid-gap: 150px;
         }
 
         .level-button {
-            width: 100px;
-            height: 100px;
-            background-color: #ca5e1a;
-            border: none;
-            border-radius: 10px;
-            font-size: 2em;
-            color: #FFF;
-            cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
-        }
+        width: 200px;
+        height: 200px;
+    background-image: url('media/background/level background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent; /* Set background to transparent */
+    border: none;
+    border-radius: 10px;
+    font-size: 2em;
+    color: #000000;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    text-align: center;
+}
+
+
 
         .level-button:hover {
             background-color: #b05016;
@@ -62,7 +69,7 @@
 
             .level-container {
                 grid-template-columns: repeat(2, 80px);
-                grid-gap: 15px;
+                grid-gap: 60px;
             }
 
             .level-button {
@@ -82,12 +89,12 @@
 
             .level-container {
                 grid-template-columns: repeat(2, 60px);
-                grid-gap: 10px;
+                grid-gap: 50px;
             }
 
             .level-button {
-                width: 60px;
-                height: 60px;
+                width: 100px;
+                height: 100px;
                 font-size: 1.2em;
             }
         }
