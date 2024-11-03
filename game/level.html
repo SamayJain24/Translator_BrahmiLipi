@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Levels</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #101820FF;
+            background-image: url('media/background/Image_Background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #FEE715FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ca5e1a;
+            text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
+            margin-bottom: 50px;
+        }
+
+        .level-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 20px;
+        }
+
+        .level-button {
+            width: 100px;
+            height: 100px;
+            background-color: #ca5e1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 2em;
+            color: #FFF;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .level-button:hover {
+            background-color: #b05016;
+            transform: scale(1.05);
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 800px) {
+            h1 {
+                font-size: 4em;
+                margin-bottom: 15px;
+            }
+
+            .level-container {
+                grid-template-columns: repeat(2, 80px);
+                grid-gap: 15px;
+            }
+
+            .level-button {
+                width: 80px;
+                height: 80px;
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 2em;
+               margin-bottom:70px;
+                margin-top: 0px;
+                ;
+            }
+
+            .level-container {
+                grid-template-columns: repeat(2, 60px);
+                grid-gap: 10px;
+            }
+
+            .level-button {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Your Level</h1>
+    <div class="level-container">
+        <button class="level-button" onclick="selectLevel(1)">Level 1</button>
+        <button class="level-button" onclick="selectLevel(2)">Level 2</button>
+        <button class="level-button" onclick="selectLevel(3)">Level 3</button>
+        <button class="level-button" onclick="selectLevel(4)">Level 4</button>
+        <button class="level-button" onclick="selectLevel(5)">Level 5</button>
+        <button class="level-button" onclick="selectLevel(6)">Level 6</button>
+    </div>
+</body>
+<script>
+  function selectLevel(level) {
+    // Save the selected level in localStorage
+    localStorage.setItem('selectedLevel', level);
+
+    // Redirect to index.html
+    window.location.href = 'game.html';
+  }
+</script>
+</html>
