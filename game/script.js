@@ -1,5 +1,5 @@
 // Initialize the current round
-let currentRound = 0;
+let currentRound = 1;
 
 // Function to load the selected level if available
 function loadSelectedLevel() {
