@@ -1,14 +1,15 @@
-// , '𑀘', '𑀙', '𑀚', '𑀛', '𑀜',
-//     '𑀝', '𑀞', '𑀟', '𑀠', '𑀡', '𑀢', '𑀣', '𑀤', '𑀥', '𑀦',
-//     '𑀧', '𑀨', '𑀩', '𑀪', '𑀫', '𑀬', '𑀭', '𑀮', '𑀯', '𑀰',
-//     '𑀱', '𑀲', '𑀳', '𑀴', '𑀵', '𑀶','𑁒', '𑁓', '𑁔', '𑁕',
-//     '𑁖', '𑁗', '𑁘', '𑁙', '𑁚', 'o',
+let currentRound = 0;
 
-let words = [
-    
-    '𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃','𑁇'
+let rounds = [
+    // Round 1 words
+    ['𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃'],
+    // Round 2 words
+    ['𑀧', '𑀭', '𑀣', '𑀫'],
+    // Round 3 words 
+    ['𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃','𑁇'], 
 ];
-
+let words = rounds[currentRound];
+console.log(words)
 const gameArea = document.getElementById('game-area');
 const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
@@ -22,12 +23,19 @@ let isWordActive = false;
 let wordIndex = 0; // Track current index in `sentence`
 
 
-// Function to create a new word in sequence
 function createWord() {
+    // Check if this is the last word in the array and if there are no active words on screen
+    if (wordIndex === words.length && activeWords.length === 0) {
+        // Don't show alert immediately - wait for animations to complete
+        console.log("All words processed and activeWords is empty. Preparing to display round completion.");
+        return; // Exit here - the level completion will be handled by soul animation completion
+    }
+    
     if (!isWordActive && wordIndex < words.length) {
+        // Rest of your createWord logic remains the same
         const word = document.createElement('div');
         word.classList.add('word');
-        const nextChar = words[wordIndex]; // Pick the next character in sequence
+        const nextChar = words[wordIndex];
         word.textContent = nextChar;
         word.style.left = `${Math.random() * (gameArea.offsetWidth - 100)}px`;
         word.style.top = '0px';
@@ -35,20 +43,52 @@ function createWord() {
         gameArea.appendChild(word);
         activeWords.push(word);
         isWordActive = true;
-
-        // Advance to the next character
         wordIndex++;
-        if (wordIndex >= words.length+1) {
-            // Prompt "Round 1 is cleared" and stop the sequence
-            alert("Round 1 is cleared");
-            wordIndex = 0; // Optional: Reset if needed for the next round
-            return; // Exit the function to prevent continuous looping
-        }
-
         resetButtonHighlights();
         highlightButton(nextChar);
     }
 }
+
+// Function to handle when a word leaves the game area or is processed
+function removeWord(wordElement) {
+    console.log("removeWord called. Word to remove:", wordElement.textContent);
+    
+    // Remove word from the DOM and activeWords array
+    const index = activeWords.indexOf(wordElement);
+    if (index > -1) {
+        activeWords.splice(index, 1);
+        wordElement.remove();
+        console.log(`Word removed from activeWords. Remaining activeWords.length: ${activeWords.length}`);
+    } else {
+        console.log("Error: Word to remove was not found in activeWords.");
+    }
+
+    // Check if all words have been cleared
+    console.log("Checking if all words are cleared after removeWord.");
+    console.log("Current state: wordIndex:", wordIndex, "words.length:", words.length, "activeWords.length:", activeWords.length);
+    if (wordIndex >= words.length && activeWords.length === 0) {
+        console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
+        setTimeout(() => {
+            console.log(`Round ${currentRound + 1} is cleared!`);
+            alert(`Round ${currentRound + 1} is cleared!`);
+
+            // Move to the next round if available
+            currentRound++;
+            if (currentRound < rounds.length) {
+                words = rounds[currentRound];
+                wordIndex = 0;
+                console.log("Moving to next round. currentRound:", currentRound);
+                updateRound(currentRound + 1);
+            } else {
+                console.log("Game Completed!");
+                alert("Game Completed!");
+            }
+        }, 500);
+    }
+}
+
+
+
 
 // Function to move words downward
 function moveWords() {
@@ -76,6 +116,7 @@ function moveWords() {
         }
     }
 }
+
 // Function to check input against active words
 function checkInput() {
     const inputText = userInput.value.trim();
@@ -227,49 +268,83 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Modify the launchRocket function to include the soul animation
 function launchRocket(targetWord) {
-    shootSound.play();
-    const rocket = document.createElement('div');
-    rocket.classList.add('rocket');
-    
-    const gameAreaRect = gameArea.getBoundingClientRect();
-    const wordRect = targetWord.getBoundingClientRect();
-    
-    const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
-    const startY = gameAreaRect.height - 30;
-    
-    rocket.style.left = `${targetX}px`;
-    rocket.style.bottom = '10px';
-    gameArea.appendChild(rocket);
-    
-    shootSound.play();
-    userInput.value = '';
-    
-    const targetY = wordRect.top - gameAreaRect.top;
-    rocket.style.transition = 'top 0.5s linear';
-    rocket.offsetHeight;
-    rocket.style.top = `${targetY}px`;
-    
-    setTimeout(() => {
-        createExplosion(targetWord);
-        if (targetWord.parentNode) {
-            gameArea.removeChild(targetWord);
-        }
-        activeWords = activeWords.filter(w => w !== targetWord);
-        if (rocket.parentNode) {
-            gameArea.removeChild(rocket);
-        }
-        updateScore(1);
-        createSoulAnimation(targetWord.textContent);
-    }, 500);
+    return new Promise((resolve) => {
+        shootSound.play();
+        const rocket = document.createElement('div');
+        rocket.classList.add('rocket');
+        
+        const gameAreaRect = gameArea.getBoundingClientRect();
+        const wordRect = targetWord.getBoundingClientRect();
+        
+        const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
+        const startY = gameAreaRect.height - 30;
+        
+        rocket.style.left = `${targetX}px`;
+        rocket.style.bottom = '10px';
+        gameArea.appendChild(rocket);
+        
+        shootSound.play();
+        userInput.value = '';
+        
+        const targetY = wordRect.top - gameAreaRect.top;
+        rocket.style.transition = 'top 0.5s linear';
+        rocket.offsetHeight;
+        rocket.style.top = `${targetY}px`;
+        
+        setTimeout(async () => {
+            createExplosion(targetWord);
+            if (targetWord.parentNode) {
+                gameArea.removeChild(targetWord);
+            }
+            activeWords = activeWords.filter(w => w !== targetWord);
+            if (rocket.parentNode) {
+                gameArea.removeChild(rocket);
+            }
+            updateScore(1);
+            
+            // If this was the last word
+            if (wordIndex >= words.length && activeWords.length === 0) {
+                await createSoulAnimation(targetWord.textContent);
+                // Check if all text is revealed before showing completion
+                // if (isComplete()) {
+                    console.log(`Round ${currentRound + 1} is cleared!`);
+                    alert(`Round ${currentRound + 1} is cleared!`);
+                    
+                    currentRound++;
+                    if (currentRound < rounds.length) {
+                        words = rounds[currentRound];
+                        wordIndex = 0;
+                        isWordActive = false;
+                        activeWords = [];
+                        console.log("Moving to next round. currentRound:", currentRound);
+                        updateRound(currentRound + 1);
+                        createWord();
+                    } else {
+                        console.log("Game Completed!");
+                        alert("Game Completed!");
+                    }
+                }
+             else {
+                await createSoulAnimation(targetWord.textContent);
+            }
+            resolve();
+        }, 500);
+    });
 }
+
+
 
 // Add this new function for the soul animation
 function createSoulAnimation(character) {
     const gameAreaRect = gameArea.getBoundingClientRect();
-    const leftTextArea = document.querySelector('[placeholder*="𑀅"]');
-    const rightTextArea = document.querySelector('[placeholder*="श्री"]');
+    const leftTextArea = document.getElementById('leftTextArea');
+    const rightTextArea = document.getElementById('rightTextArea');
+    if (!leftTextArea || !rightTextArea) {
+        console.error('Text areas not found');
+        return; // Prevent further code execution if the elements don't exist
+    }
+    
 
     // Create two souls (one for each text area)
     const soulLeft = document.createElement('div');
@@ -319,7 +394,7 @@ function createSoulAnimation(character) {
         if (document.body.contains(soulLeft)) {
             document.body.removeChild(soulLeft);
         }// Remove soulLeft once it reaches the target
-        verifyleftTextAreas(); // Highlight text after soul removal
+        verifyleftTextAreas(character); // Highlight text after soul removal
     });
 
     // Add a transition end event listener for the right soul
@@ -327,31 +402,248 @@ function createSoulAnimation(character) {
         if (document.body.contains(soulRight)) {
             document.body.removeChild(soulRight);
         }; // Remove soulRight once it reaches the target
-        updateTextArea(); // Highlight text after soul removal  character
+        updateTextArea(character); // Highlight text after soul removal  character
     });
 }
 
-// Store state globally
+
 let spans = null;
 let currentIndex = 0;
-let isProcessing = false; // Add a processing flag
+let isProcessing = false;
+let currentRoundSpans = {};
 
-function updateTextArea() {
-    // If already processing, exit immediately
+const roundTexts = {
+        1: {
+            left: "𑀚𑁃𑀦 𑀥𑀭𑁆𑀫 𑀓𑁂 𑀧𑁆𑀭𑀣𑀫 𑀢𑀻𑀭𑁆𑀣𑀁𑀓𑀭 𑀆𑀤𑀺𑀦𑀸𑀣 𑀪𑀕𑀯𑀸𑀦 𑀚𑀻 𑀳𑁃𑀁 𑁇",
+            right: "जैन धर्म के प्रथम तीर्थंकर आदिनाथ भगवान जी हैं।",
+        },
+        2: {
+            left: "𑀋𑀱𑀪𑀤𑁂𑀯 𑀚𑀻, 𑀯𑀾𑀱𑀪𑀦𑀸𑀣 𑀚𑀻 𑀒𑀭 𑀆𑀤𑀺𑀦𑀸𑀣 𑀚𑀻 𑀬𑁂 𑀢𑀻𑀦𑁄𑀁 𑀦𑀸𑀫 𑀧𑁆𑀭𑀣𑀫 𑀢𑀻𑀭𑁆𑀣𑀁𑀓𑀭 𑀓𑁂 𑀳𑀻 𑀳𑁃𑀁𑁇",
+            right: "ऋषभदेव जी, वृषभनाथ जी और आदिनाथ जी ये तीनों नाम प्रथम तीर्थंकर के ही हैं।",
+        },
+        3: {
+            left: "𑀫𑀳𑀸𑀭𑀸𑀚𑀸 𑀋𑀱𑀪𑀤𑁂𑀯 𑀚𑀻 𑀦𑁂 𑀅𑀧𑀦𑀻 𑀩𑀟़𑀻 𑀧𑀼𑀢𑁆𑀭𑀻 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀓𑁄 𑀅𑀓𑁆𑀱𑀭 𑀮𑁂𑀔𑀦 𑀓𑀻 𑀓𑀮𑀸 𑀲𑀺𑀔𑀸𑀈𑁇",
+            right: "महाराजा ऋषभदेव जी ने अपनी बड़ी पुत्री ब्राह्मी को अक्षर लेखन की कला सिखाई।",
+        },
+        4: {
+            left: "𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀦𑁂 𑀧𑀺𑀢𑀸 𑀓𑁂 𑀤𑁆𑀯𑀸𑀭𑀸 𑀤𑀻 𑀕𑀈 𑀮𑀺𑀧𑀺 𑀯𑀺𑀤𑁆𑀬𑀸 𑀚𑀦-𑀚𑀦 𑀓𑁄 𑀲𑀺𑀔𑀸𑀈𑁇",
+            right: "ब्राह्मी ने पिता के द्वारा दी गई लिपि विद्या जन-जन को सिखाई।",
+        },
+        5: {
+            left: "𑀲𑀩𑀦𑁂 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀲𑁂 𑀲𑀻𑀔𑀻 𑀕𑀈 𑀮𑀺𑀧𑀺 𑀯𑀺𑀤𑁆𑀬𑀸 𑀓𑁄 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀮𑀺𑀧𑀺 𑀦𑀸𑀫 𑀤𑀺𑀬𑀸𑁇",
+            right: "सबने ब्राह्मी से सीखी गई लिपि विद्या को ब्राह्मी लिपि नाम दिया।",
+        },
+        6: {
+            left: "𑀪𑀸𑀱𑀸 𑀩𑁄𑀮𑀻 𑀚𑀸𑀢𑀻 𑀳𑁃, 𑀮𑀺𑀧𑀺 𑀮𑀺𑀔𑀻 𑀚𑀸𑀢𑀻 𑀳𑁃𑁇 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀏𑀧 𑀓𑀻 𑀫𑀤𑀤 𑀲𑁂 𑀆𑀧 𑀩𑁆𑀭𑀸𑀳𑁆𑀫𑀻 𑀮𑀺𑀧𑀺 𑀓𑁄 𑀓𑀺𑀲𑀻 𑀪𑀻 𑀪𑀸𑀱𑀸 𑀫𑁂𑀁 𑀮𑀺𑀔𑀦𑀸 𑀲𑀻𑀔 𑀲𑀓𑀢𑁂 𑀳𑁃𑀁𑁇",
+            right: "भाषा बोली जाती है, लिपि लिखी जाती है। ब्राह्मी एप की मदद से आप ब्राह्मी लिपि को किसी भी भाषा में लिखना सीख सकते हैं।",
+        }
+        // ... Other rounds
+    };
+
+function initializeRound(roundNumber) {
+        console.log(`Initializing round ${roundNumber}`);
+        const rightTextArea = document.getElementById("rightTextArea");
+        const leftTextArea = document.getElementById("leftTextArea");
+
+        if (rightTextArea && leftTextArea) {
+            rightTextArea.textContent = roundTexts[roundNumber].right;
+            leftTextArea.textContent = roundTexts[roundNumber].left;
+
+            rightTextArea.innerHTML = [...rightTextArea.textContent].map(char => {
+                if (char === ' ') return ' ';
+                return `<span data-revealed="false" style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
+            }).join('');
+
+            leftTextArea.innerHTML = [...leftTextArea.textContent].map(char => {
+                if (char === ' ') return ' ';
+                return `<span style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
+            }).join('');
+
+            currentIndex = 0;
+            spans = null;
+            currentRoundSpans = {};
+        } else {
+            console.warn("Text areas not found during initialization");
+        }
+    }
+
+function updateRound(roundNumber) {
+        currentRound = roundNumber - 1;
+        initializeRound(roundNumber);
+    }
+
+    initializeRound(1);
+
+function verifyleftTextAreas(char) {
+        console.log("verifyleftTextAreas called properly ")
+        const leftTextArea = document.getElementById("leftTextArea");
+        console.log(`thelefttextarea is ${leftTextArea.textContent}`)
+        if (!leftTextArea) {
+            console.warn("leftTextArea element not found");
+            return;
+        }
+
+        console.log(`charachter now is ${char}`)
+        
+
+        const characterSpans = leftTextArea.querySelectorAll('span');
+        
+let conditionMet = false;
+
+for (let span of characterSpans) {
+
+    function is(condition) {
+        return Boolean(condition);
+    }
+
+    let one = is(span.textContent === char);
+    let two = is(span.style.color === 'transparent');
+    console.log(`span.textContent: ${span.textContent}, char: ${char}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
+
+    if (one && two) {
+        span.style.color = 'black';
+        conditionMet = true;  // Set the flag to true to mark the condition as met
+        break;  // Exit the for loop
+    }
+}
+
+if (conditionMet) {
+    console.log("Condition met, exited loop after updating the first matching span.");
+} else {
+    console.log("No matching span found.");
+}
+
+        
+    }
+;
+
+// function updateTextArea() {
+//     if (isProcessing) {
+//         console.log("Already processing, skipping call");
+//         return;
+//     }
+
+//     isProcessing = true;
+//     console.log("------- Function Start -------");
+
+//     const rightTextArea = document.getElementById("rightTextArea");
+//     if (!rightTextArea) {
+//         console.warn("rightTextArea element not found");
+//         isProcessing = false;
+//         return;
+//     }
+
+//     if (!currentRoundSpans[currentRound]) {
+//         console.log(`Creating new spans for round ${currentRound}`);
+//         const roundText = roundTexts[currentRound + 1]?.right || '';
+//         const characters = [...roundText];
+        
+//         const processedHTML = characters.map(char => {
+//             if (char === ' ') {
+//                 return ' ';
+//             }
+//             return `<span data-revealed="false" style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
+//         }).join('');
+        
+//         rightTextArea.innerHTML = processedHTML;
+//         currentRoundSpans[currentRound] = Array.from(rightTextArea.getElementsByTagName('span'));
+//         spans = currentRoundSpans[currentRound];
+//         currentIndex = 0;
+//     } else {
+//         spans = currentRoundSpans[currentRound];
+//     }
+
+//     if (currentIndex < spans.length) {
+//         const currentSpan = spans[currentIndex];
+        
+//         if (currentSpan.dataset.revealed === "false") {
+//             console.log(`Revealing: "${currentSpan.textContent}"`);
+//             currentSpan.style.color = 'black';
+//             currentSpan.dataset.revealed = "true";
+//             currentIndex++;
+//         }
+//     }
+
+//     setTimeout(() => {
+//         isProcessing = false;
+//     }, 100);
+// }
+
+const hindiMapping = {
+    '𑀚': 'ज',
+    '𑁃': 'ै',
+    '𑀦': 'न',
+    '𑀥': 'ध',
+    '𑀭': 'र',
+    '𑀫': 'म',
+    '𑀓': 'क',
+    '𑁂': '्',
+    '𑀧': 'प',
+    '𑀣': 'थ',
+    '𑀅': 'अ',
+    '𑀆': 'आ',
+    '𑀇': 'इ',
+    '𑀈': 'ई',
+    '𑀉': 'उ',
+    '𑀊': 'ऊ',
+    '𑀏': 'ए',
+    '𑀐': 'ऐ',
+    '𑀑': 'ओ',
+    '𑀒': 'औ',
+    '𑀸': 'ा',
+    '𑀺': 'ि',
+    '𑀻': 'ी',
+    '𑀼': 'ु',
+    '𑀽': 'ू',
+    '𑀔': 'ख',
+    '𑀕': 'ग',
+    '𑀖': 'घ',
+    '𑀗': 'ङ',
+    '𑀘': 'च',
+    '𑀙': 'छ',
+    '𑀛': 'ट',
+    '𑀜': 'ठ',
+    '𑀝': 'ड',
+    '𑀞': 'ढ',
+    '𑀟': 'ण',
+    '𑀡': 'द',
+    '𑀢': 'ध',
+    '𑀤': 'न',
+    '𑀪': 'ब',
+    '𑀫': 'म',
+    '𑀬': 'य',
+    '𑀭': 'र',
+    '𑀮': 'ल',
+    '𑀯': 'व',
+    '𑀰': 'श',
+    '𑀱': 'ष',
+    '𑀲': 'स',
+    '𑀳': 'ह',
+    '𑀴': 'ळ',
+    '𑀵': 'क्ष',
+    '𑀶': 'ज्ञ'
+};
+
+function updateTextArea(inputChar) {
     if (isProcessing) {
         console.log("Already processing, skipping call");
         return;
     }
-    
-    isProcessing = true; // Set processing flag
+
+    isProcessing = true;
     console.log("------- Function Start -------");
-    const rightTextArea = document.getElementById("righttextarea");
-    
-    // Initialize spans only if they don't exist
-    if (!spans) {
-        console.log("Creating new spans");
-        const text = rightTextArea.textContent;
-        const characters = [...text];
+
+    const rightTextArea = document.getElementById("rightTextArea");
+    if (!rightTextArea) {
+        console.warn("rightTextArea element not found");
+        isProcessing = false;
+        return;
+    }
+
+    if (!currentRoundSpans[currentRound]) {
+        console.log(`Creating new spans for round ${currentRound}`);
+        const roundText = roundTexts[currentRound + 1]?.right || '';
+        const characters = [...roundText];
         
         const processedHTML = characters.map(char => {
             if (char === ' ') {
@@ -361,78 +653,104 @@ function updateTextArea() {
         }).join('');
         
         rightTextArea.innerHTML = processedHTML;
-        spans = Array.from(rightTextArea.getElementsByTagName('span'));
-        console.log(`Created ${spans.length} character spans`);
+        currentRoundSpans[currentRound] = Array.from(rightTextArea.getElementsByTagName('span'));
+        spans = currentRoundSpans[currentRound];
+        currentIndex = 0;
+    } else {
+        spans = currentRoundSpans[currentRound];
     }
 
-    // Log current state
-    console.log("Current spans state:");
-    spans.forEach((span, index) => {
-        console.log(`Span ${index}: "${span.textContent}" - Revealed: ${span.dataset.revealed}`);
-    });
-
-    // Only reveal one character and exit
-    if (currentIndex < spans.length) {
-        const currentSpan = spans[currentIndex];
-        
-        if (currentSpan.dataset.revealed === "false") {
-            console.log(`Revealing: "${currentSpan.textContent}"`);
-            currentSpan.style.color = 'black';
-            currentSpan.dataset.revealed = "true";
-            currentIndex++;
-            
-            // Log final state
-            console.log("Final spans state:");
-            spans.forEach((span, index) => {
-                console.log(`Span ${index}: "${span.textContent}" - Revealed: ${span.dataset.revealed}`);
-            });
-        }
-    }
-
-    // Reset processing flag after a small delay
-    setTimeout(() => {
+    // Get the mapped Hindi character
+    console.log(`inputchar ${inputChar} , hindimapping[inputChar] = ${hindiMapping[inputChar]}`)
+    const hindiChar = hindiMapping[inputChar];
+    if (!hindiChar) {
+        console.warn(`No mapping found for character: ${inputChar}`);
         isProcessing = false;
-    }, 100); // 100ms delay before allowing next call
+        return;
+    }
+
+    console.log(`currentspan.textcontent${rightTextArea.textContent}`)
+    const characterSpans = rightTextArea.querySelectorAll('span');
+    for(let span of characterSpans){
+        console.log(`spanlist for right ${span.textContent}`)
+
+    }
+let conditionMet = false;
+
+for (let span of characterSpans) {
+
+    function is(condition) {
+        return Boolean(condition);
+    }
+
+    let one = is(span.textContent=== hindiChar);
+    let two = is(span.style.color === 'transparent');
+    console.log(` Right span.textContent: ${span.textContent}, hindi char: ${hindiChar}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
+
+    if (one && two) {
+        span.style.color = 'black';
+        conditionMet = true;  // Set the flag to true to mark the condition as met
+        break;  // Exit the for loop
+    }
 }
 
+if (conditionMet) {
+    console.log("Condition met, exited loop after updating the first matching span.");
+} else {
+    console.log("No matching span found.");
+}
+
+    // // Find and reveal the first span with the mapped Hindi character
+    // for (let i = currentIndex; i < spans.length; i++) {
+    //     const currentSpan = spans[i];
+        
+    //     if (currentSpan.dataset.revealed === "false" && currentSpan.textContent === hindiChar) {
+    //         console.log(`Revealing: "${currentSpan.textContent}"`);
+    //         currentSpan.style.color = 'black';
+    //         currentSpan.dataset.revealed = "true";
+    //         currentIndex = i + 1; // Move to the next span after the revealed one
+    //         break;
+    //     }
+    // }
+
+    setTimeout(() => {
+        isProcessing = false;
+    }, 100);
+}
+
+
 function resetTextArea() {
-    console.log("Resetting text area");
-    if (spans) {
-        spans.forEach(span => {
+    console.log(`Resetting text area for round ${currentRound}`);
+    const rightTextArea = document.getElementById("rightTextArea");
+    const leftTextArea = document.getElementById("leftTextArea");
+    
+    if (!rightTextArea || !leftTextArea) {
+        console.warn("Text areas not found");
+        return;
+    }
+
+    if (currentRoundSpans[currentRound]) {
+        currentRoundSpans[currentRound].forEach(span => {
             span.style.color = 'transparent';
             span.dataset.revealed = "false";
         });
-        currentIndex = 0;
-        isProcessing = false;
     }
+
+    if (roundTexts[currentRound + 1]) {
+        rightTextArea.textContent = roundTexts[currentRound + 1].right;
+        leftTextArea.textContent = roundTexts[currentRound + 1].left;
+    }
+
+    currentIndex = 0;
+    isProcessing = false;
+    spans = null;
+    delete currentRoundSpans[currentRound];
 }
 
-function isComplete() {
-    return spans && currentIndex >= spans.length;
-}
-
-
-function verifyleftTextAreas() {
-    const leftTextArea = document.getElementById("lefttextarea");
-    
-
-    if (!leftTextArea .innerHTML.includes("span")) {
-        leftTextArea .innerHTML = leftTextArea .textContent.split('').map(char => {
-            return `<span style="color: transparent; -webkit-text-stroke: 0.3px black;">${char}</span>`;
-        }).join('');
-    }
-    
-    // Get all span elements (characters) in the text area
-    const characterSpans = leftTextArea .querySelectorAll('span');
-
-    // Change the first non-black character to black
-    for (let span of characterSpans) {
-        if (span.style.color === 'transparent') {
-            span.style.color = 'black';
-            break;
-        }
-    }
-}
+window.onload = function() {
+    console.log("Window Loaded");
+    history.pushState({}, '', window.location.href);
+};
 
 
 window.onpopstate = function(event) {
@@ -444,6 +762,3 @@ window.onpopstate = function(event) {
     window.onload = function() {
         history.pushState({}, '', window.location.href);
     };
-
-
-
