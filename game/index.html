@@ -132,7 +132,32 @@
                 width: 50%;
 
             }
+        
         }
+        .modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #FEE715FF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+        }
+
+    .modal.active {
+    display: block;
+    }
+
+    .toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
+
     </style>
 </head>
 <body>
@@ -167,6 +192,15 @@
                 cursor: pointer;
                 transition: 0.3s;">Close</button>
         </div>
+        <div id="settings-modal" class="modal">
+            <h3>Settings</h3>
+            <label class="toggle-label">
+                <input type="checkbox" id="keyboard-hint-toggle" onchange="toggleKeyboardHint()" checked>
+                Keyboard Hint
+            </label>
+            <button onclick="closeSettings()">Close</button>
+        </div>
+        
 
         <!-- Sound Effects -->
         <audio id="shoot-sound" src="media/sounds/plasma.ogg"></audio>
@@ -174,33 +208,40 @@
     </div>
 
 <script>
-    // Ensure elements are visible when navigating back to this page
-
     window.onload = function() {
-            document.getElementById('title').classList.add('reset-animation');
-            document.getElementById('subtitle').classList.add('reset-animation');
-            history.pushState({}, '', window.location.href);
-        };
-    function startGame() {
-            // Get elements
-            const heading1 = document.querySelector('h1');
-            const heading2 = document.querySelector('h2');
-            const buttons = document.querySelectorAll('button');
+    history.pushState({}, '', window.location.href);
 
-            // Add classes for animation
-            heading1.classList.add('fade-out');
-            heading2.classList.add('fade-out');
-            buttons.forEach(button => button.classList.add('fade-out-buttons'));
-
-            // Redirect after animation
-            setTimeout(() => {
-                window.location.href = 'game.html';
-            }, 500); // Wait for 1 second for the animation to complete
+    // Load saved state for Keyboard Hint
+    const keyboardHintStatus = localStorage.getItem('keyboardHint');
+        if (keyboardHintStatus === null) {
+            localStorage.setItem('keyboardHint', 'on'); // Default to 'on' if not set
+        } else {
+            document.getElementById('keyboard-hint-toggle').checked = (keyboardHintStatus === 'on');
         }
+};
+
+
+    function startGame() {
+        // Get elements
+        const heading1 = document.querySelector('h1');
+        const heading2 = document.querySelector('h2');
+        const buttons = document.querySelectorAll('button');
+
+        // Add classes for animation
+        heading1.classList.add('fade-out');
+        heading2.classList.add('fade-out');
+        buttons.forEach(button => button.classList.add('fade-out-buttons'));
+
+        // Redirect after animation
+        setTimeout(() => {
+            window.location.href = 'game.html';
+        }, 500); // Wait for 1 second for the animation to complete
+    }
+
     // Handle back navigation to ensure proper state reset
     window.onpopstate = function(event) {
-            document.getElementById('title').classList.add('reset-animation');
-            document.getElementById('subtitle').classList.add('reset-animation');
+        document.getElementById('title').classList.add('reset-animation');
+        document.getElementById('subtitle').classList.add('reset-animation');
     };
 
     function showStats() {
@@ -208,7 +249,22 @@
     }
 
     function showSettings() {
-        alert("Settings will be available soon!");
+        // Show the settings modal
+        document.getElementById('settings-modal').style.display = 'block';
+    }
+
+    function closeSettings() {
+        // Close the settings modal
+        document.getElementById('settings-modal').style.display = 'none';
+    }
+
+    function toggleKeyboardHint() {
+        const isChecked = document.getElementById('keyboard-hint-toggle').checked;
+        
+        localStorage.setItem('keyboardHint', isChecked ? 'on' : 'off');
+        const keyboardHintStatus = localStorage.getItem('keyboardHint');
+
+        console.log("Keyboard Hint status:", keyboardHintStatus);
     }
 
     function howToPlay() {
@@ -219,6 +275,7 @@
         document.getElementById('description').style.display = 'none';
     }
 </script>
+
 </body>
 </html>
 
