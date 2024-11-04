@@ -12,7 +12,7 @@
 <body>
     <div id="game-container">
         <h2>खेल-खेल में सीखें ब्राह्मी लिपि</h2>
-        <div id="score-display">Score: 0</div>
+        <div id="LEVEL">LEVEL 0</div>
         <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
             <!-- Left Text Area -->
             <div contenteditable="False" id="leftTextArea"
@@ -67,8 +67,10 @@
             <video autoplay loop muted playsinline id="background-video">
                 <source src="media\background\area new video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
+                
             </video>
-            <!-- Game elements overlaying the video -->
+            <div id="score-display">0
+            </div>
         </div>
 
         <div id="input-container">
@@ -185,4 +187,3 @@
 </body>
 
 </html>
-
