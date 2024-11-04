@@ -11,10 +11,22 @@ function loadSelectedLevel() {
   console.log("Starting at Level:", currentRound);
   return
 }
+// Function to check the status of the Keyboard Hint setting
+function loadKeyboardHintStatus() {
+    const keyboardHintStatus = localStorage.getItem('keyboardHint');
+    if (keyboardHintStatus === null ) {
+        console.log("Keyboard Hint status not found. Defaulting to 'on'.");
+        return 'on'; // Return 'on' as default if not set
+    }
+    console.log("Keyboard Hint status:", keyboardHintStatus);
+    return keyboardHintStatus; // Returns 'on' or 'off'
+}
+
 
 // Call this function early in the script
 loadSelectedLevel();
 console.log("Selected Level:", currentRound);
+
 
 
 
@@ -42,6 +54,7 @@ const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
 const shootSound = document.getElementById('shoot-sound');
 const explosionSound = document.getElementById('explosion-sound');
+const level = document.getElementById('LEVEL')
 let activeWords = [];
 let score = 0;
 let gameOverOccurred = false;
@@ -50,7 +63,7 @@ let isWordActive = false;
 let wordIndex = 0; // Track current index in `sentence`
 
 
-
+updatelevel(currentRound)
 function createWord() {
     if (wordIndex === words.length && activeWords.length === 0) {
         console.log("All words processed and activeWords is empty.");
@@ -145,8 +158,8 @@ function removeWord(wordElement) {
         if (wordIndex >= words.length && activeWords.length === 0) {
             console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
             setTimeout(() => {
-                console.log(`Round ${currentRound + 1} is cleared!`);
-                alert(`Round ${currentRound + 1} is cleared!`);
+                console.log(`Round ${currentRound} is cleared!`);
+                alert(`Round ${currentRound} is cleared!`);
 
                 // Move to the next round if available
                 currentRound++;
@@ -231,7 +244,11 @@ function createExplosion(targetWord) {
 // Update score and display
 function updateScore() {
     score++;
-    scoreDisplay.textContent = `Score: ${score}`;
+    scoreDisplay.textContent = `${score}`;
+}
+// Update score and display
+function updatelevel() {
+    level.textContent = `LEVEL ${currentRound}`;
 }
 
 // Handle game over logic
@@ -281,6 +298,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to highlight a button by character with a blinking outline effect
 function highlightButton(char) {
+    // Check the "Keyboard Hint" status from localStorage
+    const keyboardHintStatus = loadKeyboardHintStatus();
+    if (keyboardHintStatus === 'off') {
+        console.log("Keyboard Hint is disabled. Highlighting is skipped.");
+        return; // Exit the function early if the hint is disabled
+    }
     const button = document.querySelector(`#keyboard button[data-char="${char}"]`);
     if (button) {
         let blinkCount = 0;
@@ -705,7 +728,7 @@ function updateTextArea(inputChar) {
 
     if (!currentRoundSpans[currentRound]) {
         console.log(`Creating new spans for round ${currentRound}`);
-        const roundText = roundTexts[currentRound + 1]?.right || '';
+        const roundText = roundTexts[currentRound]?.right || '';
         const characters = [...roundText];
         
         const processedHTML = characters.map(char => {
