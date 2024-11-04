@@ -159,7 +159,7 @@ function removeWord(wordElement) {
             console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
             setTimeout(() => {
                 console.log(`Round ${currentRound} is cleared!`);
-                alert(`Round ${currentRound} is cleared!`);
+                alert(`Round ${currentRound - 1} is cleared!`);
 
                 // Move to the next round if available
                 currentRound++;
