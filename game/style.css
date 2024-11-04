@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #101820FF; /* Fallback color in cae the image doesn't load */
+    background-color: #101820FF; /* Fallback color in case the image doesn't load */
     background-image: url('media/background/Image_Background.jpg'); /* Replace with your image path */
     background-size:cover; /* Ensures the image covers the entire background */
     background-position:center; /* Keeps the image centered */
@@ -87,10 +87,21 @@ h2 {
 }
 
 #score-display {
+    position: relative;
+    top: 10px; /* Adjust this value to move vertically */
+    left: 130px; /* Adjust this value to move horizontally */
+    z-index: 2; /* Ensure it appears above the video */
+    font-size: 1.5rem;
+    margin-bottom: 0px;
+    margin-top:0px;
+    color: #ca5e1a;
+}
+#LEVEL {
     font-size: 1rem;
     margin-bottom: 0px;
     margin-top:0px;
     color: #ca5e1a;
+
 }
 
 /* Additional game elements */
