@@ -68,9 +68,9 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the video fills the area while maintaining aspect ratio */
-    z-index: 1; /* Sends the video to the background */
-    pointer-events: none; /* Disables interaction with the video */
+    object-fit: cover; 
+    z-index: 1; 
+    pointer-events: none; 
 }
 
 /* Media query for mobile devices */
@@ -101,7 +101,49 @@ h2 {
     margin-bottom: 0px;
     margin-top:0px;
     color: #ca5e1a;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    margin-left: 140px;
+    
+}
 
+.mute-button {
+    background-color: #333;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin-left: 300px;
+    width: 30px;
+    height: 30px;
+    display: inline-block; /* Changed from flex */
+    text-align: center; /* Center icon horizontally */
+    line-height: 30px; /* Center icon vertically */
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    vertical-align: middle; /* Aligns with other inline elements */
+}
+
+/* Icon styling */
+.mute-icon, .unmute-icon {
+    display: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Visible icon based on state */
+.mute-button.muted .mute-icon {
+    display: inline;
+}
+
+.mute-button:not(.muted) .unmute-icon {
+    display: inline;
+}
+
+/* Hover effect */
+.mute-button:hover {
+    background-color: #555;
+    transform: scale(1.1);
 }
 
 /* Additional game elements */
