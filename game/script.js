@@ -1,5 +1,11 @@
 // Initialize the current round
 let currentRound = 1;
+// Variable to check if the game has started
+let gameStarted = false;
+
+loadSelectedLevel();
+console.log("Selected Level:", currentRound);
+
 
 // Function to load the selected level if available
 function loadSelectedLevel() {
@@ -21,11 +27,36 @@ function loadKeyboardHintStatus() {
     console.log("Keyboard Hint status:", keyboardHintStatus);
     return keyboardHintStatus; // Returns 'on' or 'off'
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const backgroundMusic = document.getElementById("background-music");
+    const startGameButton = document.getElementById("start-game-button");
 
+    // Function to start the game
+    function startGame() {
+        gameStarted = true; // Set the gameStarted variable to true
+        startGameButton.style.display = "none"; // Hide the start button
 
-// Call this function early in the script
-loadSelectedLevel();
-console.log("Selected Level:", currentRound);
+        // Unmute and play background music
+        backgroundMusic.muted = false;
+        backgroundMusic.volume = 0.4;
+        backgroundMusic.play().catch(error => {
+            console.log("Error starting audio playback:", error);
+        });
+
+        // Call other game initialization functions here
+        initializeGame();
+    }
+
+    // Attach event listener to the "Start Game" button
+    startGameButton.addEventListener("click", startGame);
+});
+
+// Game initialization function
+function initializeGame() {
+    if (!gameStarted) return; // Prevent initialization if the game hasn't started
+    console.log("Game started!");
+    // Place all game setup code here
+}
 
 
 
@@ -54,16 +85,35 @@ const userInput = document.getElementById('user-input');
 const scoreDisplay = document.getElementById('score-display');
 const shootSound = document.getElementById('shoot-sound');
 const explosionSound = document.getElementById('explosion-sound');
+const missedWord = document.getElementById('missed-word');
 const level = document.getElementById('LEVEL')
+document.querySelectorAll('.Key').forEach((element) => {
+    element.addEventListener("click", () => {
+        // Short vibration (100 milliseconds)
+        if (navigator.vibrate) {
+            console.log("Button clicked"); // Test if the click is working // or 500 if that's the intended duration
+            if (navigator.vibrate) {
+                navigator.vibrate(250); // Attempt the vibration
+                console.log("Vibration triggered");
+            } else {
+                console.log("Vibration API not supported on this device/browser.");
+            }
+        }
+    });
+});
+
+
 let activeWords = [];
 let score = 0;
 let gameOverOccurred = false;
 let currentTargetChar = null;
 let isWordActive = false;
 let wordIndex = 0; // Track current index in `sentence`
+shootSound.volume = 0.3;
 
 
 const muteButton = document.getElementById('muteButton');
+const backgroundMusic = document.getElementById("background-music");
     let isMuted = false;
 
     muteButton.addEventListener('click', () => {
@@ -73,12 +123,15 @@ const muteButton = document.getElementById('muteButton');
         // Toggle the muted property for both audio elements
         shootSound.muted = isMuted;
         explosionSound.muted = isMuted;
+        backgroundMusic.muted = isMuted;
+
     });
 
 
 
 updatelevel(currentRound)
 function createWord() {
+    if (!gameStarted) return; // Prevent initialization if the game hasn't started
     if (wordIndex === words.length && activeWords.length === 0) {
         console.log("All words processed and activeWords is empty.");
         return;
@@ -109,8 +162,9 @@ function createWord() {
 }
 
 function moveWords() {
+    if (!gameStarted) return; // Prevent initialization if the game hasn't started
     const gameAreaHeight = gameArea.offsetHeight;
-    const seventyPercentHeight = Math.floor(gameAreaHeight * 0.7);
+    const seventyPercentHeight = Math.floor(gameAreaHeight * 0.8);
     
     for (let i = activeWords.length - 1; i >= 0; i--) {
         const word = activeWords[i];
@@ -121,15 +175,19 @@ function moveWords() {
 
         // Create new word when current word passes 70% of height
         if (currentTop >= seventyPercentHeight && word.dataset.passedMiddle === 'false') {
-            console.log("Word passed 70% height, creating new word");
+            console.log("Word passed 80% height, creating new word");
             word.dataset.passedMiddle = 'true';
             isWordActive = false;
+            missedWord.play();
             setTimeout(() => createWord(), 0);
         }
-
         // Handle word reaching bottom
-        if (currentTop >= gameAreaHeight * 0.9) { // 90% of height
+        if (currentTop >= gameAreaHeight * 0.95) { // 90% of height
             word.dataset.isRemoving = 'true';
+            
+            
+            playSound(); // Call this where you want to play the sound
+            
             
             setTimeout(() => {
                 if (word.parentNode) {
@@ -147,6 +205,7 @@ function moveWords() {
     }
 }
 function removeWord(wordElement) {
+    if (!gameStarted) return; // Prevent initialization if the game hasn't started
     console.log("removeWord called. Word to remove:", wordElement.textContent);
     
     if (wordElement.dataset.isRemoving === 'true') {
@@ -604,7 +663,7 @@ for (let span of characterSpans) {
 
     let one = is(span.textContent === char);
     let two = is(span.style.color === 'transparent');
-    console.log(`span.textContent: ${span.textContent}, char: ${char}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
+    // console.log(`span.textContent: ${span.textContent}, char: ${char}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
 
     if (one && two) {
         span.style.color = 'black';
@@ -772,7 +831,7 @@ function updateTextArea(inputChar) {
     console.log(`currentspan.textcontent${rightTextArea.textContent}`)
     const characterSpans = rightTextArea.querySelectorAll('span');
     for(let span of characterSpans){
-        console.log(`spanlist for right ${span.textContent}`)
+        // console.log(`spanlist for right ${span.textContent}`)
 
     }
 let conditionMet = false;
@@ -785,7 +844,7 @@ for (let span of characterSpans) {
 
     let one = is(span.textContent=== hindiChar);
     let two = is(span.style.color === 'transparent');
-    console.log(` Right span.textContent: ${span.textContent}, hindi char: ${hindiChar}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
+    // console.log(` Right span.textContent: ${span.textContent}, hindi char: ${hindiChar}, isEqual: ${one}, span.style.color: ${span.style.color}, isTransparent: ${two}`);
 
     if (one && two) {
         span.style.color = 'black';
@@ -862,3 +921,11 @@ window.onpopstate = function(event) {
     window.onload = function() {
         history.pushState({}, '', window.location.href);
     };
+
+
+
+
+
+
+
+
