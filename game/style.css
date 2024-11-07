@@ -307,27 +307,6 @@ h2 {
     background-color: #8B2323;
     ;
 }
-
-
-/* 
-.keyboard button { 
-    width: 33px;
-    height: 33px;
-    font-size: 1.1rem;
-    text-align: center;
-    cursor: pointer;
-    background-color: #e0e0e0;
-    border: none;
-    background: rgb(185,152,76);
-    background: linear-gradient(90deg, rgba(185,152,76,1) 0%, rgba(241,227,211,1) 45%, rgba(185,152,76,1) 100%);
-    clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-
 .keyboard button { 
     width: 33px;
     height: 33px;
@@ -473,3 +452,50 @@ h2 {
     color: #000000 !important; /* Force color change */
     font-weight: bold;
 }
+
+#start-game-button {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 20px;
+    font-size: 28px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    color: #4a3c2c;
+    border: 6px solid #8B2323; 
+    border-radius: 30px;
+    background: linear-gradient(145deg, #fffefc, #dad8d4); 
+    box-shadow: 
+        0 4px 8px rgba(73, 57, 27, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    z-index: 2;
+    width: 180px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    overflow: hidden;
+}
+
+#start-game-button:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    background: linear-gradient(145deg, #d4b982, #e6d5ac);
+    color: #353a1f;
+    box-shadow: 
+        0 6px 12px rgba(73, 57, 27, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+#start-game-button:active {
+    transform: translate(-50%, -50%) scale(0.98);
+    box-shadow: 
+        0 2px 4px rgba(73, 57, 27, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+
