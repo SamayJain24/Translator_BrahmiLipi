@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Unmute and play background music
         backgroundMusic.muted = false;
-        backgroundMusic.volume = 0.4;
+        backgroundMusic.volume = 0.2;
         backgroundMusic.play().catch(error => {
             console.log("Error starting audio playback:", error);
         });
