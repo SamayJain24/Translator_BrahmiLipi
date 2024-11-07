@@ -12,11 +12,20 @@
 <body>
     <div id="game-container">
         <h2>खेल-खेल में सीखें ब्राह्मी लिपि</h2>
-        <div id="LEVEL">LEVEL 0</div>
-        <div class="mute-button" id="muteButton">
-            <span class="mute-icon">🔇</span> <!-- Mute icon -->
-            <span class="unmute-icon">🔊</span> <!-- Unmute icon -->
+        <div class="control-container">
+            <div class="pause-button" id="pauseButton">
+                <span class="pause-icon play-icon">▶️</span> <!-- Play icon -->
+                <span class="pause-icon pause-icon-hidden">⏸️</span> <!-- Pause icon -->
+            </div>
+            
+            <div id="LEVEL">LEVEL 0</div>
+            
+            <div class="mute-button" id="muteButton">
+                <span class="mute-icon">🔇</span> <!-- Mute icon -->
+                <span class="unmute-icon">🔊</span> <!-- Unmute icon -->
+            </div>
         </div>
+        
         <button id="start-game-button">Start</button>
         
         <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
@@ -193,7 +202,20 @@
     <!-- <audio id="explosion-sound" src="media/sounds/explosion.ogg"></audio> -->
     <audio id="explosion-sound" src="media/sounds/Game Point Sound effect.mp3"></audio>
     <audio id="missed-word" src="media/sounds/Missed Word.mp3"></audio>
-    <script src="script.js"></script>
+    <!-- Video Container -->
+    <div id="videoContainer" style="display: none;">
+        <div class="video-overlay">
+            <p id="videoMessage"></p>
+            <video id="celebrationVideo" width="500" height="280" controls autoplay>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button id="nextButton" onclick="nextRound()" class="next-button">Next</button>
+        </div>
+    </div>
+
+<script src="script.js"></script>
 </body>
+  
 
 </html>
