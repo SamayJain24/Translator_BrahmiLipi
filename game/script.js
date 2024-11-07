@@ -2,6 +2,15 @@
 let currentRound = 1;
 // Variable to check if the game has started
 let gameStarted = false;
+const muteButton = document.getElementById('muteButton');
+const backgroundMusic = document.getElementById("background-music");
+const gameArea = document.getElementById('game-area');
+const userInput = document.getElementById('user-input');
+const scoreDisplay = document.getElementById('score-display');
+const shootSound = document.getElementById('shoot-sound');
+const explosionSound = document.getElementById('explosion-sound');
+const missedWord = document.getElementById('missed-word');
+const level = document.getElementById('LEVEL')
 
 loadSelectedLevel();
 console.log("Selected Level:", currentRound);
@@ -27,8 +36,10 @@ function loadKeyboardHintStatus() {
     console.log("Keyboard Hint status:", keyboardHintStatus);
     return keyboardHintStatus; // Returns 'on' or 'off'
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     const backgroundMusic = document.getElementById("background-music");
+    
     const startGameButton = document.getElementById("start-game-button");
 
     // Function to start the game
@@ -51,15 +62,57 @@ document.addEventListener("DOMContentLoaded", () => {
     startGameButton.addEventListener("click", startGame);
 });
 
+
+
+
+// Add a flag for game pause
+let gamePaused = true;
+
+// Select the pause button and icons
+const pauseButton = document.getElementById("pauseButton");
+const playIcon = pauseButton.querySelector(".play-icon");
+const pauseIcon = pauseButton.querySelector(".pause-icon-hidden");
+
+// Add event listener to pause button
+pauseButton.addEventListener("click", () => {
+    // Toggle the pause/play icon visibility
+    playIcon.classList.toggle("pause-icon-hidden");
+    pauseIcon.classList.toggle("pause-icon-hidden");
+    
+    // Toggle game pause state
+    gamePaused = !gamePaused;
+    
+    // If the game is paused, stop audio/video or animations if necessary
+    if (gamePaused) {
+        // Any actions to pause audio or animations
+        console.log("Game paused");
+        shootSound.muted = true;
+        explosionSound.muted = true;
+        backgroundMusic.muted = true;
+        missedWord.muted = true;
+
+    } else {
+        // Any actions to resume audio or animations
+        console.log("Game resumed");
+    }
+});
+
+
 // Game initialization function
 function initializeGame() {
     if (!gameStarted) return; // Prevent initialization if the game hasn't started
     console.log("Game started!");
+
+    // Reset the pause button to "resume" state when the game starts
+    gamePaused = false; // Set gamePaused to false to resume the game
+    
+    // Ensure the pause button shows the "pause" icon and hides the "play" icon
+    playIcon.classList.add("pause-icon-hidden"); // Hide play icon
+    pauseIcon.classList.remove("pause-icon-hidden"); // Show pause icon
+
     // Place all game setup code here
+
 }
-
-
-
 
 let rounds = [
     // Round 1 words
@@ -80,13 +133,7 @@ console.log("Words for this level:", rounds[currentRound]);
 let words = rounds[currentRound-1];
 console.log("Words for Current Round:", words);
 console.log(words)
-const gameArea = document.getElementById('game-area');
-const userInput = document.getElementById('user-input');
-const scoreDisplay = document.getElementById('score-display');
-const shootSound = document.getElementById('shoot-sound');
-const explosionSound = document.getElementById('explosion-sound');
-const missedWord = document.getElementById('missed-word');
-const level = document.getElementById('LEVEL')
+
 document.querySelectorAll('.Key').forEach((element) => {
     element.addEventListener("click", () => {
         // Short vibration (100 milliseconds)
@@ -112,8 +159,7 @@ let wordIndex = 0; // Track current index in `sentence`
 shootSound.volume = 0.3;
 
 
-const muteButton = document.getElementById('muteButton');
-const backgroundMusic = document.getElementById("background-music");
+
     let isMuted = false;
 
     muteButton.addEventListener('click', () => {
@@ -124,6 +170,7 @@ const backgroundMusic = document.getElementById("background-music");
         shootSound.muted = isMuted;
         explosionSound.muted = isMuted;
         backgroundMusic.muted = isMuted;
+        missedWord.muted = isMuted;
 
     });
 
@@ -131,7 +178,9 @@ const backgroundMusic = document.getElementById("background-music");
 
 updatelevel(currentRound)
 function createWord() {
+
     if (!gameStarted) return; // Prevent initialization if the game hasn't started
+    if (!gameStarted || gamePaused) return; // Prevent movement if game hasn't started or is paused
     if (wordIndex === words.length && activeWords.length === 0) {
         console.log("All words processed and activeWords is empty.");
         return;
@@ -162,18 +211,20 @@ function createWord() {
 }
 
 function moveWords() {
-    if (!gameStarted) return; // Prevent initialization if the game hasn't started
+    if (!gameStarted) return;
+    // if (!gameStarted || gamePaused) return;
     const gameAreaHeight = gameArea.offsetHeight;
     const seventyPercentHeight = Math.floor(gameAreaHeight * 0.8);
     
     for (let i = activeWords.length - 1; i >= 0; i--) {
         const word = activeWords[i];
-        if (word.dataset.isRemoving === 'true') continue;
+        if (word.dataset.isRemoving === 'true' || gamePaused === 'true') continue;
 
         const rect = word.getBoundingClientRect();
+        
         const currentTop = rect.top - gameArea.getBoundingClientRect().top;
 
-        // Create new word when current word passes 70% of height
+        
         if (currentTop >= seventyPercentHeight && word.dataset.passedMiddle === 'false') {
             console.log("Word passed 80% height, creating new word");
             word.dataset.passedMiddle = 'true';
@@ -181,12 +232,12 @@ function moveWords() {
             missedWord.play();
             setTimeout(() => createWord(), 0);
         }
-        // Handle word reaching bottom
-        if (currentTop >= gameAreaHeight * 0.95) { // 90% of height
+        
+        if (currentTop >= gameAreaHeight * 0.95) { 
             word.dataset.isRemoving = 'true';
             
             
-            playSound(); // Call this where you want to play the sound
+            playSound(); 
             
             
             setTimeout(() => {
@@ -204,6 +255,8 @@ function moveWords() {
         }
     }
 }
+
+
 function removeWord(wordElement) {
     if (!gameStarted) return; // Prevent initialization if the game hasn't started
     console.log("removeWord called. Word to remove:", wordElement.textContent);
@@ -231,7 +284,7 @@ function removeWord(wordElement) {
         if (wordIndex >= words.length && activeWords.length === 0) {
             console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
             setTimeout(() => {
-                console.log(`Round ${currentRound} is cleared!`);
+                console.log(`Remove Word Round ${currentRound} is cleared!`);
                 alert(`Round ${currentRound} is cleared!`);
 
                 // Move to the next round if available
@@ -348,7 +401,9 @@ userInput.addEventListener('input', checkInput);
 
 // Create words and move them down the screen periodically
 setInterval(createWord, 1000);  // Generate a new word every 2 seconds
-setInterval(moveWords, 300);     // Move words down every 50ms
+setInterval(moveWords, 300);
+
+     // Move words down every 50ms
 
 // Keyboard interaction for custom keyboard on screen
 document.addEventListener("DOMContentLoaded", function() {
@@ -433,6 +488,71 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// function launchRocket(targetWord) {
+//     return new Promise((resolve) => {
+//         shootSound.play();
+//         const rocket = document.createElement('div');
+//         rocket.classList.add('rocket');
+        
+//         const gameAreaRect = gameArea.getBoundingClientRect();
+//         const wordRect = targetWord.getBoundingClientRect();
+        
+//         const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
+//         const startY = gameAreaRect.height - 30;
+        
+//         rocket.style.left = `${targetX}px`;
+//         rocket.style.bottom = '10px';
+//         gameArea.appendChild(rocket);
+        
+//         shootSound.play();
+//         userInput.value = '';
+        
+//         const targetY = wordRect.top - gameAreaRect.top;
+//         rocket.style.transition = 'top 0.5s linear';
+//         rocket.offsetHeight;
+//         rocket.style.top = `${targetY}px`;
+        
+//         setTimeout(async () => {
+//             createExplosion(targetWord);
+//             if (targetWord.parentNode) {
+//                 gameArea.removeChild(targetWord);
+//             }
+//             activeWords = activeWords.filter(w => w !== targetWord);
+//             if (rocket.parentNode) {
+//                 gameArea.removeChild(rocket);
+//             }
+//             updateScore(1);
+            
+//             // If this was the last word
+//             if (wordIndex >= words.length && activeWords.length === 0) {
+//                 await createSoulAnimation(targetWord.textContent);
+//                 // Check if all text is revealed before showing completion
+//                 // if (isComplete()) {
+//                     console.log(` Launched Round ${currentRound } is cleared!`);
+//                     alert(`Round ${currentRound } is cleared!`);
+                    
+//                     currentRound++;
+//                     if (currentRound < rounds.length) {
+//                         words = rounds[currentRound];
+//                         wordIndex = 0;
+//                         isWordActive = false;
+//                         activeWords = [];
+//                         console.log("Moving to next round. currentRound:", currentRound);
+//                         updateRound(currentRound + 1);
+//                         createWord();
+//                     } else {
+//                         console.log("Game Completed!");
+//                         alert("Game Completed!");
+//                     }
+//                 }
+//              else {
+//                 await createSoulAnimation(targetWord.textContent);
+//             }
+//             resolve();
+//         }, 500);
+//     });
+// }
+
 function launchRocket(targetWord) {
     return new Promise((resolve) => {
         shootSound.play();
@@ -471,26 +591,28 @@ function launchRocket(targetWord) {
             // If this was the last word
             if (wordIndex >= words.length && activeWords.length === 0) {
                 await createSoulAnimation(targetWord.textContent);
-                // Check if all text is revealed before showing completion
-                // if (isComplete()) {
-                    console.log(`Round ${currentRound + 1} is cleared!`);
-                    alert(`Round ${currentRound + 1} is cleared!`);
-                    
-                    currentRound++;
-                    if (currentRound < rounds.length) {
-                        words = rounds[currentRound];
-                        wordIndex = 0;
-                        isWordActive = false;
-                        activeWords = [];
-                        console.log("Moving to next round. currentRound:", currentRound);
-                        updateRound(currentRound + 1);
-                        createWord();
-                    } else {
-                        console.log("Game Completed!");
-                        alert("Game Completed!");
-                    }
+                
+                // Check if all words are cleared, then show the video popup
+                console.log(`Round ${currentRound} is cleared!`);
+                alert(`Round ${currentRound + 1} is cleared!`);
+                // Show the video popup and "Next" button instead of alert
+                // showRoundCompletionVideo(currentRound);
+
+                currentRound++;
+                if (currentRound < rounds.length) {
+                    words = rounds[currentRound];
+                    wordIndex = 0;
+                    isWordActive = false;
+                    activeWords = [];
+                    console.log("Moving to next round. currentRound:", currentRound);
+                    updateRound(currentRound + 1);
+                    createWord();
+                } else {
+                    console.log("Game Completed!");
+                    // Show game completed message and button to restart
+                    showGameCompletedVideo();
                 }
-             else {
+            } else {
                 await createSoulAnimation(targetWord.textContent);
             }
             resolve();
@@ -498,7 +620,86 @@ function launchRocket(targetWord) {
     });
 }
 
+// Function to show the video when a round is cleared
+function showRoundCompletionVideo(currentRound) {
+    const videoContainer = document.getElementById("videoContainer");
+    const videoMessage = document.getElementById("videoMessage");
+    const video = document.getElementById("celebrationVideo");
+    const videoSource = document.querySelector("#celebrationVideo source");
 
+    // Show the video container with a round completion message
+    videoMessage.textContent = `Round ${currentRound} is cleared!`;
+    videoContainer.style.display = "block";
+
+    // Set the video source and play the video
+    videoSource.src = "media/background/round_completion.mp4";
+    video.type = "video/mp4";
+    video.play();
+}
+
+// Function to show video when the game is completed
+function showGameCompletedVideo() {
+    const videoContainer = document.getElementById("videoContainer");
+    const videoMessage = document.getElementById("videoMessage");
+    const video = document.getElementById("celebrationVideo");
+
+    // Show the video container with a game completion message
+    videoMessage.textContent = "Game Completed!";
+    videoContainer.style.display = "block";
+    
+    // Play the video
+    video.play();
+}
+
+// Function to show video when the game is completed
+function showGameCompletedVideo() {
+    // Get the video container element
+    const videoContainer = document.getElementById("videoContainer");
+    const video = document.getElementById("celebrationVideo");
+    
+    // Show the video container with a game completed message
+    videoContainer.style.display = "block";
+    videoContainer.innerHTML = `
+        <p>Game Completed!</p>
+        <video id="celebrationVideo" width="500" height="280" controls>
+            <source src="media/background/WinningScreen .mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="nextButton" onclick="restartGame()" class="next-button">Restart Game</button>
+    `;
+    
+    // Play the video
+    video.play();
+}
+
+// Function to move to the next round
+function nextRound() {
+    // Hide the video container
+    const videoContainer = document.getElementById("videoContainer");
+    videoContainer.style.display = "none";
+    
+    // Continue the game logic for the next round
+    currentRound++; // Increment the round counter
+    console.log(`Moving to Round ${currentRound}`);
+    updateRound(currentRound + 1);
+    createWord();
+}
+
+// Function to restart the game
+function restartGame() {
+    // Hide the video container
+    const videoContainer = document.getElementById("videoContainer");
+    videoContainer.style.display = "none";
+    
+    // Reset the game state and restart from the first round
+    currentRound = 0;
+    words = rounds[currentRound];
+    wordIndex = 0;
+    activeWords = [];
+    isWordActive = false;
+    updateRound(currentRound + 1);
+    createWord();
+}
 
 // Add this new function for the soul animation
 function createSoulAnimation(character) {
