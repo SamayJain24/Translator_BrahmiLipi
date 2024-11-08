@@ -350,13 +350,14 @@ h2 {
         height: 45vh;
     }
 }
+    
 
-.keyboard {
+/* .keyboard {
     display: flex;
     flex-wrap: wrap;
     max-width: 750px;
     margin: 2px auto;
-    gap: 0.5px 0.5px; /* Set 2px horizontal and 1px vertical gap */
+    gap: 0.5px 0.5px; 
     justify-content: center;
     padding: 5px;
     border: 2px solid black;
@@ -384,7 +385,7 @@ h2 {
     background-color: transparent;
 }
 .keyboard button.highlight {
-    background-color: #ffcc00;  /* Color for highlighting */
+    background-color: #ffcc00; 
 }
 
 .keyboard button.space {
@@ -393,6 +394,66 @@ h2 {
     border-radius: 3px;
 }
   
+.keyboard button.backspace {
+    width: 80px;
+    clip-path: none;
+    border-radius: 4px;
+} */
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 750px;
+    margin: 2px auto;
+    gap: 0.5px 0.5px; 
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #FFFFF0;
+     /* #FFFFF0*/
+}
+
+.keyboard button {
+    width: 33px;
+    height: 33px;
+    font-size: 1.1rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url('media/background/level background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transform: translateY(-2px);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.keyboard button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.keyboard button:hover {
+    background-color: transparent;
+}
+
+.keyboard button.highlight {
+    background-color: #ffcc00; 
+}
+
+.keyboard button.space {
+    width: 50px;
+    clip-path: none;
+    border-radius: 3px;
+}
+
 .keyboard button.backspace {
     width: 80px;
     clip-path: none;
