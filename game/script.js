@@ -347,7 +347,7 @@ function checkInput() {
     if (!foundMatch) {
         userInput.value = '';
         // JavaScript
-        const audio = new Audio("media/sounds/Wrong_Answer_Sound_Effect.mp3");
+        const audio = new Audio("media/sounds/Wrong_Answer.mp3");
         // Play the audio
         audio.play();
     }
