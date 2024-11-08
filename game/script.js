@@ -95,6 +95,11 @@ pauseButton.addEventListener("click", () => {
     } else {
         // Any actions to resume audio or animations
         console.log("Game resumed");
+        shootSound.muted = false;
+        explosionSound.muted = false;
+        backgroundMusic.muted = false;
+        missedWord.muted = false;
+        audio.muted =false;
     }
 });
 
