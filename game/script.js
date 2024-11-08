@@ -598,7 +598,7 @@ function launchRocket(targetWord) {
                 
                 // Check if all words are cleared, then show the video popup
                 console.log(`Round ${currentRound} is cleared!`);
-                alert(`Round ${currentRound + 1} is cleared!`);
+                alert(`Round ${currentRound } is cleared!`);
                 // Show the video popup and "Next" button instead of alert
                 // showRoundCompletionVideo(currentRound);
 
