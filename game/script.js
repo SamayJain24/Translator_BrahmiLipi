@@ -346,6 +346,10 @@ function checkInput() {
     // If no match is found, clear the input box
     if (!foundMatch) {
         userInput.value = '';
+        // JavaScript
+        const audio = new Audio("media/sounds/Wrong_Answer_Sound_Effect.mp3");
+        // Play the audio
+        audio.play();
     }
 }
 
