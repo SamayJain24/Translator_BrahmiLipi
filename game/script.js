@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const startGameButton = document.getElementById("start-game-button");
 
     // Function to start the game
-    backgroundMusic.volume = 0.2;
     function startGame() {
         gameStarted = true; // Set the gameStarted variable to true
         startGameButton.style.display = "none"; // Hide the start button
