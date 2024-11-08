@@ -140,7 +140,7 @@ document.querySelectorAll('.Key').forEach((element) => {
         if (navigator.vibrate) {
             console.log("Button clicked"); // Test if the click is working // or 500 if that's the intended duration
             if (navigator.vibrate) {
-                navigator.vibrate(250); // Attempt the vibration
+                navigator.vibrate(200); // Attempt the vibration
                 console.log("Vibration triggered");
             } else {
                 console.log("Vibration API not supported on this device/browser.");
