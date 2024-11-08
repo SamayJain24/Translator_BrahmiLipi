@@ -11,7 +11,7 @@ const shootSound = document.getElementById('shoot-sound');
 const explosionSound = document.getElementById('explosion-sound');
 const missedWord = document.getElementById('missed-word');
 const level = document.getElementById('LEVEL')
-
+const audio = new Audio("media/sounds/Wrong_Answer.mp3");
 loadSelectedLevel();
 console.log("Selected Level:", currentRound);
 
@@ -90,6 +90,7 @@ pauseButton.addEventListener("click", () => {
         explosionSound.muted = true;
         backgroundMusic.muted = true;
         missedWord.muted = true;
+        audio.muted =true;
 
     } else {
         // Any actions to resume audio or animations
@@ -171,6 +172,7 @@ shootSound.volume = 0.3;
         explosionSound.muted = isMuted;
         backgroundMusic.muted = isMuted;
         missedWord.muted = isMuted;
+        audio.muted = isMuted;
 
     });
 
@@ -346,9 +348,6 @@ function checkInput() {
     // If no match is found, clear the input box
     if (!foundMatch) {
         userInput.value = '';
-        // JavaScript
-        const audio = new Audio("media/sounds/Wrong_Answer.mp3");
-        // Play the audio
         audio.play();
     }
 }
