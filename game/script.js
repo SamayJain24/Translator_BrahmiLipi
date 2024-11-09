@@ -25,6 +25,10 @@ function loadSelectedLevel() {
   console.log("Starting at Level:", currentRound);
   return
 }
+// Update score and display
+function updatelevel() {
+    level.textContent = `LEVEL ${currentRound}`;
+}
 // Function to check the status of the Keyboard Hint setting
 function loadKeyboardHintStatus() {
     const keyboardHintStatus = localStorage.getItem('keyboardHint');
@@ -417,10 +421,7 @@ function updateScore() {
     score++;
     scoreDisplay.textContent = `${score}`;
 }
-// Update score and display
-function updatelevel() {
-    level.textContent = `LEVEL ${currentRound}`;
-}
+
 
 // Handle game over logic
 function triggerGameOver() {
