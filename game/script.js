@@ -143,6 +143,7 @@ let rounds = [
     ['𑀪', '𑀸', '𑀱', '𑀸', '𑀩', '𑁄', '𑀮,', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻', '𑀳,' ,' 𑁃', '𑀮', '𑀺', '𑀧', '𑀺', '𑀮', '𑀺', '𑀔', '𑀻', '𑀚', '𑀸', '𑀢', '𑀻,' ,'𑀳', '𑁃', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀏', '𑀧', '𑀓', '𑀻', '𑀫', '𑀤', '𑀤,', '𑀲', '𑁂', '𑀆', '𑀧', '𑀩𑁆', '𑀭', '𑀸', '𑀳', '𑀫', '𑀻', '𑀮', '𑀺', '𑀧', '𑀺', '𑀓', '𑁄', '𑀓','𑀺', '𑀲', '𑀻', '𑀪', '𑀻', '𑀪', '𑀸', '𑀱', '𑀸', '𑀫', '𑁂', '𑀁', '𑀮', '𑀺', '𑀔', '𑀦', '𑀸', '𑀲', '𑀻', '𑀔', '𑀲', '𑀓', '𑀢', '𑁂', '𑀳', '𑁃', '𑀁',],
 
 ];
+console.log(`the current round is ${currentRound}`)
 console.log("Words for this level:", rounds[currentRound]);
 let words = rounds[currentRound-1];
 console.log("Words for Current Round:", words);
@@ -174,20 +175,20 @@ shootSound.volume = 0.3;
 
 
 
-    let isMuted = false;
+let isMuted = false;
 
-    muteButton.addEventListener('click', () => {
-        isMuted = !isMuted; 
-        muteButton.classList.toggle('muted', isMuted);
-    
-        // Toggle the muted property for both audio elements
-        shootSound.muted = isMuted;
-        explosionSound.muted = isMuted;
-        backgroundMusic.muted = isMuted;
-        missedWord.muted = isMuted;
-        audio.muted = isMuted;
+muteButton.addEventListener('click', () => {
+    isMuted = !isMuted; 
+    muteButton.classList.toggle('muted', isMuted);
 
-    });
+    // Toggle the muted property for both audio elements
+    shootSound.muted = isMuted;
+    explosionSound.muted = isMuted;
+    backgroundMusic.muted = isMuted;
+    missedWord.muted = isMuted;
+    audio.muted = isMuted;
+
+});
 
 
 
@@ -296,56 +297,56 @@ function moveWords() {
 }
 
 
-function removeWord(wordElement) {
-    if (!gameStarted) return; // Prevent initialization if the game hasn't started
-    console.log("removeWord called. Word to remove:", wordElement.textContent);
+// function removeWord(wordElement) {
+//     if (!gameStarted) return; // Prevent initialization if the game hasn't started
+//     console.log("removeWord called. Word to remove:", wordElement.textContent);
     
-    if (wordElement.dataset.isRemoving === 'true') {
-        return; // Prevent double removal
-    }
+//     if (wordElement.dataset.isRemoving === 'true') {
+//         return; // Prevent double removal
+//     }
     
-    wordElement.dataset.isRemoving = 'true';
-    wordElement.style.opacity = '0';
-    wordElement.style.pointerEvents = 'none';
+//     wordElement.dataset.isRemoving = 'true';
+//     wordElement.style.opacity = '0';
+//     wordElement.style.pointerEvents = 'none';
     
-    setTimeout(() => {
-        const index = activeWords.indexOf(wordElement);
-        if (index > -1) {
-            activeWords.splice(index, 1);
-            wordElement.remove();
-            console.log(`Word removed from activeWords. Remaining activeWords.length: ${activeWords.length}`);
-        }
+//     setTimeout(() => {
+//         const index = activeWords.indexOf(wordElement);
+//         if (index > -1) {
+//             activeWords.splice(index, 1);
+//             wordElement.remove();
+//             console.log(`Word removed from activeWords. Remaining activeWords.length: ${activeWords.length}`);
+//         }
 
-        // Check if all words have been cleared
-        console.log("Checking if all words are cleared after removeWord.");
-        console.log("Current state: wordIndex:", wordIndex, "words.length:", words.length, "activeWords.length:", activeWords.length);
+//         // Check if all words have been cleared
+//         console.log("Checking if all words are cleared after removeWord.");
+//         console.log("Current state: wordIndex:", wordIndex, "words.length:", words.length, "activeWords.length:", activeWords.length);
         
-        if (wordIndex >= words.length && activeWords.length === 0) {
-            console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
-            setTimeout(() => {
-                console.log(`Remove Word Round ${currentRound} is cleared!`);
-                alert(`Round ${currentRound} is cleared!`);
+//         if (wordIndex >= words.length && activeWords.length === 0) {
+//             console.log("All words cleared and activeWords is empty. Displaying round completion prompt.");
+//             setTimeout(() => {
+//                 console.log(`Remove Word Round ${currentRound} is cleared!`);
+//                 alert(`Round ${currentRound} is cleared!`);
 
-                // Move to the next round if available
-                currentRound++;
-                if (currentRound < rounds.length) {
-                    words = rounds[currentRound];
-                    wordIndex = 0;
-                    score = 0;
-                    console.log("Moving to next round. currentRound:", currentRound);
-                    updateRound(currentRound + 1);
-                } else {
-                    console.log("Game Completed!");
-                    alert("Game Completed!");
-                }
-            }, 500);
-        }
+//                 // Move to the next round if available
+//                 currentRound++;
+//                 if (currentRound < rounds.length) {
+//                     words = rounds[currentRound];
+//                     wordIndex = 0;
+//                     score = 0;
+//                     console.log("Moving to next round. currentRound:", currentRound);
+//                     updateRound(currentRound + 1);
+//                 } else {
+//                     console.log("Game Completed!");
+//                     alert("Game Completed!");
+//                 }
+//             }, 500);
+//         }
 
-        // Allow new word creation after removal
-        isWordActive = false;
-        setTimeout(() => createWord(), 0);
-    }, 500);
-}
+//         // Allow new word creation after removal
+//         isWordActive = false;
+//         setTimeout(() => createWord(), 0);
+//     }, 500);
+// }
 
 // Add this CSS to your stylesheet
 const styles = `
@@ -539,71 +540,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// function launchRocket(targetWord) {
-//     return new Promise((resolve) => {
-//         shootSound.play();
-//         const rocket = document.createElement('div');
-//         rocket.classList.add('rocket');
-        
-//         const gameAreaRect = gameArea.getBoundingClientRect();
-//         const wordRect = targetWord.getBoundingClientRect();
-        
-//         const targetX = wordRect.left - gameAreaRect.left + (wordRect.width / 2) - 5;
-//         const startY = gameAreaRect.height - 30;
-        
-//         rocket.style.left = `${targetX}px`;
-//         rocket.style.bottom = '10px';
-//         gameArea.appendChild(rocket);
-        
-//         shootSound.play();
-//         userInput.value = '';
-        
-//         const targetY = wordRect.top - gameAreaRect.top;
-//         rocket.style.transition = 'top 0.5s linear';
-//         rocket.offsetHeight;
-//         rocket.style.top = `${targetY}px`;
-        
-//         setTimeout(async () => {
-//             createExplosion(targetWord);
-//             if (targetWord.parentNode) {
-//                 gameArea.removeChild(targetWord);
-//             }
-//             activeWords = activeWords.filter(w => w !== targetWord);
-//             if (rocket.parentNode) {
-//                 gameArea.removeChild(rocket);
-//             }
-//             updateScore(1);
-            
-//             // If this was the last word
-//             if (wordIndex >= words.length && activeWords.length === 0) {
-//                 await createSoulAnimation(targetWord.textContent);
-//                 // Check if all text is revealed before showing completion
-//                 // if (isComplete()) {
-//                     console.log(` Launched Round ${currentRound } is cleared!`);
-//                     alert(`Round ${currentRound } is cleared!`);
-                    
-//                     currentRound++;
-//                     if (currentRound < rounds.length) {
-//                         words = rounds[currentRound];
-//                         wordIndex = 0;
-//                         isWordActive = false;
-//                         activeWords = [];
-//                         console.log("Moving to next round. currentRound:", currentRound);
-//                         updateRound(currentRound + 1);
-//                         createWord();
-//                     } else {
-//                         console.log("Game Completed!");
-//                         alert("Game Completed!");
-//                     }
-//                 }
-//              else {
-//                 await createSoulAnimation(targetWord.textContent);
-//             }
-//             resolve();
-//         }, 500);
-//     });
-// }
-
 function launchRocket(targetWord) {
     return new Promise((resolve) => {
         shootSound.play();
@@ -645,13 +581,11 @@ function launchRocket(targetWord) {
                 
                 // Check if all words are cleared, then show the video popup
                 console.log(`Round ${currentRound} is cleared!`);
-                alert(`Round ${currentRound } is cleared!`);
-                // Show the video popup and "Next" button instead of alert
-                // showRoundCompletionVideo(currentRound);
-
-                currentRound++;
+                setTimeout(function() {
+                    alert(`Round ${currentRound} is cleared!`);
+                    currentRound++;
                 if (currentRound < rounds.length) {
-                    words = rounds[currentRound];
+                    words = rounds[currentRound-1];
                     wordIndex = 0;
                     isWordActive = false;
                     activeWords = [];
@@ -665,6 +599,12 @@ function launchRocket(targetWord) {
                     // Show game completed message and button to restart
                     showGameCompletedVideo();
                 }
+                  }, 1000); // 2000 milliseconds = 2 seconds
+                  
+                // Show the video popup and "Next" button instead of alert
+                // showRoundCompletionVideo(currentRound);
+
+                
             } else {
                 await createSoulAnimation(targetWord.textContent);
             }
@@ -745,12 +685,12 @@ function restartGame() {
     videoContainer.style.display = "none";
     
     // Reset the game state and restart from the first round
-    currentRound = 0;
+    currentRound = 1;
     words = rounds[currentRound];
     wordIndex = 0;
     activeWords = [];
     isWordActive = false;
-    updateRound(currentRound + 1);
+    updateRound(currentRound);
     createWord();
 }
 
@@ -888,7 +828,7 @@ function initializeRound(roundNumber) {
 
 function updateRound(roundNumber) {
         currentRound = roundNumber - 1;
-        initializeRound(roundNumber);
+        initializeRound(roundNumber -1);
         score =0;
     }
 
