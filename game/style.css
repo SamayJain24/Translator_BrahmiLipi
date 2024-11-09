@@ -241,7 +241,7 @@ h2 {
 }
 
 .word.falling {
-    animation: wordMove 7s linear forwards;
+    animation: wordMove 8s linear forwards;
 }
 .rocket {
     width: 10px;

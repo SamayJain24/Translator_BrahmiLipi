@@ -15,7 +15,6 @@ const audio = new Audio("media/sounds/Wrong_Answer.mp3");
 loadSelectedLevel();
 console.log("Selected Level:", currentRound);
 
-
 // Function to load the selected level if available
 function loadSelectedLevel() {
   const savedLevel = localStorage.getItem('selectedLevel');
@@ -73,6 +72,7 @@ const pauseButton = document.getElementById("pauseButton");
 const playIcon = pauseButton.querySelector(".play-icon");
 const pauseIcon = pauseButton.querySelector(".pause-icon-hidden");
 
+
 // Add event listener to pause button
 pauseButton.addEventListener("click", () => {
     // Toggle the pause/play icon visibility
@@ -81,6 +81,8 @@ pauseButton.addEventListener("click", () => {
     
     // Toggle game pause state
     gamePaused = !gamePaused;
+
+    const areavideo = document.getElementById('background-video');
     
     // If the game is paused, stop audio/video or animations if necessary
     if (gamePaused) {
@@ -91,6 +93,7 @@ pauseButton.addEventListener("click", () => {
         backgroundMusic.muted = true;
         missedWord.muted = true;
         audio.muted =true;
+        areavideo.pause();
 
     } else {
         // Any actions to resume audio or animations
@@ -100,6 +103,7 @@ pauseButton.addEventListener("click", () => {
         backgroundMusic.muted = false;
         missedWord.muted = false;
         audio.muted =false;
+        areavideo.play();
     }
 });
 
@@ -184,15 +188,14 @@ shootSound.volume = 0.3;
 
 
 updatelevel(currentRound)
-function createWord() {
 
-    if (!gameStarted) return; // Prevent initialization if the game hasn't started
-    if (!gameStarted || gamePaused) return; // Prevent movement if game hasn't started or is paused
+function createWord() {
+    if (!gameStarted || gamePaused) return; // Prevent creation if game hasn't started or is paused
     if (wordIndex === words.length && activeWords.length === 0) {
         console.log("All words processed and activeWords is empty.");
         return;
     }
-    
+
     if (!isWordActive && wordIndex < words.length) {
         const word = document.createElement('div');
         word.classList.add('word');
@@ -203,19 +206,44 @@ function createWord() {
         word.dataset.passedMiddle = 'false';
         word.dataset.isRemoving = 'false';
         gameArea.appendChild(word);
-        
+
         // Start falling animation
         requestAnimationFrame(() => {
             word.classList.add('falling');
         });
 
+        // Add to active words array
         activeWords.push(word);
         isWordActive = true;
         wordIndex++;
         resetButtonHighlights();
         highlightButton(nextChar);
+
+        // Continuously check `gamePaused` with `requestAnimationFrame`
+        function checkPauseState() {
+            if (gamePaused) {
+                word.style.animationPlayState = 'paused'; // Pause animation
+            } else if (gameStarted) {
+                word.style.animationPlayState = 'running'; // Resume animation if the game is running
+            }
+
+            // Continue checking until the word is out of the game area or removed
+            if (parseInt(word.style.top) <= gameArea.offsetHeight && document.body.contains(word)) {
+                requestAnimationFrame(checkPauseState);
+            }
+        }
+
+        // Start checking the pause state
+        requestAnimationFrame(checkPauseState);
     }
 }
+
+
+// const wor = document.querySelectorAll('.word.falling'); 
+//  wor.forEach(word => { 
+//         // Pause the animation at the current position
+//         word.style.animationPlayState = 'paused'; 
+//     });
 
 function moveWords() {
     if (!gameStarted) return;
@@ -338,24 +366,33 @@ function checkInput() {
     let foundMatch = false; // Flag to track if a match was found
 
     for (let i = activeWords.length - 1; i >= 0; i--) {
+        if (gamePaused) {
+            userInput.value = ''; // Clear the input if the game is paused
+            return; // Exit the function early if the game is paused
+        }
+
         const word = activeWords[i];
+        
+        // Check if the input matches an active word
         if (inputText === word.textContent) {
-            launchRocket(word);
-            isWordActive = false;
-            createWord();
+            launchRocket(word); // Call the launchRocket function for the matched word
+            
+            isWordActive = false; // Set isWordActive to false after a match
+            createWord(); // Create a new word to replace the matched word
             resetButtonHighlights();
-            createWord();
-            foundMatch = true; // Set flag to true if a match is found
-            break; // Exit loop once a match is found
+            createWord();  // Reset the button highlights
+            foundMatch = true; // Set flag to true since a match was found
+            break; // Exit the loop after the match is found
         }
     }
 
-    // If no match is found, clear the input box
+    // If no match is found, clear the input box and play sound
     if (!foundMatch) {
-        userInput.value = '';
-        audio.play();
+        userInput.value = ''; // Clear the input if no match
+        audio.play(); // Play the audio (missed word sound)
     }
 }
+
 
 
 
