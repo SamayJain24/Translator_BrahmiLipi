@@ -129,6 +129,7 @@ function initializeGame() {
 }
 
 let rounds = [
+    ['𑀚', '𑁃', '𑀦'],
     // Round 1 words
     ['𑀚', '𑁃', '𑀦', '𑀥', '𑀭', '𑀫','𑀓','𑁂' ,'𑀧','𑁂','𑀭','𑀣','𑀫','𑀢','𑀻','𑀭','𑁂','𑀣','𑀓','𑀭','𑀆','𑀤','𑀺','𑀦','𑀸','𑀣','𑀪','𑀕','𑀯','𑀸','𑀦','𑀚','𑀻','𑀳','𑁃'],
     // Round 2 words
@@ -331,6 +332,7 @@ function removeWord(wordElement) {
                 if (currentRound < rounds.length) {
                     words = rounds[currentRound];
                     wordIndex = 0;
+                    score = 0;
                     console.log("Moving to next round. currentRound:", currentRound);
                     updateRound(currentRound + 1);
                 } else {
@@ -417,8 +419,12 @@ function createExplosion(targetWord) {
 }
 
 // Update score and display
-function updateScore() {
-    score++;
+function updateScore(m) {
+    if (m==2){
+        score = 0
+    }else{ 
+    score= score+m;
+}
     scoreDisplay.textContent = `${score}`;
 }
 
@@ -650,8 +656,10 @@ function launchRocket(targetWord) {
                     wordIndex = 0;
                     isWordActive = false;
                     activeWords = [];
+                    updateScore(2);
                     console.log("Moving to next round. currentRound:", currentRound);
                     updateRound(currentRound + 1);
+                    updatelevel();
                     createWord();
                 } else {
                     console.log("Game Completed!");
@@ -882,6 +890,7 @@ function initializeRound(roundNumber) {
 function updateRound(roundNumber) {
         currentRound = roundNumber - 1;
         initializeRound(roundNumber);
+        score =0;
     }
 
 initializeRound(currentRound);
