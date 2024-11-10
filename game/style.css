@@ -335,7 +335,7 @@ h2 {
     transition: width 0.3s ease;
 }
 
-/* Additional adjustments for mobile */
+/* Additional adjustments for mobile
 @media screen and (max-width: 768px) {
     #game-area {
         width: 95%;
@@ -349,8 +349,106 @@ h2 {
         width: 100%;
         height: 45vh;
     }
+} */
+
+@media screen and (max-width: 768px) {
+    #game-area {
+        width: 95%;
+        height: 41vh;
+        margin-bottom: 1200px;
+    }
+
+    .falling-word {
+        font-size: 6vw;
+    }
+} 
+
+/* Additional adjustments for mobile */
+@media screen and (max-width: 480px) {
+    .keyboard {
+        max-width: 100%;
+        padding: 6px;
+    }
+
+    .keyboard button {
+        height: 33px; 
+        font-size: 1.1rem;
+    }
+    .keyboardE {
+        max-width: 100%;
+        padding: 6px;
+    }
+  
+    .keyboardE button {
+        height: 33px; 
+        font-size: 1.1rem;
+    }
+      #onetwothree{
+        width: 40px;
+  
+      } 
+
 }
-    
+
+.keyboardE {
+    position: fixed;       
+    bottom: 0;            
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    height: 290px; 
+    margin: 0; 
+    right: 0;           
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #99C0FB;
+    flex-direction: row;
+    overflow: auto;
+  }
+  
+  
+  .keyboardE button {
+    flex: 1 1 10%;
+    height: 33px;
+    align-content: stretch;
+    width: 33px;
+    padding: 1px;
+    margin: 0px 0px;
+    font-size: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    background-image: url('img/Brahmi lipi tools symbol_20241103_163634_0000.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  Hover Effect
+  .keyboardE button:hover {
+      background-color: rgba(209, 209, 209, 0.7); 
+  }
+  
+  /* Special Button Styling */
+  .keyboardE button.space{
+      flex: 1 1 40%; 
+      max-width: 290%;
+      border-radius: 8px;
+      background-image: url('media/background/space_button.png');
+      width: 100px;
+      background-color: transparent;
+  
+    } 
+  
+
 
 /* .keyboard {
     display: flex;
@@ -362,9 +460,31 @@ h2 {
     padding: 5px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #8B2323;
-}
-.keyboard button { 
+    background-color: #FFFFF0;
+} */
+
+.keyboard {
+    position: fixed;
+    bottom : 0;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    margin: 0;
+    height: 290px;
+    right :0;
+    gap :0; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #FFFFF0;
+    flex-direction: row;
+    overflow: auto;
+} 
+
+
+/* .keyboard button {
     width: 33px;
     height: 33px;
     font-size: 1.1rem;
@@ -376,50 +496,23 @@ h2 {
     background-position: center;
     background-repeat: no-repeat;
     border: none;
-    transition: background-color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.keyboard button:hover {
-    background-color: transparent;
-}
-.keyboard button.highlight {
-    background-color: #ffcc00; 
-}
-
-.keyboard button.space {
-    width: 50px;
-    clip-path: none;
-    border-radius: 3px;
-}
-  
-.keyboard button.backspace {
-    width: 80px;
-    clip-path: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    transform: translateY(-2px);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.4);
 } */
 
-.keyboard {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 750px;
-    margin: 2px auto;
-    gap: 0.5px 0.5px; 
-    justify-content: center;
-    padding: 5px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: #FFFFF0;
-     /* #FFFFF0*/
-}
-
 .keyboard button {
-    width: 33px;
+    flex: 1 1 10%;
     height: 33px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-align: center;
     cursor: pointer;
+    align-content: stretch;
+    padding: 1px;
     background-color: transparent;
     background-image: url('media/background/level background.png');
     background-size: cover;
@@ -448,17 +541,29 @@ h2 {
     background-color: #ffcc00; 
 }
 
-.keyboard button.space {
+/* .keyboard button.space {
     width: 50px;
     clip-path: none;
     border-radius: 3px;
-}
+} */
 
+.keyboard button.space {
+    flex : 1 1 40%;
+    max-width: 290%;
+    width: 100px;
+    background-color: transparent;
+    background-image: url('media/background/space_button.png');
+    border-radius: 8px;
+}
+#onetwothree{
+    font-size: 0.8rem;
+}
+/* 
 .keyboard button.backspace {
     width: 80px;
     clip-path: none;
     border-radius: 4px;
-}
+} */
 
 #fullscreen-image {
     position: fixed;
