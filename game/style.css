@@ -390,49 +390,50 @@ h2 {
 
 }
 
-.keyboardE {
-    position: fixed;       
-    bottom: 0;            
+.keyboardE{
+    position: fixed;
+    bottom : 0;
     display: flex;
     flex-wrap: wrap;
     max-width: 700px;
-    height: 290px; 
-    margin: 0; 
-    right: 0;           
-    gap: 0;
+    margin: 0;
+    height: 290px;
+    right :0;
+    gap :0; 
     align-items: center;
     justify-content: center;
     padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #99C0FB;
+    background-color: #FFFFF0;
     flex-direction: row;
     overflow: auto;
-  }
+} 
   
-  
-  .keyboardE button {
+.keyboardE button {
     flex: 1 1 10%;
     height: 33px;
-    align-content: stretch;
-    width: 33px;
-    padding: 1px;
-    margin: 0px 0px;
     font-size: 0.8rem;
     text-align: center;
     cursor: pointer;
-    background-image: url('img/Brahmi lipi tools symbol_20241103_163634_0000.png');
+    align-content: stretch;
+    padding: 1px;
+    background-color: transparent;
+    background-image: url('media/background/level background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: transparent;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+    border-radius: 8px;
+    transform: translateY(-2px);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.4);
+}
   
-  Hover Effect
+  /* Hover Effect */
   .keyboardE button:hover {
       background-color: rgba(209, 209, 209, 0.7); 
   }
