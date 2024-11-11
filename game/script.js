@@ -526,6 +526,46 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// // Function to highlight a button by character with a blinking outline effect
+// function highlightButton(char) {
+//     // Check the "Keyboard Hint" status from localStorage
+//     const keyboardHintStatus = loadKeyboardHintStatus();
+//     if (keyboardHintStatus === 'off') {
+//         console.log("Keyboard Hint is disabled. Highlighting is skipped.");
+//         return; // Exit the function early if the hint is disabled
+//     }
+//     const button = document.querySelector(`#keyboard1 button[data-char="${char}"]`);
+//     const Hindibutton = document.querySelector(`#keyboard10 button[data-char="${char}"]`);
+//     if (button) {
+//         let blinkCount = 0;
+        
+//         // Add a class for the highlight animation
+//         button.classList.add('highlight-ready');
+        
+//         const blinkInterval = setInterval(() => {
+//             if (blinkCount < 3) {
+//                 // Toggle highlight class
+//                 button.classList.add('highlight-active');
+//                 Hindibutton.classList.add('highlight-active');
+                
+//                 // Remove highlight after a short delay
+//                 setTimeout(() => {
+//                     button.classList.remove('highlight-active');
+//                     Hindibutton.classList.remove('highlight-active');
+//                 }, 250);
+                
+//                 blinkCount++;
+//             } else {
+//                 // Stop the blinking effect and cleanup
+//                 clearInterval(blinkInterval);
+//                 button.classList.remove('highlight-ready');
+//                 Hindibutton.classList.remove('highlight-active');
+//             }
+//         }, 500);
+//     }
+// }
+
+
 // Function to highlight a button by character with a blinking outline effect
 function highlightButton(char) {
     // Check the "Keyboard Hint" status from localStorage
@@ -534,31 +574,40 @@ function highlightButton(char) {
         console.log("Keyboard Hint is disabled. Highlighting is skipped.");
         return; // Exit the function early if the hint is disabled
     }
+
     const button = document.querySelector(`#keyboard1 button[data-char="${char}"]`);
-    if (button) {
-        let blinkCount = 0;
+    const hindiButton = document.querySelector(`#keyboard10 button[data-char="${char}"]`);
+    
+    function applyHighlight(element) {
+        if (!element) return;
         
+        let blinkCount = 0;
         // Add a class for the highlight animation
-        button.classList.add('highlight-ready');
+        element.classList.add('highlight-ready');
         
         const blinkInterval = setInterval(() => {
             if (blinkCount < 3) {
                 // Toggle highlight class
-                button.classList.add('highlight-active');
+                element.classList.add('highlight-active');
                 
                 // Remove highlight after a short delay
                 setTimeout(() => {
-                    button.classList.remove('highlight-active');
+                    element.classList.remove('highlight-active');
                 }, 250);
                 
                 blinkCount++;
             } else {
                 // Stop the blinking effect and cleanup
                 clearInterval(blinkInterval);
-                button.classList.remove('highlight-ready');
+                element.classList.remove('highlight-ready');
+                element.classList.remove('highlight-active');
             }
         }, 500);
     }
+
+    // Apply highlighting to both buttons independently
+    applyHighlight(button);
+    applyHighlight(hindiButton);
 }
 
 
