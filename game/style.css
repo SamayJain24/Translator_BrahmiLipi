@@ -52,6 +52,7 @@ body {
     padding: 0;
     flex-direction: column;
     min-height: 100vh;
+    padding-bottom: 300px;
 }
 
 #game-container {
@@ -60,6 +61,8 @@ body {
 
 
 h2 {
+    position: relative;
+    top: 0%;
     font-size: 1.3rem;
     margin-top: 3px;
     margin-bottom: 0px;
@@ -83,7 +86,7 @@ h2 {
 }
 
 #game-area {
-    position: relative;
+    position:relative;
     width: 80vw;
     height: 60vh;
     border: 3px solid #000000;
@@ -109,8 +112,9 @@ h2 {
 @media (max-width: 768px) {
     #game-area {
         width: 95vw;  /* Adjust the width for smaller screens */
-        height: 50vh; /* Adjust the height for smaller screens */
+        height: 35vh; /* Adjust the height for smaller screens */
         border-radius: 10px; /* Smaller border radius for better appearance on mobile */
+
     }
 
     #background-video {
@@ -352,10 +356,15 @@ h2 {
 } */
 
 @media screen and (max-width: 768px) {
-    #game-area {
+    /* #game-area {
         width: 95%;
         height: 41vh;
         margin-bottom: 1200px;
+    } */
+    #game-area {
+        width: 95%;
+        height: 35vh; /* Reduce height to make room for keyboard */
+        margin-bottom: 20px; /* Small margin to prevent overlap */
     }
 
     .falling-word {
@@ -387,6 +396,11 @@ h2 {
         width: 40px;
   
       } 
+      #game-area {
+        width: 95%;
+        height: 30vh; /* Further reduced for smaller devices */
+        margin-bottom: 20px;
+    }
 
 }
 
@@ -474,6 +488,7 @@ h2 {
     height: 290px;
     right :0;
     gap :0; 
+    left:0;
     align-items: center;
     justify-content: center;
     padding: 10px;
