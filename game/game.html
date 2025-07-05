@@ -26,68 +26,34 @@
             </div>
         </div>
         
-        <button id="start-game-button">Start</button>
-        
-        <div style="display: flex; align-items: center; justify-content: center; max-width: 100%; width: 100%; margin: auto;">
+        <div class="text-areas-container">
             <!-- Left Text Area -->
-            <div contenteditable="False" id="leftTextArea"
-                style="
-                    width: 180px;
-                    height: 80px;
-                    border-radius: 20px 0 0 20px;
-                    font-size: 15px;
-                    padding: 8px;
-                    line-height: 1.8;
-                    border: 1px solid #ccc;
-                    background-color: white;
-                    overflow: auto;
-                    resize: none;
-                    color: transparent;
-                    -webkit-text-stroke: 0.3px black;">
+            <div contenteditable="False" id="leftTextArea">
             </div>
         
             <!-- Divider -->
-            <div
-                style="
-                    width: 2px;
-                    height: 80px;
-                    background-color: #ccc;
-                    border: 1px solid #ccc;
-                ">
+            <div class="text-area-divider">
             </div>
         
             <!-- Right Text Area -->
-            <div contenteditable="False" id="rightTextArea"
-                style="
-                    width: 180px;
-                    height: 80px;
-                    border-radius: 0 20px 20px 0;
-                    font-size: 15px;
-                    padding: 8px;
-                    line-height: 1.8;
-                    border: 1px solid #ccc;
-                    background-color: white;
-                    overflow: auto;
-                    resize: none;
-                    color: transparent;
-                    -webkit-text-stroke: 0.3px black;">
+            <div contenteditable="False" id="rightTextArea">
             </div>
         </div>
 
-        
-        
-        
         <div id="game-area">
             <!-- Background video for the game area -->
             <video autoplay loop muted playsinline id="background-video" id="gameareavideo">
                 <source src="media\background\area new video.mp4" type="video/mp4" >
                 Your browser does not support the video tag.
-                
             </video>
             <div id="score-display">0
             </div>
+            <button id="start-game-button">Start</button>
         </div>
 
+        
+        
+        
         <div id="input-container">
             <input type="text" hidden id="user-input" placeholder="Start typing Brahmi words..." autofocus />
         </div>
