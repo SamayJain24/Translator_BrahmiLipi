@@ -224,6 +224,10 @@ h2 {
     color: transparent;
     -webkit-text-stroke: 0.3px black;
     flex-shrink: 0;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 #leftTextArea {
@@ -431,7 +435,48 @@ h2 {
     margin-top: 0 !important;
 }
 
+/* Ensure English keyboard variants also use 10 columns and same styling */
+.keyboardE {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    width: 100%;
+    max-width: 700px;
+    margin: 4px auto 0 auto;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #FFFFF0;
+    align-items: center;
+    overflow: hidden;
+    max-height: 60vh;
+    min-height: 220px;
+}
+
 .keyboard button {
+    width: 100%;
+    min-width: 0;
+    height: clamp(32px, 8vw, 44px);
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url('media/background/level background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transform: translateY(-2px);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.4);
+    margin: 0;
+}
+
+.keyboardE button {
     width: 100%;
     min-width: 0;
     height: clamp(32px, 8vw, 44px);
@@ -585,6 +630,19 @@ h2 {
         gap: 2px;
         padding: 8px;
     }
+    .keyboardE {
+        position: static;
+        width: 100%;
+        max-width: 700px;
+        height: auto;
+        max-height: 55vh;
+        min-height: 180px;
+        border-radius: 10px;
+        margin: 10px auto;
+        z-index: auto;
+        gap: 2px;
+        padding: 8px;
+    }
     
     #game-area {
         height: 35vh;
@@ -593,23 +651,30 @@ h2 {
     
     .text-areas-container {
         flex-direction: row; /* Keep text areas side by side */
-        gap: 0;
-        max-width: 400px; /* Limit width for better mobile layout */
-        padding-left: 10vw;
-        padding-right: 10vw;
+        align-items: stretch;
+        width: 100%;
+        gap: 4%;
+        max-width: 100%;
+        padding-left: 4%;
+        padding-right: 4%;
+        overflow-x: hidden;
+        box-sizing: border-box;
     }
     
     #leftTextArea, #rightTextArea {
-        width: 38vw;
-        min-width: 110px;
-        max-width: 180px;
-        height: 60px;
-        font-size: 13px;
+        width: 46%;
+        min-width: 0;
+        max-width: 100%;
+        height: 14vh;
+        font-size: 3.5vw;
+        box-sizing: border-box;
     }
     
     .text-area-divider {
         display: block; /* Show divider */
-        height: 60px; /* Match text area height */
+        width: 2%;
+        height: auto; /* Match text area height */
+        align-self: stretch;
     }
     
     .control-container {
@@ -622,6 +687,12 @@ h2 {
     }
     
     .keyboard button {
+        flex: 1 1 13%;
+        min-width: 32px;
+        height: clamp(32px, 9vw, 40px);
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+    .keyboardE button {
         flex: 1 1 13%;
         min-width: 32px;
         height: clamp(32px, 9vw, 40px);
@@ -949,14 +1020,35 @@ h2 {
    but keep the columns side-by-side rather than stacking them. */
 @media (max-width: 420px) {
   .text-areas-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     gap: 12px;
   }
   #leftTextArea, #rightTextArea {
-    min-width: 160px;  /* ensure readable column width */
+    min-width: 0;
   }
   .text-area-divider {
     height: auto;
+  }
+}
+
+/* Mobile override after forced vertical rules to prevent horizontal scroll */
+@media (max-width: 767px) {
+  .text-areas-container {
+    gap: 4% !important;
+    padding-left: 4% !important;
+    padding-right: 4% !important;
+    overflow-x: hidden !important;
+  }
+  #leftTextArea, #rightTextArea {
+    flex: 1 1 0 !important;
+    width: 46% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 14vh !important;
+  }
+  .text-area-divider {
+    flex: 0 0 2% !important;
+    width: 2% !important;
+    height: auto !important;
   }
 }
