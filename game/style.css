@@ -805,3 +805,158 @@ h2 {
 }
 
 
+
+
+/* ------------------ Responsive layout overrides (added) ------------------ */
+/* Keep the main game centered with ~5% space on left and right on all screens */
+#game-container {
+  width: 90%;              /* 100% - 5% left - 5% right */
+  max-width: 1400px;       /* preserve desktop look */
+  margin: 0 auto;          /* center horizontally */
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Text areas: left and right should be symmetric with a divider in the middle */
+.text-areas-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;               /* small spacing between left/divider/right */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 2%;           /* small inner padding so text areas don't touch edges */
+}
+
+/* Assume HTML order: leftTextArea .text-area-divider rightTextArea */
+#leftTextArea, #rightTextArea {
+  flex: 1 1 0;             /* both take equal remaining space */
+  min-width: 120px;        /* prevent collapsing on very small screens */
+  max-width: none;
+  box-sizing: border-box;
+  /* keep internal padding consistent */
+  padding: 12px;
+}
+
+/* Divider should be visually centered between the two equal columns */
+.text-area-divider {
+  width: 2px;
+  background: rgba(0,0,0,0.25);
+  align-self: stretch;
+  flex: 0 0 2px;           /* fixed small width */
+  border-radius: 2px;
+  margin: 0;
+  /* if you want a gap around the divider, the container gap controls it */
+}
+
+/* Game-area centered within the container with a little vertical breathing room */
+#game-area {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 18px auto;       /* vertical space and centered */
+  padding: 8px;
+  max-width: 100%;
+}
+
+/* Score & start button should stay positioned relative to game-area */
+#score-display, #start-game-button {
+  /* ensure they don't overflow on small screens */
+  max-width: calc(100% - 40px);
+  box-sizing: border-box;
+}
+
+/* Small screens: preserve the 5% left/right space and stack elements if needed */
+@media (max-width: 767px) {
+  #game-container {
+    width: 90%;            /* same 5% margins on both sides */
+    margin: 0 auto;
+    padding: 0 2%;
+  }
+
+  .text-areas-container {
+    flex-direction: column; /* stack text areas on small phones */
+    gap: 12px;
+    padding: 0;
+  }
+
+  .text-area-divider {
+    width: 100%;
+    height: 2px;
+    flex: 0 0 auto;
+    align-self: center;
+  }
+
+  #leftTextArea, #rightTextArea {
+    width: 100%;
+    flex: 0 0 auto;
+    min-width: 0;
+    padding: 10px;
+  }
+
+  #game-area {
+    margin: 12px auto;
+    padding: 6px;
+  }
+}
+
+/* Medium screens (tablets) - keep columns but reduce gaps */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #game-container { width: 92%; }
+  .text-areas-container { gap: 16px; padding: 0 2%; }
+  .text-area-divider { width: 3px; }
+}
+
+/* Desktop and up: keep the 90% width but allow bigger max-width for visuals */
+@media (min-width: 1024px) {
+  #game-container { width: 90%; }
+  .text-areas-container { gap: 24px; padding: 0 2%; }
+  .text-area-divider { width: 2px; }
+}
+
+/* Small utility: ensure keyboard fits inside #game-container */
+.keyboard { box-sizing: border-box; width: 100%; max-width: 100%; }
+.keyboard .Key { box-sizing: border-box; }
+
+
+
+/* ------------------ Divider forced vertical patch ------------------ */
+/* Ensure text areas stay side-by-side and divider is vertical on all screens */
+.text-areas-container {
+  flex-direction: row !important;   /* force row layout to keep left/right symmetry */
+  align-items: stretch;
+  gap: 20px;
+}
+
+/* Vertical divider: thin vertical line centered between columns */
+.text-area-divider {
+  width: 2px !important;
+  height: auto !important;
+  background: rgba(0,0,0,0.25) !important;
+  align-self: stretch !important;
+  flex: 0 0 2px !important;
+  margin: 0 !important;
+}
+
+/* Left and right areas should take equal space and keep inner breathing room */
+#leftTextArea, #rightTextArea {
+  flex: 1 1 0 !important;
+  min-width: 140px;
+  padding: 12px !important;
+}
+
+/* Mobile tweak: allow horizontal scrolling if the screen is too narrow,
+   but keep the columns side-by-side rather than stacking them. */
+@media (max-width: 420px) {
+  .text-areas-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+  }
+  #leftTextArea, #rightTextArea {
+    min-width: 160px;  /* ensure readable column width */
+  }
+  .text-area-divider {
+    height: auto;
+  }
+}
