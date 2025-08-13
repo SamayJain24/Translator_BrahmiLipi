@@ -1052,3 +1052,49 @@ h2 {
     height: auto !important;
   }
 }
+
+/* --- Mobile gameplay lock and balanced layout (non-scroll + visible keyboard) --- */
+@media (max-width: 767px) {
+  html, body { height: 100%; overflow: hidden !important; }
+  #game-container { height: 100vh; overflow: hidden; }
+
+  /* Increase game area and reduce keyboard height as requested */
+  #game-area { height: 42vh !important; }
+  #leftTextArea, #rightTextArea { height: 8vh !important; }
+
+  .keyboard, .keyboardE {
+    height: 38vh !important;
+    max-height: 38vh !important;
+    min-height: 0 !important;
+    grid-template-columns: repeat(10, 1fr) !important;
+    grid-auto-rows: 1fr !important;
+    align-content: stretch !important;
+    justify-content: stretch !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  .keyboard button, .keyboardE button {
+    height: 100% !important;
+    min-width: 0 !important;
+    font-size: clamp(0.8rem, 2.6vw, 1.05rem) !important;
+    /* Do NOT override transform to preserve blinking/scale effect */
+  }
+}
+
+/* Landscape phones: keep non-scroll and balance space */
+@media (max-width: 767px) and (orientation: landscape) {
+  html, body { overflow: hidden !important; }
+  #game-container { height: 100vh; overflow: hidden; }
+  #game-area { height: 55vh !important; }
+  .keyboard, .keyboardE { height: 45vh !important; max-height: 45vh !important; grid-auto-rows: 1fr !important; }
+  .keyboard button, .keyboardE button { height: 100% !important; }
+}
+
+/* Landscape phones: split space evenly and keep no-scroll */
+@media (max-width: 767px) and (orientation: landscape) {
+  html, body { overflow: hidden !important; }
+  #game-container { height: 100vh; overflow: hidden; }
+  #game-area { height: 55vh !important; }
+  .keyboard, .keyboardE { height: 45vh !important; max-height: 45vh !important; grid-auto-rows: 1fr !important; }
+  .keyboard button, .keyboardE button { height: 100% !important; }
+}
